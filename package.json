@@ -1,27 +1,43 @@
 {
-  "name": "tingnect-landing",
-  "version": "0.1.0",
+  "name": "tingnect-website",
+  "version": "1.0.0",
   "private": true,
+  "description": "TingNect - Build for Billions | Official Website",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "docker:build": "docker build -t tingnect-website .",
+    "docker:run": "docker run -p 3000:3000 tingnect-website"
   },
   "dependencies": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "next": "15.4.5"
-  },
-  "devDependencies": {
-    "typescript": "^5",
+    "@react-three/drei": "^10.6.1",
+    "@react-three/fiber": "^9.3.0",
     "@types/node": "^20",
+    "@types/nodemailer": "^6.4.14",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "axios": "^1.6.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.12",
+    "google-spreadsheet": "^4.1.2",
+    "lucide-react": "^0.536.0",
+    "next": "15.4.5",
+    "nodemailer": "^6.9.7",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-icons": "^5.5.0",
+    "tailwind-merge": "^3.3.1",
+    "three": "^0.179.1",
+    "typescript": "^5"
+  },
+  "devDependencies": {
+    "@types/three": "^0.179.0",
+    "autoprefixer": "^10.0.1",
     "eslint": "^9",
     "eslint-config-next": "15.4.5",
-    "@eslint/eslintrc": "^3"
+    "postcss": "^8",
+    "tailwindcss": "^3.4.0"
   }
 }

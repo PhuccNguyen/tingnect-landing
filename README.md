@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🚀 TingNect – Build for Billions
+TingNect is a next-generation platform that connects developers, founders, investors, and tech leaders to collaboratively shape a sustainable Web3 future for billions of users.
 
-## Getting Started
+🌐 Live Websites
+Domain	Purpose
+tingnect.com	Main website – project overview, ecosystem, and navigation hub.
+event.tingnect.com	Event landing page – full agenda, speakers, sponsors, and event details.
+lu.ma/tingnect	Event registration form powered by Lu.ma with real-time Telegram & Google Sheets integration.
 
-First, run the development server:
+🏗️ Project Structure
+tingnect-landing/
+├── src/
+│   ├── app/
+│   │   ├── (main-site)/          # Routes for tingnect.com
+│   │   └── (event-site)/         # Routes for event.tingnect.com
+│   ├── components/               # Shared and site-specific React components
+│   ├── data/                     # Static content: agenda, speakers, sponsors, etc.
+│   ├── lib/                      # Utility functions (e.g., Telegram Bot, Sheets API)
+│   ├── styles/                   # Tailwind and global styles
+├── docker/
+│   ├── Dockerfile                # Docker container build config
+│   └── nginx.conf                # Nginx reverse proxy setup
+├── scripts/
+│   ├── setup-server.sh          # One-click Ubuntu server setup (Node.js, PM2, etc.)
+│   └── deploy.sh                # Deployment automation script
+├── .env.example                 # Environment variable template
+├── docker-compose.yml           # Docker orchestration
+├── next.config.ts               # Rewrites, image domains, appDir config
+└── README.md
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+⚙️ Tech Stack
+🧩 Framework: Next.js 15 (App Router)
+⚛️ UI Library: React 19
+🎨 Styling: Tailwind CSS 4 with custom themes
+🎞️ Animation: Framer Motion
+📦 Deployment: Docker + Nginx
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🤖 Integrations:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Telegram Bot API for real-time notifications
+Google Sheets API for form syncing
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+📦 Deployment Scripts
+# 1. Server setup (for Ubuntu)
+bash scripts/setup-server.sh
+# 2. Project deployment (build + restart + logs)
+bash scripts/deploy.sh
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🛠️ Custom Features
+🖥️ Dual site architecture with subdomain routing via next.config.ts
+⚙️ App router structure using (main-site) and (event-site) folders
+🔔 Real-time Telegram alerts on registration/sponsor form submission
+📊 Google Sheets API integration for data backup and live dashboards
+💨 Animated hero sections with Framer Motion and Canvas particles
+or scale with Docker + Nginx reverse proxy support

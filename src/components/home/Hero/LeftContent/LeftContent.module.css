@@ -1,0 +1,524 @@
+.leftContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  max-width: 600px;
+  padding: 0rem 1rem;
+  z-index: 10;
+  margin-top: -5.5rem;
+}
+
+/* Mobile Logo Group Section */
+.logoGroupMobile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+/* Ẩn trên desktop */
+@media (min-width: 768px) {
+  .logoGroupMobile {
+    display: none;
+  }
+}
+
+.logoItem {
+  position: relative;
+  cursor: pointer;
+  margin-top: -0.35rem; 
+    margin-bottom: -1.35rem; 
+
+}
+
+.logoImage {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 4px 8px rgba(59, 130, 246, 0.3));
+  transition: all 0.3s ease;
+}
+
+/* Desktop Title Section */
+.titleWrapper {
+  position: relative;
+  margin-bottom: 0.1rem;
+    margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.mainTitle {
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 900;
+  line-height: 0.9;
+  margin: 0;
+  background: linear-gradient(45deg, 
+    #ffffff 0%, 
+    #60a5fa 25%, 
+    #a78bfa 50%, 
+    #10b981 75%, 
+    #ffffff 100%);
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  position: relative;
+}
+
+.titleBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.35rem 0.65rem;
+  border-radius: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+.slogan {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0.5rem 0 0 0;
+  letter-spacing: -0.01em;
+}
+
+/* Mobile Title Section */
+.titleWrapperMobile {
+  position: relative;
+  margin: 0 auto;
+    margin-bottom: -1.2rem;
+  padding: 1rem 0;
+  width: 100%;
+  text-align: center;
+}
+
+.titleRowMobile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.mainTitleMobile {
+  font-size: clamp(2.9rem, 6vw, 2rem);
+  font-weight: 900;
+  line-height: 1;
+  margin: 0;
+  background: linear-gradient(45deg, 
+    #ffffff 0%, 
+    #60a5fa 25%, 
+    #a78bfa 50%, 
+    #10b981 75%, 
+    #ffffff 100%);
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+}
+
+.titleBadgeMobile {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  color: white;
+  font-size: 0.45rem;
+  font-weight: 700;
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  box-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: absolute;
+  top: 20px;
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+.sloganMobile {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0.25rem 0 0 0;
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Hide desktop component on mobile, show mobile component */
+@media (max-width: 767px) {
+  .titleWrapper {
+    display: none;
+  }
+  .titleWrapperMobile {
+    display: block;
+  }
+}
+
+/* Hide mobile component on desktop */
+@media (min-width: 768px) {
+  .titleWrapperMobile {
+    display: none;
+  }
+}
+
+/* Typing Text */
+.typingText {
+  margin-bottom: 0.5rem;
+}
+
+.typingContent {
+  font-size: clamp(0.7rem, 2.5vw, 1.25rem);
+  font-weight: 700;
+  color: #60a5fa;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 20px rgba(96, 165, 250, 0.4);
+}
+
+.cursor {
+  color: #a78bfa;
+  font-weight: 700;
+}
+
+.eventInfo {
+  background: linear-gradient(135deg, 
+    rgba(10, 15, 35, 0.9) 0%,
+    rgba(20, 30, 50, 0.7) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 0.75rem;
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+}
+
+.eventInfo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.05) 0%,
+    rgba(139, 92, 246, 0.03) 100%);
+  border-radius: inherit;
+}
+
+.eventHeader {
+  margin-bottom: 0.5rem;
+}
+
+.eventBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.eventDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.eventItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-top: -0.15rem;
+}
+
+.eventItem:first-child {
+  margin-top: 0;
+}
+
+.eventItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.eventIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.2) 0%,
+    rgba(139, 92, 246, 0.1) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 0.5rem;
+  color: #60a5fa;
+}
+
+.eventText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.eventLabel {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.eventValue {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+/* Event Summary */
+.eventSummary {
+  margin-bottom: -2rem;
+  display: none; /* Ẩn mặc định trên desktop */
+}
+
+/* Hiển thị trên mobile */
+@media (max-width: 767px) {
+  .eventSummary {
+    display: block; /* Hiển thị trên mobile */
+  }
+}
+
+.summaryText {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.statItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.statIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  border-radius: 0.5rem;
+  color: white;
+}
+
+.statValue {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #60a5fa;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.backgroundEffects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1; /* Đảm bảo content nằm trên */
+}
+
+.floatingParticle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(45deg, #60a5fa, #a78bfa, #10b981, #f472b6, #9333ea);
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(96, 165, 250, 0.7), 0 0 25px rgba(167, 139, 250, 0.5);
+  animation: pulse 2s ease-in-out infinite alternate, twinkle 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  from {
+    box-shadow: 0 0 15px rgba(96, 165, 250, 0.7), 0 0 25px rgba(167, 139, 250, 0.5);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.9), 0 0 30px rgba(167, 139, 250, 0.7);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.9; }
+}
+
+/* Animations */
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .leftContent {
+    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+    max-width: 100%;
+  }
+
+  .logoGroup {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .logoWrapper {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .logoText {
+    font-size: 0.8rem;
+  }
+
+  .titleBadge {
+    position: static;
+    margin-top: 0.5rem;
+    align-self: flex-start;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .statItem {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .eventDetails {
+    gap: 0.75rem;
+  }
+
+  .eventItem {
+    padding: 0.5rem;
+  }
+
+  .eventIcon {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .leftContent {
+    padding: 1rem 0.5rem;
+    gap: 1.25rem;
+  }
+
+  .logoGroup {
+    gap: 0.75rem;
+  }
+
+  .logoContainer {
+    gap: 0.5rem;
+  }
+
+  .logoWrapper {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .logoText {
+    font-size: 0.7rem;
+  }
+
+  .eventInfo {
+    padding: 1.25rem;
+  }
+
+  .summaryText {
+    font-size: 0.9rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .floatingParticle,
+  .logoGlow,
+  .mainTitle {
+    animation: none !important;
+  }
+  
+  .eventItem,
+  .statItem,
+  .logoWrapper {
+    transition: none !important;
+  }
+}
+
+/* Focus states */
+.eventItem:focus,
+.statItem:focus,
+.logoWrapper:focus {
+  outline: 2px solid rgba(59, 130, 246, 0.6);
+  outline-offset: 2px;
+}
