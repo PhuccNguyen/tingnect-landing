@@ -18,6 +18,8 @@ const spaceGrotesk = Space_Grotesk({
   display: 'swap',
 });
 
+
+
 export default function RootLayout({
   children,
 }: {
@@ -30,6 +32,16 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
+            <head>
+        {/* Favicon SVG */}
+        <link
+          rel="icon"
+          href="/Image/Logo/TingNect/TingNecticon.svg"
+          type="image/svg+xml"
+        />
+        {/* Fallback PNG (nếu cần) */}
+        {/* <link rel="icon" href="/favicon-32.png" sizes="32x32" /> */}
+      </head>
       <body className="font-inter antialiased" suppressHydrationWarning>
         <Header />
         <main className="min-h-screen">
