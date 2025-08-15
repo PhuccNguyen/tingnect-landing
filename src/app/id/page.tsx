@@ -1,5 +1,6 @@
 import IDHero from '@/components/id/IDHero/IDHero';
 import SearchSection from '@/components/id/SearchSection/SearchSection';
+import RegisterForm from '@/components/id/RegisterForm/RegisterForm';
 import DemoWallets from '@/components/id/DemoWallets/DemoWallets';
 
 export const metadata = {
@@ -13,6 +14,7 @@ export default function IDPage() {
     <div className="min-h-screen bg-slate-900">
       <IDHero />
       <SearchSection />
+      <RegisterForm />
       <DemoWallets />
     </div>
   );

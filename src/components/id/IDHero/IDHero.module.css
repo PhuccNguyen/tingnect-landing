@@ -1,13 +1,78 @@
 .hero {
   position: relative;
-  padding: 8rem 0 6rem;
+  padding: 7rem 0 6rem;
   overflow: hidden;
+  margin-bottom: 10rem;
+
 }
 
-.background {
+.heroBackground {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  top: 0;
+  left: 0;
+  width: 150%;
+  height: 150%;
+  z-index: -1;
+}
+
+.backgroundOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2); /* Adjust as needed */
+}
+
+.backgroundGradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1), transparent); /* Adjust as needed */
+}
+
+.sceneLoader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #fff;
+}
+
+.loaderPulse {
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+.loaderText {
+  margin-left: 10px;
+  font-size: 1rem;
+}
+
+.sceneFallback {
+  background: #000; /* Fallback background */
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .gridPattern {

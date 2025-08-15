@@ -2,9 +2,32 @@
 
 import { motion } from 'framer-motion';
 import { Search, Shield, Users, Wallet, Globe, Zap } from 'lucide-react';
+import dynamic from 'next/dynamic';
+import { Suspense, useState, useEffect } from 'react';
 import styles from './IDHero.module.css';
 
+// Dynamic import for BlockchainScene
+const BlockchainScene = dynamic(
+  () => import('@/components/3D/BlockchainScene'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className={styles.sceneLoader}>
+        <div className={styles.loaderPulse} />
+        <span className={styles.loaderText}>Loading Experience...</span>
+      </div>
+    ),
+  }
+);
+
 export default function IDHero() {
+  const [mounted, setMounted] = useState(false);
+
+  // Ensure component is mounted on the client to avoid hydration issues
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const features = [
     { icon: Shield, title: 'Verified', desc: 'Authenticated identities' },
     { icon: Wallet, title: 'On-chain', desc: 'Blockchain verified' },
@@ -14,9 +37,15 @@ export default function IDHero() {
 
   return (
     <section className={styles.hero}>
-      <div className={styles.background}>
-        <div className={styles.gridPattern} />
-        <div className={styles.gradientOverlay} />
+      {/* New 3D Background */}
+      <div className={styles.heroBackground}>
+        <div className={styles.backgroundOverlay} />
+        {mounted && (
+          <Suspense fallback={<div className={styles.sceneFallback} />}>
+            <BlockchainScene />
+          </Suspense>
+        )}
+        <div className={styles.backgroundGradient} />
       </div>
 
       <div className={styles.container}>
@@ -55,7 +84,7 @@ export default function IDHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Explore verified Web3 profiles, discover talented builders, and connect with 
+            Explore verified Web3 profiles, discover talented builders, and connect with
             the vibrant community shaping the decentralized future.
           </motion.p>
 
@@ -98,7 +127,7 @@ export default function IDHero() {
             transition={{
               duration: 8,
               repeat: Infinity,
-              ease: "easeInOut",
+              ease: 'easeInOut',
             }}
           >
             <Wallet size={24} />
@@ -113,7 +142,7 @@ export default function IDHero() {
             transition={{
               duration: 6,
               repeat: Infinity,
-              ease: "easeInOut",
+              ease: 'easeInOut',
             }}
           >
             <Shield size={20} />
@@ -128,7 +157,7 @@ export default function IDHero() {
             transition={{
               duration: 10,
               repeat: Infinity,
-              ease: "easeInOut",
+              ease: 'easeInOut',
             }}
           >
             <Users size={22} />
