@@ -1,61 +1,285 @@
 .hero {
   position: relative;
-  min-height: 100vh;
   width: 100%;
+  min-height: 100vh;
   overflow: hidden;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
+/* Enhanced Container - Tăng max-width và center content */
 .container {
   position: relative;
-  z-index: 10;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
   width: 100%;
+  max-width: 1600px; /* Tăng từ 1400px */
+  margin: 0 auto;
+  padding: 0 3rem; /* Tăng padding */
+  z-index: 10;
 }
 
 .content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  display: flex;
   align-items: center;
-  min-height: 80vh;
+  justify-content: center; /* Center content */
+  min-height: 100vh;
+  position: relative;
 }
 
-.leftSection {
+/* Main Content Section - Remove constraints */
+.mainSection {
+  width: 100%;
+  max-width: none; /* Remove max-width constraint */
+  position: relative;
+  z-index: 15;
+  margin: 0; /* Remove margins */
+  padding: 0; /* Remove padding */
+}
+
+/* Content Enhancement Overlay */
+.contentOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 12;
+}
+
+.contentParticles {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.contentParticle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 12px rgba(59, 130, 246, 0.8),
+    0 0 24px rgba(139, 92, 246, 0.4);
+  pointer-events: none;
+}
+
+/* Interactive Light Beams */
+.lightBeams {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.lightBeam {
+  position: absolute;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.1), transparent);
+  filter: blur(1px);
+  transform-origin: top center;
+}
+
+.beam1 {
+  top: 0;
+  left: 15%;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(59, 130, 246, 0.2) 30%, 
+    rgba(59, 130, 246, 0.1) 70%, 
+    transparent 100%);
+}
+
+.beam2 {
+  top: 0;
+  right: 25%;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(139, 92, 246, 0.15) 25%, 
+    rgba(139, 92, 246, 0.08) 75%, 
+    transparent 100%);
+}
+
+.beam3 {
+  top: 0;
+  left: 65%;
+  width: 1.5px;
+  height: 100%;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(6, 182, 212, 0.18) 20%, 
+    rgba(6, 182, 212, 0.1) 80%, 
+    transparent 100%);
+}
+
+/* Enhanced Scroll Indicator */
+.scrollIndicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 20;
 }
 
-.rightSection {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.scrollDot {
+  width: 2px;
+  height: 2px;
+  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 8px rgba(59, 130, 246, 0.8),
+    0 0 16px rgba(139, 92, 246, 0.4);
+  position: relative;
+}
+
+.scrollDot::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -3px;
+  width: 8px;
+  height: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: transparent;
+}
+
+.scrollText {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
-  .content {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    text-align: center;
-  }
-  
-  .rightSection {
-    order: -1;
+@media (max-width: 1400px) {
+  .container {
+    max-width: 1400px;
+    padding: 0 2rem;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
+  .container {
+    max-width: 1200px;
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 1024px) {
   .container {
     padding: 0 1rem;
   }
   
   .content {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
     gap: 2rem;
-    min-height: 70vh;
+  }
+  
+  .lightBeam {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 100svh;
+  }
+  
+  .container {
+    padding: 1rem 0.75rem;
+  }
+  
+  .contentParticle {
+    width: 4px;
+    height: 4px;
+  }
+  
+  .scrollIndicator {
+    bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0.5rem;
+  }
+  
+  .content {
+    gap: 1rem;
+  }
+  
+  .scrollIndicator {
+    bottom: 1rem;
+  }
+  
+  .scrollText {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 100dvh;
+  }
+  
+  .container {
+    padding: 0.25rem;
+  }
+  
+  .contentParticles {
+    display: none;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .contentParticle,
+  .lightBeam,
+  .scrollDot {
+    animation: none;
+  }
+  
+  .mainSection {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .scrollText {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .contentParticle {
+    box-shadow: 
+      0 0 8px rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .hero {
+    min-height: auto;
+    page-break-inside: avoid;
+  }
+  
+  .lightBeams,
+  .contentOverlay,
+  .scrollIndicator {
+    display: none;
+  }
+  
+  .content {
+    flex-direction: column;
   }
 }

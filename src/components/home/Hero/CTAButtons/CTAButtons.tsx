@@ -9,7 +9,7 @@ export default function CTAButtons() {
     <div className={styles.ctaButtons}>
       {/* Primary CTA Button */}
       <motion.a
-        href="https://lu.ma/qji7t8kq"
+        href="https://tingvote.com"
         target="_blank"
         rel="noopener noreferrer"
         className={styles.primaryButton}
@@ -75,7 +75,7 @@ export default function CTAButtons() {
 
       {/* Secondary CTA Button */}
       <motion.a
-        href="/products"
+        href="https://tingvote.com"
         className={styles.secondaryButton}
         whileHover={{ 
           scale: 1.02, 
@@ -93,7 +93,7 @@ export default function CTAButtons() {
             <Users size={18} className={styles.buttonIcon} />
             <div className={styles.iconGlow} />
           </div>
-          <span className={styles.buttonText}>Explore Products</span>
+          <span className={styles.buttonText}>Vote Now</span>
           <motion.div
             className={styles.buttonArrowWrapper}
             animate={{ x: [0, 2, 0] }}
@@ -134,7 +134,7 @@ export default function CTAButtons() {
           <div className={styles.infoIcon}>
             <Users size={14} />
           </div>
-          <span className={styles.infoText}>Limited Seats</span>
+          <span className={styles.infoText}>Free Voting Daily</span>
           <div className={styles.urgencyBadge}>
             Hot
           </div>

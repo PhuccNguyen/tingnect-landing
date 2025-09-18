@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { motion } from 'framer-motion';
-import { Clock, Rocket, Zap, Shield, Globe, Code } from 'lucide-react';
-import styles from './ProductsGrid.module.css';
+import { motion } from 'framer-motion'
+import { Clock, Shield, Globe, Zap, Code, Smartphone, Network } from 'lucide-react'
+import styles from './ProductsGrid.module.css'
 
 const products = [
   {
     id: 1,
-    title: 'TingNect Identity',
-    description: 'Decentralized identity solution for Web3 ecosystem',
+    title: 'Ting Identity',
+    description: 'Decentralized identity solution for secure Web3 authentication',
     status: 'Coming Soon',
     icon: Shield,
     color: 'blue',
@@ -16,7 +16,7 @@ const products = [
   },
   {
     id: 2,
-    title: 'TingNect Chain',
+    title: 'Ting Chain',
     description: 'High-performance blockchain for decentralized applications',
     status: 'In Development',
     icon: Globe,
@@ -25,7 +25,7 @@ const products = [
   },
   {
     id: 3,
-    title: 'TingNect AI',
+    title: 'Ting AI',
     description: 'AI-powered tools for smart contract development',
     status: 'Research Phase',
     icon: Zap,
@@ -34,28 +34,47 @@ const products = [
   },
   {
     id: 4,
-    title: 'TingNect SDK',
-    description: 'Developer toolkit for building on TingNect ecosystem',
+    title: 'Ting SDK',
+    description: 'Developer toolkit for building on the Ting ecosystem',
     status: 'Planning',
     icon: Code,
     color: 'green',
     features: ['Multi-Language', 'Easy Integration', 'Rich Documentation'],
   },
-];
+  {
+    id: 5,
+    title: 'TingApp',
+    description: 'Mobile app for seamless interaction with the Ting ecosystem',
+    status: 'In Development',
+    icon: Smartphone,
+    color: 'yellow',
+    features: ['Wallet Integration', 'Real-Time Notifications', 'User-Friendly UI'],
+  },
+  {
+    id: 6,
+    title: 'TingNect',
+    description: 'Community platform for networking and collaboration',
+    status: 'Live',
+    icon: Network,
+    color: 'teal',
+    features: ['Event Management', 'Community Forums', 'Partner Connect'],
+  },
+]
 
 const statusColors = {
   'Coming Soon': { bg: 'rgba(59, 130, 246, 0.1)', border: 'rgba(59, 130, 246, 0.3)', text: '#60a5fa' },
   'In Development': { bg: 'rgba(139, 92, 246, 0.1)', border: 'rgba(139, 92, 246, 0.3)', text: '#a78bfa' },
   'Research Phase': { bg: 'rgba(6, 182, 212, 0.1)', border: 'rgba(6, 182, 212, 0.3)', text: '#67e8f9' },
   'Planning': { bg: 'rgba(34, 197, 94, 0.1)', border: 'rgba(34, 197, 94, 0.3)', text: '#4ade80' },
-};
+  'Live': { bg: 'rgba(20, 184, 166, 0.1)', border: 'rgba(20, 184, 166, 0.3)', text: '#2dd4bf' },
+}
 
 export default function ProductsGrid() {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           className={styles.header}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -64,16 +83,16 @@ export default function ProductsGrid() {
         >
           <h2 className={styles.sectionTitle}>Our Product Ecosystem</h2>
           <p className={styles.sectionDescription}>
-            Building the infrastructure for a decentralized future
+            Empowering the decentralized future with innovative solutions
           </p>
         </motion.div>
 
         {/* Products Grid */}
         <div className={styles.grid}>
           {products.map((product, index) => {
-            const IconComponent = product.icon;
-            const statusStyle = statusColors[product.status as keyof typeof statusColors];
-            
+            const IconComponent = product.icon
+            const statusStyle = statusColors[product.status as keyof typeof statusColors]
+
             return (
               <motion.div
                 key={product.id}
@@ -82,7 +101,7 @@ export default function ProductsGrid() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -10, scale: 1.02 }}
+                whileHover={{ y: -8, scale: 1.03 }}
               >
                 <div className={styles.cardContent}>
                   {/* Icon */}
@@ -92,12 +111,12 @@ export default function ProductsGrid() {
                   </div>
 
                   {/* Status Badge */}
-                  <div 
+                  <div
                     className={styles.statusBadge}
                     style={{
                       background: statusStyle.bg,
                       border: `1px solid ${statusStyle.border}`,
-                      color: statusStyle.text
+                      color: statusStyle.text,
                     }}
                   >
                     <Clock size={12} />
@@ -118,30 +137,29 @@ export default function ProductsGrid() {
                   </div>
 
                   {/* Coming Soon Overlay */}
-                  <div className={styles.comingSoonOverlay}>
-                    <Rocket className={styles.rocketIcon} />
-                    <span>Launching Soon</span>
-                  </div>
+                  {product.status !== 'Live' && (
+                    <div className={styles.comingSoonOverlay}>
+                      <IconComponent className={styles.overlayIcon} />
+                      <span>{product.status}</span>
+                    </div>
+                  )}
                 </div>
-
-                {/* Hover Glow Effect */}
-                <div className={styles.hoverGlow} />
               </motion.div>
-            );
+            )
           })}
         </div>
 
         {/* Call to Action */}
-        <motion.div 
+        <motion.div
           className={styles.cta}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <h3 className={styles.ctaTitle}>Want to be the first to know?</h3>
+          <h3 className={styles.ctaTitle}>Join the Ting Ecosystem</h3>
           <p className={styles.ctaDescription}>
-            Join our community to get updates on product launches and early access opportunities.
+            Stay updated on product launches and gain early access to our innovative solutions.
           </p>
           <motion.a
             href="https://t.me/tingnect"
@@ -156,5 +174,5 @@ export default function ProductsGrid() {
         </motion.div>
       </div>
     </section>
-  );
+  )
 }

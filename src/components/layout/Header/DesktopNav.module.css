@@ -1,0 +1,400 @@
+/* Premium Desktop Navigation */
+.desktopNav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.625rem;
+  border-radius: 2rem;
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 0.4s ease;
+}
+
+.navBackground {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(59, 130, 246, 0.04) 50%,
+    rgba(255, 255, 255, 0.06) 100%);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.navIndicatorTrack {
+  position: absolute;
+  bottom: -0.5rem;
+  left: 1rem;
+  right: 1rem;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(59, 130, 246, 0.3) 50%,
+    transparent 100%);
+  border-radius: 1px;
+}
+
+.desktopNav:hover .navBackground {
+  opacity: 1;
+}
+
+.navItemWrapper {
+  position: relative;
+}
+
+.navLinkContainer {
+  position: relative;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 1rem 1.75rem;
+  border-radius: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  backdrop-filter: blur(15px);
+  border: 1px solid transparent;
+  transform-style: preserve-3d;
+}
+
+.navLink:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(59, 130, 246, 0.3);
+  transform: translateY(-3px) rotateX(8deg);
+  box-shadow: 
+    0 10px 30px rgba(59, 130, 246, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.navText {
+  position: relative;
+  z-index: 3;
+  transition: all 0.5s ease;
+}
+
+.navHoverEffect {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.12) 0%,
+    rgba(139, 92, 246, 0.08) 50%,
+    rgba(16, 185, 129, 0.06) 100%);
+  opacity: 0;
+  transition: all 0.5s ease;
+  border-radius: inherit;
+}
+
+.navLink:hover .navHoverEffect {
+  opacity: 1;
+}
+
+.navRipple {
+  position: absolute;
+  inset: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.navGlow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(59, 130, 246, 0.15), 
+    rgba(139, 92, 246, 0.12),
+    transparent);
+  transform: translateX(-100%);
+  transition: transform 1s ease;
+}
+
+.navShimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.25), 
+    transparent);
+  transition: left 0.8s ease;
+}
+
+.navLink:hover .navGlow {
+  transform: translateX(100%);
+}
+
+.navLink:hover .navShimmer {
+  left: 100%;
+}
+
+.navLinkActive {
+  color: #60a5fa !important;
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.15) 0%,
+    rgba(139, 92, 246, 0.10) 100%) !important;
+  border-color: rgba(59, 130, 246, 0.4) !important;
+  box-shadow: 
+    0 10px 30px rgba(59, 130, 246, 0.3),
+    0 0 0 1px rgba(59, 130, 246, 0.2);
+  transform: translateY(-2px);
+}
+
+.activeIndicator {
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1rem;
+  height: 1rem;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  border-radius: 50%;
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.9);
+}
+
+.activeGlow {
+  position: absolute;
+  bottom: -1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.5rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  filter: blur(10px);
+}
+
+.externalLink {
+  border-left: 3px solid rgba(139, 92, 246, 0.5);
+  position: relative;
+}
+
+.externalLink::before {
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: 0;
+  width: 3px;
+  height: 0;
+  background: linear-gradient(to bottom, #8b5cf6, #06b6d4);
+  transition: height 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.externalLink:hover::before {
+  height: 100%;
+}
+
+.externalIcon {
+  opacity: 0.8;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.externalLink:hover .externalIcon {
+  opacity: 1;
+  transform: translateY(-3px) scale(1.2) rotate(8deg);
+}
+
+/* Ultra Premium Register Button */
+.registerSection {
+  display: flex;
+  align-items: center;
+}
+
+.registerButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 1.125rem 2.75rem;
+  border-radius: 3rem;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  color: white;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 
+    0 15px 50px rgba(59, 130, 246, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  transform-style: preserve-3d;
+}
+
+.registerButton:hover {
+  box-shadow: 
+    0 25px 80px rgba(59, 130, 246, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.buttonBackground {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    rgba(6, 11, 25, 0.95) 0%,
+    rgba(15, 23, 42, 0.85) 50%,
+    rgba(30, 41, 59, 0.95) 100%);
+  backdrop-filter: blur(25px);
+}
+
+.buttonGradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, 
+    #3b82f6 0%, 
+    #8b5cf6 25%, 
+    #06b6d4 50%, 
+    #10b981 75%, 
+    #3b82f6 100%);
+  background-size: 500% 500%;
+  animation: gradientShift 8s ease infinite;
+  opacity: 0.95;
+}
+
+.buttonMesh {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.4) 0%, transparent 60%),
+    radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.3) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.registerButton:hover .buttonMesh {
+  opacity: 1;
+}
+
+.buttonShine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.5), 
+    transparent);
+  transition: left 1s ease;
+  z-index: 2;
+}
+
+.buttonBorder {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(45deg, 
+    rgba(255, 255, 255, 0.3),
+    rgba(59, 130, 246, 0.4),
+    rgba(139, 92, 246, 0.3),
+    rgba(255, 255, 255, 0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: subtract;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: subtract;
+}
+
+.registerButton:hover .buttonShine {
+  left: 100%;
+}
+
+.buttonContent {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  position: relative;
+  z-index: 3;
+}
+
+.buttonIcon,
+.buttonArrow,
+.buttonText {
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.buttonIcon {
+  filter: drop-shadow(0 4px 8px rgba(59, 130, 246, 0.5));
+}
+
+.buttonArrow {
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.registerButton:hover .buttonArrow {
+  transform: translateX(6px) scale(1.15);
+}
+
+.registerButton:hover .buttonIcon {
+  transform: scale(1.2) rotate(20deg);
+}
+
+.buttonGlow {
+  position: absolute;
+  inset: -6px;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #10b981, #3b82f6);
+  border-radius: inherit;
+  opacity: 0;
+  filter: blur(25px);
+  animation: logoRotate 10s linear infinite;
+  transition: opacity 0.5s ease;
+}
+
+.registerButton:hover .buttonGlow {
+  opacity: 0.8;
+}
+
+.buttonParticles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.buttonParticle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  filter: blur(0.5px);
+}
+
+.buttonParticle:nth-child(1) { top: 20%; left: 20%; }
+.buttonParticle:nth-child(2) { top: 25%; right: 25%; }
+.buttonParticle:nth-child(3) { bottom: 30%; left: 30%; }
+.buttonParticle:nth-child(4) { bottom: 25%; right: 20%; }
+.buttonParticle:nth-child(5) { top: 50%; left: 50%; }
+.buttonParticle:nth-child(6) { bottom: 20%; right: 40%; }
+.buttonParticle:nth-child(7) { top: 70%; left: 15%; }
+.buttonParticle:nth-child(8) { top: 30%; right: 15%; }
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  25% { background-position: 100% 50%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+}
+
+@keyframes logoRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .desktopNav,
+  .registerSection {
+    display: none;
+  }
+}

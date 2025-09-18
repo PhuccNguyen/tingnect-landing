@@ -58,56 +58,7 @@ const RightVisual: React.FC = () => {
       initial="hidden"
       animate="visible"
     >
-      {/* Logo Group - Top Right */}
-      <motion.div className={styles.logoGroup} variants={logoVariants}>
-        <div className={styles.logoContainer}>
-          <motion.div
-            className={styles.logoWrapper}
-            whileHover={{
-              scale: 1.1,
-              rotateY: 10,
-            }}
-            transition={{ type: "spring", stiffness: 400, damping: 25 }}
-          >
-            <div className={styles.logoBackground} />
-            <Image
-              src="/Image/Logo/TingNect/TingNect.svg"
-
-              alt="TingNect"
-              width={168}
-              height={98}
-              className={styles.logoIcon}
-            />
-            <div className={styles.logoGlow} />
-          </motion.div>
-        </div>
-
-        <div className={styles.logoSeparator} />
-
-        <div className={styles.logoContainer}>
-          <motion.div
-            className={styles.logoWrapper}
-            whileHover={{
-              scale: 1.1,
-              rotateY: -10,
-            }}
-            transition={{ type: "spring", stiffness: 400, damping: 25 }}
-          >
-            <div className={styles.logoBackground} />
-            <Image
-              src="/Image/Logo/TingFoundation/TingFoundation-white.svg"
-
-              alt="Ting Foundation"
-              width={208}
-              height={128}
-              className={styles.logoIcon}
-            />
-            <div className={styles.logoGlow} />
-          </motion.div>
-        </div>
-      </motion.div>
-
-
+    
       {/* Background Glow */}
       <div className={styles.backgroundGlow} />
 
@@ -183,7 +134,7 @@ const RightVisual: React.FC = () => {
         }}
       >
         <Image
-          src="/Image/Logo/TingFoundation/TingFoundation-icon.svg"
+          src="Image/Logo/TingNect/TingNect icon.svg"
           alt="AI"
           width={24}
           height={24}
@@ -228,7 +179,7 @@ const RightVisual: React.FC = () => {
         }}
       >
         <Image
-          src="/Image/Logo/TingFoundation/TingFoundation-icon.svg"
+          src="Image/Logo/TingNect/TingNect icon.svg"
           alt="AI Tech"
           width={20}
           height={20  }

@@ -1,15 +1,18 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
-import { Menu, X, ExternalLink, Sparkles, ArrowRight, Zap, Star } from 'lucide-react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { Menu, X, Sparkles, Clock, Wifi } from 'lucide-react';
+import DesktopNav from './DesktopNav';
+import MobileNav from './MobileNav';
 import styles from './Header.module.css';
 
 const navigation = [
   { name: 'Home', href: '/' },
+  { name: 'Vote', href: 'https://tingvote.com', external: true },
   { name: 'Event', href: 'https://event.tingnect.com', external: true },
   { name: 'ID', href: '/id' },
   { name: 'Products', href: '/products' },
@@ -21,184 +24,281 @@ export default function Header() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [batteryLevel, setBatteryLevel] = useState(100);
+  const [networkStrength, setNetworkStrength] = useState(4);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
   const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
 
   const { scrollY } = useScroll();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 150, damping: 15 });
-  const springY = useSpring(mouseY, { stiffness: 150, damping: 15 });
+  const springX = useSpring(mouseX, { stiffness: 200, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 200, damping: 20 });
 
-  const headerOpacity = useTransform(scrollY, [0, 100], [0.95, 1]);
-  const headerScale = useTransform(scrollY, [0, 100], [1, 0.98]);
-  const headerBlur = useTransform(scrollY, [0, 100], [0, 25]);
-  const borderRadius = useTransform(scrollY, [0, 100], [0, 24]);
+  // Enhanced scroll transforms
+  const headerOpacity = useTransform(scrollY, [0, 50, 100], [0.92, 0.96, 1]);
+  const headerScale = useTransform(scrollY, [0, 100], [1, 0.985]);
+  const headerBlur = useTransform(scrollY, [0, 50, 100], [0, 15, 30]);
+  const borderRadius = useTransform(scrollY, [0, 100], [28, 20]);
+  const headerY = useTransform(scrollY, [0, 100], [0, -2]);
 
-  // Update time every second for premium feel
+  // Auto-hide header on scroll down (mobile optimization)
+  const handleScroll = useCallback(() => {
+    const currentScrollY = window.scrollY;
+    const scrollDifference = currentScrollY - lastScrollY;
+
+    if (window.innerWidth <= 768) {
+      if (scrollDifference > 5 && currentScrollY > 100) {
+        setIsVisible(false);
+      } else if (scrollDifference < -5 || currentScrollY < 50) {
+        setIsVisible(true);
+      }
+    }
+
+    setIsScrolled(currentScrollY > 20);
+    setLastScrollY(currentScrollY);
+  }, [lastScrollY]);
+
+  // Enhanced time updates with battery simulation
   useEffect(() => {
-    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+      setBatteryLevel(prev => Math.max(1, prev - 0.01));
+      setNetworkStrength(prev => Math.max(1, Math.min(4, prev + (Math.random() - 0.5) * 0.1)));
+    }, 1000);
     return () => clearInterval(timer);
   }, []);
 
-  // Enhanced scroll effect
+  // Optimized scroll handler
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Advanced mouse tracking
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (headerRef.current) {
-        const rect = headerRef.current.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-        setMousePosition({ x, y });
-        mouseX.set(e.clientX - rect.left - rect.width / 2);
-        mouseY.set(e.clientY - rect.top - rect.height / 2);
+    let ticking = false;
+    const throttledHandleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    const headerElement = headerRef.current;
-    headerElement?.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', throttledHandleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', throttledHandleScroll);
+  }, [handleScroll]);
 
-    return () => headerElement?.removeEventListener('mousemove', handleMouseMove);
+  // Enhanced mouse tracking
+  useEffect(() => {
+    let animationFrameId: number | null = null;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+
+      animationFrameId = requestAnimationFrame(() => {
+        if (headerRef.current) {
+          const rect = headerRef.current.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 100;
+          const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+          setMousePosition({ x, y });
+          mouseX.set((e.clientX - rect.left - rect.width / 2) * 0.1);
+          mouseY.set((e.clientY - rect.top - rect.height / 2) * 0.1);
+        }
+      });
+    };
+
+    const headerElement = headerRef.current;
+    if (headerElement) {
+      headerElement.addEventListener('mousemove', handleMouseMove, { passive: true });
+    }
+
+    return () => {
+      if (headerElement) {
+        headerElement.removeEventListener('mousemove', handleMouseMove);
+      }
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
   }, [mouseX, mouseY]);
 
-  // Close mobile menu when route changes
+  // Close menu on route change
   useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
 
-  // Prevent scroll when mobile menu is open
+  // Enhanced keyboard navigation
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    return () => {
-      document.body.style.overflow = '';
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
     };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMenuOpen]);
 
   return (
     <motion.header
       ref={headerRef}
-      className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}
+      className={`${styles.header} ${isScrolled ? styles.scrolled : ''} ${!isVisible ? styles.hidden : ''}`}
       style={{
         opacity: headerOpacity,
         scale: headerScale,
         borderRadius,
+        y: headerY,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      animate={{
+        y: isVisible ? 0 : -100,
+      }}
+      transition={{
+        duration: 0.3,
+        ease: "easeInOut"
+      }}
     >
-      {/* Multi-layer Premium Background */}
+      {/* Advanced Multi-layer Background */}
       <div className={styles.headerBackgroundLayers}>
-        {/* Base gradient */}
         <motion.div
           className={styles.headerBackground}
           animate={{
             background: isScrolled
               ? "linear-gradient(135deg, rgba(6, 11, 25, 0.98) 0%, rgba(15, 23, 42, 0.96) 30%, rgba(30, 41, 59, 0.94) 70%, rgba(15, 23, 42, 0.98) 100%)"
-              : "linear-gradient(135deg, rgba(6, 11, 25, 0.85) 0%, rgba(15, 23, 42, 0.80) 30%, rgba(30, 41, 59, 0.75) 70%, rgba(15, 23, 42, 0.85) 100%)"
+              : "linear-gradient(135deg, rgba(6, 11, 25, 0.88) 0%, rgba(15, 23, 42, 0.82) 30%, rgba(30, 41, 59, 0.78) 70%, rgba(15, 23, 42, 0.88) 100%)"
           }}
+          transition={{ duration: 0.5 }}
         />
 
-        {/* Animated mesh gradient */}
         <div className={styles.meshGradient} />
-
-        {/* Neural network pattern */}
         <div className={styles.neuralPattern} />
 
-        {/* Blur layer */}
         <motion.div
           className={styles.headerBlur}
           style={{
-            backdropFilter: `blur(${headerBlur}px)`,
+            backdropFilter: `blur(${headerBlur}px) saturate(1.2)`,
           }}
         />
 
-        {/* Premium border with gradient */}
         <div className={styles.premiumBorder} />
+
+        <motion.div
+          className={styles.ambientLight}
+          animate={{
+            opacity: isHovered ? 0.6 : 0.3,
+            scale: isHovered ? 1.1 : 1,
+          }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        />
       </div>
 
-      {/* Advanced Mouse Glow Effect */}
+      {/* Enhanced Mouse Interaction */}
       <motion.div
         className={styles.mouseGlow}
         style={{
-          background: `radial-gradient(800px circle at ${mousePosition.x}% ${mousePosition.y}%, 
-            rgba(59, 130, 246, 0.15) 0%, 
-            rgba(139, 92, 246, 0.12) 25%,
-            rgba(16, 185, 129, 0.08) 50%,
+          background: `radial-gradient(600px circle at ${mousePosition.x}% ${mousePosition.y}%, 
+            rgba(59, 130, 246, 0.18) 0%, 
+            rgba(139, 92, 246, 0.14) 25%,
+            rgba(16, 185, 129, 0.10) 50%,
             transparent 70%)`,
           x: springX,
           y: springY,
         }}
         animate={{
           opacity: isHovered ? 1 : 0,
-          scale: isHovered ? 1.2 : 1,
+          scale: isHovered ? 1.3 : 1,
         }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       />
 
-      {/* Floating Particles System */}
+      {/* Smart Status Bar */}
+      <div className={styles.statusBar}>
+        <motion.div
+          className={styles.statusIndicators}
+          animate={{ opacity: isScrolled ? 1 : 0.7 }}
+        >
+          <div className={styles.networkIndicator}>
+            <Wifi size={12} />
+            <div className={styles.signalBars}>
+              {[...Array(4)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className={`${styles.signalBar} ${i < Math.floor(networkStrength) ? styles.active : ''}`}
+                  animate={{
+                    height: i < Math.floor(networkStrength) ? '100%' : '30%',
+                    opacity: i < Math.floor(networkStrength) ? 1 : 0.3,
+                  }}
+                  transition={{ delay: i * 0.1 }}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.timeDisplay}>
+            <Clock size={12} />
+            <span>{currentTime.toLocaleTimeString([], {
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: false
+            })}</span>
+          </div>
+
+          <div className={styles.batteryIndicator}>
+            <div className={styles.batteryContainer}>
+              <motion.div
+                className={styles.batteryLevel}
+                animate={{
+                  width: `${batteryLevel}%`,
+                  backgroundColor: batteryLevel > 20 ? '#10b981' : '#ef4444'
+                }}
+              />
+            </div>
+            <span className={styles.batteryText}>{Math.round(batteryLevel)}%</span>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Enhanced Floating Particles */}
       <div className={styles.particleSystem}>
-        {[...Array(12)].map((_, i) => (
+        {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
-            className={`${styles.particle} ${styles[`particle${i % 3 + 1}`]}`}
+            className={`${styles.particle} ${styles[`particle${(i % 3) + 1}`]}`}
             animate={{
-              y: [-30, -120, -30],
-              x: [Math.sin(i) * 20, Math.sin(i + 1) * 30, Math.sin(i) * 20],
-              opacity: [0, 0.8, 0],
-              scale: [0.3, 1.2, 0.3],
+              y: [-20, -80, -20],
+              x: [Math.sin(i) * 15, Math.sin(i + 1) * 25, Math.sin(i) * 15],
+              opacity: [0, 0.7, 0],
+              scale: [0.2, 1, 0.2],
               rotate: [0, 180, 360],
             }}
             transition={{
-              duration: 8 + i * 0.5,
+              duration: 6 + i * 0.3,
               repeat: Infinity,
-              delay: i * 0.7,
+              delay: i * 0.5,
               ease: "easeInOut",
             }}
             style={{
-              left: `${5 + i * 8}%`,
+              left: `${10 + i * 10}%`,
             }}
           />
         ))}
       </div>
 
-      {/* Status Indicators */}
-      <div className={styles.statusIndicators}>
-        <motion.div
-          className={styles.onlineIndicator}
-          animate={{ scale: [1, 1.2, 1] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        />
-        <div className={styles.timeDisplay}>
-          {currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-        </div>
-      </div>
-
       <div className={styles.container}>
-        {/* Enhanced Logo Section */}
+        {/* Premium Logo */}
         <motion.div
           className={styles.logo}
           whileHover={{
-            scale: 1.05,
-            rotate: [0, -1, 1, 0],
+            scale: 1.08,
+            rotate: [0, -2, 2, 0],
           }}
-          whileTap={{ scale: 0.95 }}
-          transition={{ type: "spring", stiffness: 400, damping: 25 }}
+          whileTap={{ scale: 0.92 }}
+          transition={{ type: "spring", stiffness: 500, damping: 30 }}
         >
           <Link href="/" className={styles.logoLink}>
             <motion.div
@@ -206,54 +306,85 @@ export default function Header() {
               animate={{
                 boxShadow: isScrolled
                   ? [
-                    "0 0 30px rgba(59, 130, 246, 0.4)",
-                    "0 0 40px rgba(139, 92, 246, 0.3)",
-                    "0 0 30px rgba(59, 130, 246, 0.4)"
+                    "0 0 40px rgba(59, 130, 246, 0.5)",
+                    "0 0 50px rgba(139, 92, 246, 0.4)",
+                    "0 0 40px rgba(59, 130, 246, 0.5)"
                   ]
                   : [
-                    "0 0 20px rgba(59, 130, 246, 0.3)",
-                    "0 0 30px rgba(139, 92, 246, 0.2)",
-                    "0 0 20px rgba(59, 130, 246, 0.3)"
+                    "0 0 25px rgba(59, 130, 246, 0.4)",
+                    "0 0 35px rgba(139, 92, 246, 0.3)",
+                    "0 0 25px rgba(59, 130, 246, 0.4)"
                   ]
               }}
-              transition={{ duration: 3, repeat: Infinity }}
+              transition={{ duration: 4, repeat: Infinity }}
             >
               <Image
                 src="/Image/Logo/TingNect/TingNect icon.svg"
                 alt="TingNect"
-                width={36}
-                height={36}
+                width={40}
+                height={40}
                 className={styles.logoIcon}
+                priority
               />
 
-              {/* Multi-layer glow effects */}
               <div className={styles.logoGlow} />
               <div className={styles.logoGlowSecondary} />
               <div className={styles.holographicEffect} />
+
+              <motion.div
+                className={styles.pulseRing}
+                animate={{
+                  scale: [1, 1.8, 1],
+                  opacity: [0.8, 0, 0.8],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
             </motion.div>
+
+
+            <motion.div
+              className={styles.logoWrapperr}
+            >
+              <Image
+              src="/Image/Logo/TingNect/TING_Nect_01.svg"
+              alt="TingNect Logo Mobile"
+               width={120}
+               height={32}
+                className={styles.logoMobile}
+                priority
+              />
+            </motion.div>
+
 
             <div className={styles.logoTextContainer}>
               <motion.span
                 className={styles.logoText}
                 animate={{
-                  backgroundPosition: isScrolled ? "200% 0%" : "0% 0%",
+                  backgroundPosition: isScrolled ? "300% 0%" : "0% 0%",
                 }}
-                transition={{ duration: 3, ease: "easeInOut", repeat: Infinity }}
+                transition={{ duration: 4, ease: "easeInOut", repeat: Infinity }}
               >
                 TingNect
               </motion.span>
 
-              {/* New "Build for Billions" Badge */}
+
+
+
               <div className={styles.badgeContainer}>
                 <motion.div
                   className={styles.buildBadge}
                   animate={{
-                    scale: [1, 1.05, 1],
-                    opacity: [0.8, 1, 0.8],
+                    scale: [1, 1.08, 1],
+                    opacity: [0.85, 1, 0.85],
                   }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  aria-label="Build for Billions badge"
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  whileHover={{ scale: 1.1, y: -2 }}
                 >
+                  <Sparkles size={10} />
                   Build for Billions
                 </motion.div>
               </div>
@@ -261,310 +392,55 @@ export default function Header() {
           </Link>
         </motion.div>
 
-        {/* Premium Desktop Navigation */}
-        <nav className={styles.desktopNav}>
-          <div className={styles.navBackground} />
-          {navigation.map((item, index) => (
-            <motion.div
-              key={item.name}
-              className={styles.navItemWrapper}
-              initial={{ opacity: 0, y: -30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.15,
-                type: "spring",
-                stiffness: 200,
-                damping: 20
-              }}
-            >
-              {item.external ? (
-                <motion.a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${styles.navLink} ${styles.externalLink}`}
-                  whileHover={{
-                    y: -3,
-                    scale: 1.05,
-                    rotateX: 5,
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                >
-                  <span className={styles.navText}>{item.name}</span>
-                  <ExternalLink size={14} className={styles.externalIcon} />
-                  <div className={styles.navHoverEffect} />
-                  <div className={styles.navGlow} />
-                  <div className={styles.navShimmer} />
-                </motion.a>
-              ) : (
-                <motion.div className={styles.navLinkContainer}>
-                  <Link
-                    href={item.href}
-                    className={`${styles.navLink} ${pathname === item.href ? styles.navLinkActive : ''}`}
-                  >
-                    <span className={styles.navText}>{item.name}</span>
-                    <div className={styles.navHoverEffect} />
-                    <div className={styles.navGlow} />
-                    <div className={styles.navShimmer} />
-                  </Link>
+        {/* Desktop Navigation */}
+        <DesktopNav navigation={navigation} pathname={pathname} />
 
-                  {pathname === item.href && (
-                    <>
-                      <motion.div
-                        className={styles.activeIndicator}
-                        layoutId="activeIndicator"
-                        transition={{
-                          type: "spring",
-                          stiffness: 500,
-                          damping: 35
-                        }}
-                      />
-                      <motion.div
-                        className={styles.activeGlow}
-                        animate={{
-                          boxShadow: [
-                            "0 0 20px rgba(59, 130, 246, 0.5)",
-                            "0 0 30px rgba(139, 92, 246, 0.4)",
-                            "0 0 20px rgba(59, 130, 246, 0.5)"
-                          ]
-                        }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                      />
-                    </>
-                  )}
-                </motion.div>
-              )}
-            </motion.div>
-          ))}
-        </nav>
-
-        {/* Ultra Premium Register Button */}
-        <div className={styles.registerSection}>
-          <motion.a
-            href="https://lu.ma/qji7t8kq"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.registerButton}
-            whileHover={{
-              scale: 1.06,
-              y: -4,
-              rotateX: 5,
-            }}
-            whileTap={{
-              scale: 0.94,
-              rotateX: -5,
-            }}
-            transition={{ type: "spring", stiffness: 400, damping: 25 }}
-          >
-            {/* Multi-layer button effects */}
-            <div className={styles.buttonBackground} />
-            <div className={styles.buttonGradient} />
-            <div className={styles.buttonMesh} />
-            <div className={styles.buttonShine} />
-            <div className={styles.buttonBorder} />
-
-            <motion.div
-              className={styles.buttonContent}
-              animate={{ x: [0, 1, 0, -1, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
-            >
-              <Sparkles size={18} className={styles.buttonIcon} />
-              <span className={styles.buttonText}>Register Event</span>
-              <ArrowRight size={18} className={styles.buttonArrow} />
-            </motion.div>
-
-            <div className={styles.buttonGlow} />
-            <div className={styles.buttonParticles}>
-              {[...Array(6)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className={styles.buttonParticle}
-                  animate={{
-                    scale: [0, 1, 0],
-                    opacity: [0, 1, 0],
-                    rotate: [0, 360],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: i * 0.3,
-                  }}
-                />
-              ))}
-            </div>
-          </motion.a>
-        </div>
-
-        {/* Enhanced Mobile Menu Toggle */}
+        {/* Mobile Menu Button */}
         <motion.button
           className={styles.mobileMenuButton}
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsMenuOpen(!isMenuOpen);
+          }}
           whileHover={{
-            scale: 1.15,
-            rotate: 5,
+            scale: 1.2,
+            rotate: 8,
           }}
           whileTap={{
-            scale: 0.9,
-            rotate: -5,
+            scale: 0.85,
+            rotate: -8,
           }}
           animate={{
-            backgroundColor: isScrolled
-              ? "rgba(255, 255, 255, 0.12)"
-              : "rgba(255, 255, 255, 0.08)",
+            backgroundColor: isMenuOpen
+              ? "rgba(59, 130, 246, 0.2)"
+              : isScrolled
+                ? "rgba(255, 255, 255, 0.15)"
+                : "rgba(255, 255, 255, 0.1)",
             borderColor: isMenuOpen
-              ? "rgba(59, 130, 246, 0.4)"
-              : "rgba(255, 255, 255, 0.2)"
+              ? "rgba(59, 130, 246, 0.5)"
+              : "rgba(255, 255, 255, 0.25)",
+            boxShadow: isMenuOpen
+              ? "0 0 30px rgba(59, 130, 246, 0.4)"
+              : "0 8px 25px rgba(0, 0, 0, 0.1)"
           }}
+          transition={{ duration: 0.3 }}
+          aria-label={isMenuOpen ? "Đóng menu" : "Mở menu"}
+          aria-expanded={isMenuOpen}
         >
           <div className={styles.menuIconContainer}>
-            <AnimatePresence mode="wait">
-              {isMenuOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ rotate: -180, opacity: 0, scale: 0.5 }}
-                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                  exit={{ rotate: 180, opacity: 0, scale: 0.5 }}
-                  transition={{ duration: 0.3, type: "spring", stiffness: 200 }}
-                >
-                  <X size={24} />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ rotate: 180, opacity: 0, scale: 0.5 }}
-                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                  exit={{ rotate: -180, opacity: 0, scale: 0.5 }}
-                  transition={{ duration: 0.3, type: "spring", stiffness: 200 }}
-                >
-                  <Menu size={24} />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </div>
           <div className={styles.menuButtonGlow} />
         </motion.button>
       </div>
 
-      {/* Ultra Premium Mobile Navigation */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <>
-            {/* Enhanced Mobile Menu Backdrop */}
-            <motion.div
-              className={styles.mobileBackdrop}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={() => setIsMenuOpen(false)}
-            />
-
-            {/* Premium Mobile Menu */}
-            <motion.div
-              className={styles.mobileNav}
-              initial={{ opacity: 0, y: -150, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -150, scale: 0.9 }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 30,
-                duration: 0.5
-              }}
-            >
-              {/* Mobile menu background effects */}
-              <div className={styles.mobileNavBackground} />
-              <div className={styles.mobileNavMesh} />
-
-              <div className={styles.mobileNavContent}>
-                <div className={styles.mobileNavLinks}>
-                  {navigation.map((item, index) => (
-                    <motion.div
-                      key={item.name}
-                      initial={{ opacity: 0, x: -50, rotateX: -30 }}
-                      animate={{ opacity: 1, x: 0, rotateX: 0 }}
-                      transition={{
-                        duration: 0.4,
-                        delay: index * 0.1,
-                        type: "spring",
-                        stiffness: 200
-                      }}
-                    >
-                      {item.external ? (
-                        <motion.a
-                          href={item.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`${styles.mobileNavLink} ${styles.mobileExternalLink}`}
-                          onClick={() => setIsMenuOpen(false)}
-                          whileHover={{
-                            x: 12,
-                            scale: 1.02,
-                            rotateX: 5,
-                          }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <span>{item.name}</span>
-                          <ExternalLink size={20} />
-                          <div className={styles.mobileLinkGlow} />
-                        </motion.a>
-                      ) : (
-                        <motion.div className={styles.mobileLinkWrapper}>
-                          <Link
-                            href={item.href}
-                            className={`${styles.mobileNavLink} ${pathname === item.href ? styles.mobileNavLinkActive : ''}`}
-                            onClick={() => setIsMenuOpen(false)}
-                          >
-                            {item.name}
-                            <div className={styles.mobileLinkGlow} />
-                          </Link>
-                          {pathname === item.href && (
-                            <motion.div
-                              className={styles.mobileActiveIndicator}
-                              layoutId="mobileActiveIndicator"
-                            />
-                          )}
-                        </motion.div>
-                      )}
-                    </motion.div>
-                  ))}
-                </div>
-
-                <motion.div
-                  className={styles.mobileRegisterSection}
-                  initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.4, delay: 0.5 }}
-                >
-                  <motion.a
-                    href="https://lu.ma/qji7t8kq"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.mobileRegisterButton}
-                    onClick={() => setIsMenuOpen(false)}
-                    whileHover={{
-                      scale: 1.03,
-                      y: -3,
-                    }}
-                    whileTap={{ scale: 0.97 }}
-                  >
-                    <div className={styles.mobileButtonBackground} />
-                    <div className={styles.mobileButtonGradient} />
-
-                    <Sparkles size={20} />
-                    <span className={styles.pandacu}>Register Event</span>
-                    <ArrowRight size={20} />
-
-                    <div className={styles.mobileButtonGlow} />
-                  </motion.a>
-                </motion.div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+      {/* Mobile Navigation */}
+      <MobileNav 
+        isMenuOpen={isMenuOpen} 
+        setIsMenuOpen={setIsMenuOpen}
+        navigation={navigation}
+        pathname={pathname}
+      />
     </motion.header>
   );
 }

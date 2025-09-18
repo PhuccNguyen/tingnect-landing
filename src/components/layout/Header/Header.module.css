@@ -1,15 +1,28 @@
-/* Enhanced Base Styles */
+/* Base Styles với tối ưu hóa mobile */
 .header {
   position: fixed;
-  top: 0.75rem;
-  left: 0.75rem;
-  right: 0.75rem;
+  top: 0.5rem;
+  left: 0.5rem;
+  right: 0.5rem;
   z-index: 1000;
   height: 5.5rem;
-  border-radius: 1.75rem;
+  border-radius: 2rem;
   overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   transform-origin: center top;
+  will-change: transform, opacity;
+}
+
+.header.hidden {
+  transform: translateY(-120%);
+  opacity: 0;
+}
+
+.header.scrolled {
+  height: 4.5rem;  
+  top: 0.25rem;
+  backdrop-filter: blur(40px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Multi-layer Background System */
@@ -24,38 +37,38 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, 
-    rgba(6, 11, 25, 0.85) 0%, 
-    rgba(15, 23, 42, 0.80) 30%, 
-    rgba(30, 41, 59, 0.75) 70%, 
-    rgba(15, 23, 42, 0.85) 100%);
-  transition: all 0.5s ease;
+    rgba(6, 11, 25, 0.88) 0%, 
+    rgba(15, 23, 42, 0.82) 30%, 
+    rgba(30, 41, 59, 0.78) 70%, 
+    rgba(15, 23, 42, 0.88) 100%);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .meshGradient {
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.04) 0%, transparent 50%);
-  animation: meshShift 8s ease-in-out infinite alternate;
+    radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.12) 0%, transparent 60%),
+    radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.10) 0%, transparent 60%),
+    radial-gradient(circle at 50% 90%, rgba(16, 185, 129, 0.08) 0%, transparent 60%);
+  animation: meshFlow 12s ease-in-out infinite alternate;
 }
 
 .neuralPattern {
   position: absolute;
   inset: 0;
   background-image: 
-    linear-gradient(30deg, transparent 48%, rgba(59, 130, 246, 0.02) 49%, rgba(59, 130, 246, 0.02) 51%, transparent 52%),
-    linear-gradient(150deg, transparent 48%, rgba(139, 92, 246, 0.015) 49%, rgba(139, 92, 246, 0.015) 51%, transparent 52%);
-  background-size: 60px 60px, 80px 80px;
-  animation: neuralFlow 12s linear infinite;
+    linear-gradient(35deg, transparent 47%, rgba(59, 130, 246, 0.03) 48%, rgba(59, 130, 246, 0.03) 52%, transparent 53%),
+    linear-gradient(145deg, transparent 47%, rgba(139, 92, 246, 0.025) 48%, rgba(139, 92, 246, 0.025) 52%, transparent 53%);
+  background-size: 80px 80px, 120px 120px;
+  animation: neuralPulse 15s linear infinite;
 }
 
 .headerBlur {
   position: absolute;
   inset: 0;
-  backdrop-filter: blur(0px) saturate(1.2);
-  transition: backdrop-filter 0.5s ease;
+  backdrop-filter: blur(0px) saturate(1.1);
+  transition: backdrop-filter 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .premiumBorder {
@@ -64,15 +77,27 @@
   border-radius: inherit;
   padding: 1px;
   background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.15) 0%,
-    rgba(59, 130, 246, 0.2) 25%,
-    rgba(139, 92, 246, 0.15) 50%,
-    rgba(16, 185, 129, 0.1) 75%,
-    rgba(255, 255, 255, 0.05) 100%);
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(59, 130, 246, 0.25) 25%,
+    rgba(139, 92, 246, 0.20) 50%,
+    rgba(16, 185, 129, 0.15) 75%,
+    rgba(255, 255, 255, 0.08) 100%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: subtract;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: subtract;
+  animation: borderGlow 8s ease-in-out infinite;
+}
+
+.ambientLight {
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(ellipse at center, 
+    rgba(59, 130, 246, 0.1) 0%, 
+    rgba(139, 92, 246, 0.08) 40%,
+    transparent 70%);
+  filter: blur(30px);
+  opacity: 0.3;
 }
 
 .mouseGlow {
@@ -81,10 +106,110 @@
   pointer-events: none;
   opacity: 0;
   border-radius: inherit;
-  transition: opacity 0.4s ease;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* Advanced Particle System */
+/* Advanced Status Bar */
+.statusBar {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  z-index: 15;
+}
+
+.statusIndicators {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.4s ease;
+}
+
+.networkIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.signalBars {
+  display: flex;
+  align-items: end;
+  gap: 1px;
+  height: 10px;
+}
+
+.signalBar {
+  width: 2px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+
+.signalBar:nth-child(1) { height: 3px; }
+.signalBar:nth-child(2) { height: 5px; }
+.signalBar:nth-child(3) { height: 7px; }
+.signalBar:nth-child(4) { height: 10px; }
+
+.signalBar.active {
+  background: linear-gradient(to top, #10b981, #06b6d4);
+}
+
+.timeDisplay {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: 'SF Mono', 'Cascadia Code', monospace;
+  letter-spacing: 0.5px;
+}
+
+.batteryIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.batteryContainer {
+  width: 20px;
+  height: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+  position: relative;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.batteryContainer::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: 3px;
+  width: 2px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 0 1px 1px 0;
+}
+
+.batteryLevel {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #06b6d4);
+  border-radius: 1px;
+  transition: all 0.5s ease;
+}
+
+.batteryText {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+}
+
+/* Enhanced Particle System */
 .particleSystem {
   position: absolute;
   inset: 0;
@@ -97,54 +222,28 @@
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
+  filter: blur(0.5px);
 }
 
 .particle1 {
-  width: 4px;
-  height: 4px;
+  width: 3px;
+  height: 3px;
   background: linear-gradient(45deg, #60a5fa, #a78bfa);
-  box-shadow: 0 0 20px rgba(96, 165, 250, 0.8);
+  box-shadow: 0 0 15px rgba(96, 165, 250, 0.9);
 }
 
 .particle2 {
-  width: 3px;
-  height: 3px;
+  width: 2px;
+  height: 2px;
   background: linear-gradient(45deg, #8b5cf6, #06b6d4);
-  box-shadow: 0 0 15px rgba(139, 92, 246, 0.7);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.8);
 }
 
 .particle3 {
-  width: 2px;
-  height: 2px;
+  width: 4px;
+  height: 4px;
   background: linear-gradient(45deg, #10b981, #3b82f6);
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
-}
-
-/* Status Indicators */
-.statusIndicators {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  z-index: 5;
-}
-
-.onlineIndicator {
-  width: 8px;
-  height: 8px;
-  background: linear-gradient(45deg, #10b981, #06b6d4);
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
-}
-
-.timeDisplay {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.75rem;
-  font-weight: 500;
-  font-family: 'Courier New', monospace;
-  letter-spacing: 0.5px;
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.7);
 }
 
 .container {
@@ -152,7 +251,7 @@
   z-index: 10;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2.5rem;
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -172,23 +271,23 @@
   gap: 1rem;
   text-decoration: none;
   color: white;
-  transition: all 0.4s ease;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .logoWrapper {
   position: relative;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 4rem;
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 1.25rem;
+  border-radius: 1.5rem;
   background: 
-    linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)),
-    linear-gradient(45deg, rgba(16, 185, 129, 0.05), rgba(59, 130, 246, 0.05));
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(20px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.12)),
+    linear-gradient(45deg, rgba(16, 185, 129, 0.08), rgba(59, 130, 246, 0.08));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(25px);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   overflow: hidden;
 }
 
@@ -196,15 +295,15 @@
   content: '';
   position: absolute;
   inset: -2px;
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #10b981, #3b82f6);
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #10b981, #06b6d4, #3b82f6);
   border-radius: inherit;
   opacity: 0;
-  animation: rotate 4s linear infinite;
-  transition: opacity 0.3s ease;
+  animation: logoRotate 6s linear infinite;
+  transition: opacity 0.4s ease;
 }
 
 .logoWrapper:hover::before {
-  opacity: 0.4;
+  opacity: 0.6;
 }
 
 .logoWrapper::after {
@@ -217,51 +316,59 @@
 }
 
 .logoIcon {
-  width: 2.25rem;
-  height: 2.25rem;
-  filter: drop-shadow(0 8px 16px rgba(59, 130, 246, 0.4));
-  transition: all 0.4s ease;
+  width: 2.5rem;
+  height: 2.5rem;
+  filter: drop-shadow(0 10px 20px rgba(59, 130, 246, 0.5));
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   position: relative;
   z-index: 2;
+}
+
+.pulseRing {
+  position: absolute;
+  inset: -8px;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  border-radius: 50%;
+  pointer-events: none;
 }
 
 .logoGlow,
 .logoGlowSecondary {
   position: absolute;
-  inset: -4px;
+  inset: -6px;
   border-radius: inherit;
   opacity: 0;
-  filter: blur(12px);
-  transition: all 0.4s ease;
+  filter: blur(15px);
+  transition: all 0.5s ease;
   z-index: 0;
 }
 
 .logoGlow {
   background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
-  animation: rotate 6s linear infinite;
+  animation: logoRotate 8s linear infinite;
 }
 
 .logoGlowSecondary {
   background: linear-gradient(-45deg, #10b981, #06b6d4, #10b981);
-  animation: rotate 8s linear infinite reverse;
-  filter: blur(20px);
+  animation: logoRotate 10s linear infinite reverse;
+  filter: blur(25px);
 }
 
 .holographicEffect {
   position: absolute;
   inset: 0;
   background: linear-gradient(45deg, 
-    transparent 30%, 
-    rgba(255, 255, 255, 0.1) 50%, 
-    transparent 70%);
+    transparent 25%, 
+    rgba(255, 255, 255, 0.15) 50%, 
+    transparent 75%);
   opacity: 0;
   transform: translateX(-100%);
-  transition: all 0.6s ease;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .logoWrapper:hover .logoGlow,
 .logoWrapper:hover .logoGlowSecondary {
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 .logoWrapper:hover .holographicEffect {
@@ -276,418 +383,73 @@
 }
 
 .logoText {
-  font-size: 1.75rem;
+  font-size: 1.875rem;
   font-weight: 900;
   font-family: var(--font-space-grotesk), system-ui, sans-serif;
   background: linear-gradient(45deg, 
     #ffffff 0%, 
-    #60a5fa 25%, 
-    #a78bfa 50%, 
-    #10b981 75%, 
+    #60a5fa 20%, 
+    #a78bfa 40%, 
+    #10b981 60%, 
+    #06b6d4 80%,
     #ffffff 100%);
-  background-size: 400% 100%;
+  background-size: 500% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   line-height: 1;
-  transition: all 0.4s ease;
-  letter-spacing: -0.02em;
+  transition: all 0.5s ease;
+  letter-spacing: -0.03em;
 }
 
 .badgeContainer {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 0.25rem;
+  margin-top: 0.375rem;
 }
 
 .buildBadge {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.25rem;
   background: linear-gradient(45deg, #3b82f6, #8b5cf6);
   color: white;
-  font-size: 0.55rem;
+  font-size: 0.625rem;
   font-weight: 800;
-  padding: 0.15rem 0.5rem;
-  border-radius: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
-  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 15px rgba(59, 130, 246, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
 }
-
-/* Animations */
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-/* Premium Desktop Navigation */
-.desktopNav {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 1.5rem;
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.navBackground {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.03) 0%,
-    rgba(59, 130, 246, 0.02) 50%,
-    rgba(255, 255, 255, 0.03) 100%);
-  border-radius: inherit;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.desktopNav:hover .navBackground {
-  opacity: 1;
-}
-
-.navItemWrapper {
-  position: relative;
-}
-
-.navLinkContainer {
-  position: relative;
-}
-
-.navLink {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.95rem;
-  padding: 0.875rem 1.5rem;
-  border-radius: 1.25rem;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(10px);
-  border: 1px solid transparent;
-  transform-style: preserve-3d;
-}
-
-.navLink:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(59, 130, 246, 0.25);
-  transform: translateY(-2px) rotateX(5deg);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
-}
-
-.navText {
-  position: relative;
-  z-index: 3;
-  transition: all 0.4s ease;
-}
-
-.navHoverEffect {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, 
-    rgba(59, 130, 246, 0.08) 0%,
-    rgba(139, 92, 246, 0.06) 50%,
-    rgba(16, 185, 129, 0.04) 100%);
-  opacity: 0;
-  transition: all 0.4s ease;
-  border-radius: inherit;
-}
-
-.navLink:hover .navHoverEffect {
-  opacity: 1;
-}
-
-.navGlow {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(59, 130, 246, 0.1), 
-    rgba(139, 92, 246, 0.08),
-    transparent);
-  transform: translateX(-100%);
-  transition: transform 0.8s ease;
-}
-
-.navShimmer {
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(255, 255, 255, 0.2), 
-    transparent);
-  transition: left 0.6s ease;
-}
-
-.navLink:hover .navGlow {
-  transform: translateX(100%);
-}
-
-.navLink:hover .navShimmer {
-  left: 100%;
-}
-
-.navLinkActive {
-  color: #60a5fa !important;
-  background: linear-gradient(135deg, 
-    rgba(59, 130, 246, 0.12) 0%,
-    rgba(139, 92, 246, 0.08) 100%) !important;
-  border-color: rgba(59, 130, 246, 0.3) !important;
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
-  transform: translateY(-1px);
-}
-
-.activeIndicator {
-  position: absolute;
-  bottom: -0.75rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0.75rem;
-  height: 0.75rem;
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
-  border-radius: 50%;
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
-}
-
-.activeGlow {
-  position: absolute;
-  bottom: -1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  filter: blur(8px);
-}
-
-.externalLink {
-  border-left: 2px solid rgba(139, 92, 246, 0.4);
-  position: relative;
-}
-
-.externalLink::before {
-  content: '';
-  position: absolute;
-  left: -2px;
-  top: 0;
-  width: 2px;
-  height: 0;
-  background: linear-gradient(to bottom, #8b5cf6, #06b6d4);
-  transition: height 0.4s ease;
-}
-
-.externalLink:hover::before {
-  height: 100%;
-}
-
-.externalIcon {
-  opacity: 0.7;
-  transition: all 0.4s ease;
-}
-
-.externalLink:hover .externalIcon {
-  opacity: 1;
-  transform: translateY(-2px) scale(1.15) rotate(5deg);
-}
-
-/* Ultra Premium Register Button */
-.registerSection {
-  display: flex;
-  align-items: center;
-}
-
-.registerButton {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 2.5rem;
-  border-radius: 2.5rem;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 1rem;
-  color: white;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 12px 40px rgba(59, 130, 246, 0.25);
-  transform-style: preserve-3d;
-}
-
-.registerButton:hover {
-  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.35);
-  border-color: rgba(255, 255, 255, 0.4);
-}
-
-.buttonBackground {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, 
-    rgba(6, 11, 25, 0.9) 0%,
-    rgba(15, 23, 42, 0.8) 50%,
-    rgba(30, 41, 59, 0.9) 100%);
-  backdrop-filter: blur(20px);
-}
-
-.buttonGradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(45deg, 
-    #3b82f6 0%, 
-    #8b5cf6 25%, 
-    #06b6d4 50%, 
-    #10b981 75%, 
-    #3b82f6 100%);
-  background-size: 400% 400%;
-  animation: gradientShift 6s ease infinite;
-  opacity: 0.9;
-}
-
-.buttonMesh {
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.2) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.registerButton:hover .buttonMesh {
-  opacity: 1;
-}
-
-.buttonShine {
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(255, 255, 255, 0.4), 
-    transparent);
-  transition: left 0.8s ease;
-  z-index: 2;
-}
-
-.buttonBorder {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(45deg, 
-    rgba(255, 255, 255, 0.2),
-    rgba(59, 130, 246, 0.3),
-    rgba(139, 92, 246, 0.2),
-    rgba(255, 255, 255, 0.1));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: subtract;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: subtract;
-}
-
-.registerButton:hover .buttonShine {
-  left: 100%;
-}
-
-.buttonContent {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  position: relative;
-  z-index: 3;
-}
-
-.buttonIcon,
-.buttonArrow,
-.buttonText {
-  transition: all 0.4s ease;
-}
-
-.buttonIcon {
-  animation: sparkle 3s ease-in-out infinite;
-}
-
-.buttonArrow {
-  transition: transform 0.4s ease;
-}
-
-.registerButton:hover .buttonArrow {
-  transform: translateX(4px) scale(1.1);
-}
-
-.registerButton:hover .buttonIcon {
-  transform: scale(1.15) rotate(15deg);
-}
-
-.buttonGlow {
-  position: absolute;
-  inset: -4px;
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
-  border-radius: inherit;
-  opacity: 0;
-  filter: blur(20px);
-  animation: rotate 8s linear infinite;
-  transition: opacity 0.4s ease;
-}
-
-.registerButton:hover .buttonGlow {
-  opacity: 0.6;
-}
-
-.buttonParticles {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.buttonParticle {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-}
-
-.buttonParticle:nth-child(1) { top: 20%; left: 20%; }
-.buttonParticle:nth-child(2) { top: 30%; right: 25%; }
-.buttonParticle:nth-child(3) { bottom: 25%; left: 30%; }
-.buttonParticle:nth-child(4) { bottom: 35%; right: 20%; }
-.buttonParticle:nth-child(5) { top: 50%; left: 50%; }
-.buttonParticle:nth-child(6) { bottom: 20%; right: 40%; }
 
 /* Enhanced Mobile Menu Button */
 .mobileMenuButton {
   position: relative;
   display: none;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 1.25rem;
-  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.5rem;
+  padding: 1.125rem;
   color: white;
   cursor: pointer;
-  backdrop-filter: blur(20px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(25px);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  z-index: 200;
 }
 
 .mobileMenuButton:hover {
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 35px rgba(59, 130, 246, 0.25);
+  transform: scale(1.05);
 }
 
 .menuIconContainer {
@@ -702,358 +464,84 @@
 
 .menuButtonGlow {
   position: absolute;
-  inset: -2px;
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
-  border-radius: inherit;
-  opacity: 0;
-  filter: blur(8px);
-  animation: rotate 4s linear infinite;
-  transition: opacity 0.3s ease;
-}
-
-.mobileMenuButton:hover .menuButtonGlow {
-  opacity: 0.4;
-}
-
-/* Ultra Premium Mobile Navigation */
-.mobileBackdrop {
-  position: fixed;
-  inset: 0;
-  background: 
-    radial-gradient(circle at center, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%);
-  backdrop-filter: blur(8px);
-  z-index: 100;
-}
-
-.mobileNav {
-  position: fixed;
-  top: 6.5rem;
-  left: 0.75rem;
-  right: 0.75rem;
-  bottom: 1rem;
-  border-radius: 2rem;
-  z-index: 150;
-  overflow: hidden;
-  backdrop-filter: blur(40px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mobileNavBackground {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, 
-    rgba(6, 11, 25, 0.95) 0%, 
-    rgba(15, 23, 42, 0.90) 30%, 
-    rgba(30, 41, 59, 0.85) 70%, 
-    rgba(15, 23, 42, 0.95) 100%);
-}
-
-.mobileNavMesh {
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 50% 90%, rgba(16, 185, 129, 0.06) 0%, transparent 50%);
-}
-
-.mobileNavContent {
-  position: relative;
-  z-index: 10;
-  padding: 2.5rem;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-}
-
-.mobileNavLinks {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.mobileLinkWrapper {
-  position: relative;
-}
-
-.mobileNavLink {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: rgba(255, 255, 255, 0.85);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.2rem;
-  padding: 1.5rem 2rem;
-  border-radius: 1.5rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  transform-style: preserve-3d;
-}
-
-.mobileNavLink:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(59, 130, 246, 0.3);
-  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.15);
-}
-
-.mobileNavLinkActive {
-  color: #60a5fa !important;
-  background: linear-gradient(135deg, 
-    rgba(59, 130, 246, 0.15) 0%,
-    rgba(139, 92, 246, 0.1) 100%) !important;
-  border-color: rgba(59, 130, 246, 0.4) !important;
-  box-shadow: 0 12px 35px rgba(59, 130, 246, 0.25);
-}
-
-.mobileExternalLink {
-  border-left: 3px solid rgba(139, 92, 246, 0.6);
-  position: relative;
-}
-
-.mobileExternalLink::before {
-  content: '';
-  position: absolute;
-  left: -3px;
-  top: 0;
-  width: 3px;
-  height: 0;
-  background: linear-gradient(to bottom, #8b5cf6, #06b6d4);
-  transition: height 0.4s ease;
-}
-
-.mobileExternalLink:hover::before {
-  height: 100%;
-}
-
-.mobileLinkGlow {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, 
-    rgba(59, 130, 246, 0.1) 0%,
-    rgba(139, 92, 246, 0.08) 50%,
-    rgba(16, 185, 129, 0.06) 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: inherit;
-}
-
-.mobileNavLink:hover .mobileLinkGlow {
-  opacity: 1;
-}
-
-.mobileActiveIndicator {
-  position: absolute;
-  right: -0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1rem;
-  height: 1rem;
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
-  border-radius: 50%;
-  box-shadow: 0 0 25px rgba(59, 130, 246, 0.8);
-}
-
-.mobileRegisterSection {
-  margin-top: auto;
-  padding-top: 2.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  position: relative;
-}
-
-.mobileRegisterSection::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50%;
-  height: 1px;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(59, 130, 246, 0.5), 
-    transparent);
-}
-
-.mobileRegisterButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  width: 100%;
-  padding: 1.5rem 2rem;
-  color: white;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 1.2rem;
-  border-radius: 1.5rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-
-.pandacu{
-      color: white;
-  position: relative;
-}
-
-.mobileButtonBackground {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, 
-    rgba(6, 11, 25, 0.8) 0%,
-    rgba(15, 23, 42, 0.7) 50%,
-    rgba(30, 41, 59, 0.8) 100%);
-  backdrop-filter: blur(20px);
-}
-
-.mobileButtonGradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
-  background-size: 400% 400%;
-  animation: gradientShift 4s ease infinite;
-  opacity: 0.9;
-}
-
-.mobileButtonGlow {
-  position: absolute;
   inset: -3px;
   background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
   border-radius: inherit;
   opacity: 0;
-  filter: blur(15px);
-  animation: rotate 6s linear infinite;
-  transition: opacity 0.3s ease;
+  filter: blur(12px);
+  animation: logoRotate 6s linear infinite;
+  transition: opacity 0.4s ease;
 }
 
-.mobileRegisterButton:hover .mobileButtonGlow {
-  opacity: 0.7;
+.mobileMenuButton:hover .menuButtonGlow {
+  opacity: 0.6;
 }
 
-/* Scrolled State Enhancements */
-.scrolled {
-  height: 5rem;
-  top: 0.5rem;
-  left: 0.5rem;
-  right: 0.5rem;
-  border-radius: 1.5rem;
-  backdrop-filter: blur(30px);
+/* Enhanced Animations */
+@keyframes meshFlow {
+  0%, 100% { 
+    transform: translate(0, 0) scale(1) rotate(0deg); 
+    opacity: 0.8;
+  }
+  33% { 
+    transform: translate(15px, -15px) scale(1.1) rotate(2deg); 
+    opacity: 1;
+  }
+  66% { 
+    transform: translate(-10px, 8px) scale(0.9) rotate(-1deg); 
+    opacity: 0.9;
+  }
 }
 
-.scrolled .logoWrapper {
-  background: linear-gradient(135deg, 
-    rgba(59, 130, 246, 0.2) 0%,
-    rgba(139, 92, 246, 0.18) 50%,
-    rgba(16, 185, 129, 0.15) 100%);
-  border-color: rgba(59, 130, 246, 0.3);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
+@keyframes neuralPulse {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(80px, 80px) rotate(1deg); }
 }
 
-.scrolled .registerButton {
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
-  border-color: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(20px);
-  background-size: 400% 400%;
-  box-shadow: 0 15px 50px rgba(59, 130, 246, 0.4);
-}
-
-.scrolled .desktopNav {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.12);
-}
-
-/* Advanced Animations */
-@keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  25% { background-position: 100% 50%; }
-  50% { background-position: 100% 100%; }
-  75% { background-position: 0% 100%; }
-}
-
-@keyframes meshShift {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(10px, -10px) scale(1.05); }
-  66% { transform: translate(-5px, 5px) scale(0.95); }
-}
-
-@keyframes neuralFlow {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(60px, 60px); }
-}
-
-@keyframes rotate {
+@keyframes logoRotate {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 0.7; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.1); }
+@keyframes borderGlow {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
 }
 
-@keyframes sparkle {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  25% { transform: scale(1.2) rotate(90deg); }
-  50% { transform: scale(1.1) rotate(180deg); }
-  75% { transform: scale(1.15) rotate(270deg); }
+/* Thêm style cho logo mobile */
+.logoMobile {
+  display: none; /* Ẩn mặc định ở desktop */
+  width: auto;
+  height: 3.25rem; /* Điều chỉnh chiều cao phù hợp với header mobile */
+  filter: drop-shadow(0 2px 8px rgba(59, 130, 246, 0.3));
+  transition: all 0.3s ease;
+  margin-left: -0.5rem;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+.logoMobile:hover {
+  filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.5));
 }
 
-/* Enhanced Responsive Design */
-@media (max-width: 1024px) {
-  .container {
-    padding: 0 2rem;
-  }
-  
-  .desktopNav {
-    gap: 0.25rem;
-    padding: 0.375rem;
-  }
-  
-  .navLink {
-    padding: 0.75rem 1.25rem;
-    font-size: 0.9rem;
-  }
-
-  .registerButton {
-    padding: 0.875rem 2rem;
-    gap: 0.5rem;
-  }
-
-  .buttonText {
-    font-size: 0.9rem;
-  }
-}
-
+/* Responsive Design */
 @media (max-width: 768px) {
   .header {
-    height: 5rem;
-    top: 0.5rem;
-    left: 0.5rem;
-    right: 0.5rem;
+    height: 4.5rem;
+    top: 0.25rem;
+    left: 0.25rem;
+    right: 0.25rem;
+    border-radius: 1.75rem;
+  }
+  
+  .header.scrolled {
+    height: 4rem;
     border-radius: 1.5rem;
   }
   
   .container {
-    padding: 0 1.5rem;
+    padding: 0 1.25rem;
   }
   
-  .desktopNav,
-  .registerSection,
-  .statusIndicators {
+  .statusBar {
     display: none;
   }
   
@@ -1064,35 +552,42 @@
   .logoText {
     font-size: 1.5rem;
   }
+
+  .logoMobile {
+    display: none;
+  }
   
   .logoWrapper {
-    width: 3rem;
-    height: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
   }
   
   .logoIcon {
-    width: 2rem;
-    height: 2rem;
+    width: 2.25rem;
+    height: 2.25rem;
   }
 
   .particleSystem {
-    display: none;
+    opacity: 0.7;
   }
 
-  .mobileNav {
-    top: 6rem;
-    left: 0.5rem;
-    right: 0.5rem;
-    border-radius: 1.75rem;
+  .buildBadge {
+    font-size: 0.5rem;
+    padding: 0.2rem 0.6rem;
   }
 }
 
 @media (max-width: 480px) {
   .header {
-    top: 0.25rem;
-    left: 0.25rem;
-    right: 0.25rem;
-    height: 4.5rem;
+    top: 0.125rem;
+    left: 0.125rem;
+    right: 0.125rem;
+    height: 4rem;
+    border-radius: 1.5rem;
+  }
+
+  .header.scrolled {
+    height: 3.5rem;
     border-radius: 1.25rem;
   }
 
@@ -1103,143 +598,28 @@
   .logoTextContainer {
     display: none;
   }
-  
-  .mobileNavContent {
-    padding: 2rem;
-  }
-  
-  .mobileNavLink {
-    font-size: 1.1rem;
-    padding: 1.25rem 1.5rem;
-  }
 
-  .mobileRegisterButton {
-    font-size: 1.1rem;
-    padding: 1.25rem 1.5rem;
-  }
-
-  .mobileNav {
-    top: 5rem;
-    left: 0.25rem;
-    right: 0.25rem;
-    border-radius: 1.5rem;
-  }
-
-  .mouseGlow,
-  .neuralPattern {
-    display: none;
-  }
-}
-
-/* Ultra-wide screens */
-@media (min-width: 1600px) {
-  .container {
-    max-width: 1600px;
-  }
-
-  .navLink {
-    font-size: 1rem;
-    padding: 1rem 1.75rem;
-  }
-
-  .registerButton {
-    font-size: 1.1rem;
-    padding: 1.125rem 3rem;
-  }
-}
-
-/* High-end mobile devices */
-@media (max-width: 768px) and (min-resolution: 2dppx) {
-  .logoIcon {
-    filter: drop-shadow(0 4px 8px rgba(59, 130, 246, 0.3));
-  }
-
-  .mobileNavLink {
-    backdrop-filter: blur(15px);
-  }
-
-  .mobileRegisterButton {
-    backdrop-filter: blur(20px);
-  }
-}
-
-/* Accessibility Enhancements */
-@media (prefers-reduced-motion: reduce) {
-  .particle,
-  .buttonGradient,
-  .logoGlow,
-  .buttonGlow,
-  .meshGradient,
-  .neuralPattern,
-  .buttonParticle {
-    animation: none !important;
+    .logoMobile {
+    display: block;
   }
   
-  .registerButton,
-  .navLink,
-  .mobileNavLink,
   .logoWrapper {
-    transition: none !important;
+    width: 3rem;
+    height: 3rem;
   }
 
-  .mouseGlow {
+  .logoIcon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .mouseGlow,
+  .neuralPattern,
+  .particleSystem {
     display: none;
   }
-}
 
-@media (prefers-color-scheme: light) {
-  .headerBackground {
-    background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.95) 0%, 
-      rgba(248, 250, 252, 0.90) 30%, 
-      rgba(241, 245, 249, 0.85) 70%, 
-      rgba(255, 255, 255, 0.95) 100%);
-  }
-
-  .logoText {
-    background: linear-gradient(45deg, 
-      #1e293b 0%, 
-      #3b82f6 25%, 
-      #8b5cf6 50%, 
-      #10b981 75%, 
-      #1e293b 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .navLink {
-    color: rgba(30, 41, 59, 0.8);
-  }
-
-  .navLink:hover {
-    color: #1e293b;
-  }
-}
-
-/* Focus states for better accessibility */
-.navLink:focus-visible,
-.registerButton:focus-visible,
-.mobileNavLink:focus-visible,
-.mobileMenuButton:focus-visible {
-  outline: 2px solid rgba(59, 130, 246, 0.8);
-  outline-offset: 4px;
-  border-radius: 0.5rem;
-}
-
-/* Print styles */
-@media print {
-  .header {
-    position: static;
-    background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  .particleSystem,
-  .mouseGlow,
-  .statusIndicators {
+  .buildBadge {
     display: none;
   }
 }
