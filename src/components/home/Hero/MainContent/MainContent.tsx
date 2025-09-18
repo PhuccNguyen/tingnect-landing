@@ -242,53 +242,57 @@ export default function MainContent() {
               variants={itemVariants}
               whileHover={{ y: -2 }}
             >
-              <div className={styles.featuredBanner}>
-                <div className={styles.bannerGradient} />
-                <div className={styles.featuredBadge}>
-                  <Crown size={14} />
-                  <span>Featured Event</span>
-                </div>
-                <motion.div
-                  className={styles.floatingIcons}
-                  animate={{
-                    y: [-5, 5, -5],
-                    rotate: [0, 360]
-                  }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                >
-                  <Star size={16} />
-                  <Trophy size={14} />
-                  <Award size={12} />
-                </motion.div>
-              </div>
+            <div className={styles.featuredBanner}>
+  <div className={styles.bannerGradient} />
+  <div className={styles.featuredBadge}>
+    <Crown size={12} />
+    <span>Premier Showcase</span>
+  </div>
+  <motion.div
+    className={styles.floatingIcons}
+    animate={{
+      y: [-5, 5, -5],
+      scale: [1, 1.05, 1]
+    }}
+    transition={{
+      duration: 5,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }}
+  >
+    <Image
+      src="/Image/Other/Logo_tpa.svg"
+      alt="Sponsor Logo"
+      width={90}
+      height={90}
+      className={styles.sponsorLogo}
+    />
+  </motion.div>
+</div>
 
-              <div className={styles.featuredContent}>
-                <div className={styles.featuredHeader}>
-                  <h3 className={styles.featuredTitle}>
-                    Miss Student Peace Vietnam 2025
-                  </h3>
-                  <div className={styles.statusBadges}>
-                    <span className={styles.currentBadge}>
-                      <motion.div
-                        className={styles.pulsingDot}
-                        animate={{
-                          scale: [1, 1.3, 1],
-                          opacity: [0.7, 1, 0.7]
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                      />
-                      Current
-                    </span>
-                  </div>
-                </div>
+<div className={styles.featuredContent}>
+  <div className={styles.featuredHeader}>
+    <div className={styles.titleBadgeContainer}>
+      <div className={styles.statusBadges}>
+        <span className={styles.currentBadge}>
+          <motion.div
+            className={styles.pulsingDot}
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.7, 1, 0.7]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          Current
+        </span>
+      </div>
+    </div>
+  </div>
+
 
                 <div className={styles.featuredMeta}>
                   <div className={styles.metaGrid}>
@@ -364,7 +368,7 @@ export default function MainContent() {
                   </motion.button>
                   <motion.button
                     className={styles.secondaryCTA}
-                    onClick={() => handleCTAClick('https://tingvote.com/gallery')}
+                    onClick={() => handleCTAClick('https://tingvote.com/event-details')}
                     whileHover={{ scale: 1.02, y: -1 }}
                     whileTap={{ scale: 0.98 }}
                   >

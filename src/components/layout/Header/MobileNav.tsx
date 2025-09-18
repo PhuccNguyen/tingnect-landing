@@ -215,8 +215,8 @@ export default function MobileNav({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.5 }}
                 >
-                  <a
-                    href="https://lu.ma/qji7t8kq"
+                   <a
+                    href="/contact"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.registerButton}
@@ -230,7 +230,7 @@ export default function MobileNav({
                       >
                         <Sparkles size={18} />
                       </motion.div>
-                      <span>Register Event</span>
+                      <span>Contact Us</span>
                       <motion.div
                         animate={{ x: [0, 4, 0] }}
                         transition={{ duration: 2, repeat: Infinity }}

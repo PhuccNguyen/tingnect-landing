@@ -113,7 +113,7 @@ export default function DesktopNav({ navigation, pathname }: DesktopNavProps) {
       {/* Ultra Premium Register Button */}
       <div className={styles.registerSection}>
         <motion.a
-          href="https://tingnect.com/contact"
+                    href="/contact"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.registerButton}
