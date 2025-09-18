@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tingnect.com/sitemap.xml
