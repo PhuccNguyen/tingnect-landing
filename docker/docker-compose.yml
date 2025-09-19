@@ -1,12 +1,13 @@
 version: '3.8'
-
 services:
   tingnect-website:
     build:
       context: ..
       dockerfile: docker/Dockerfile
     ports:
-      - "3000:3000"
+      - "3100:3000"  # Changed from 3000:3000
+    env_file:
+      - ../.env.local
     environment:
       - NODE_ENV=production
       - NEXT_PUBLIC_SITE_URL=https://tingnect.com
@@ -15,7 +16,6 @@ services:
     restart: unless-stopped
     networks:
       - tingnect-network
-
   nginx:
     image: nginx:alpine
     ports:
@@ -29,7 +29,6 @@ services:
     restart: unless-stopped
     networks:
       - tingnect-network
-
 networks:
   tingnect-network:
     driver: bridge
