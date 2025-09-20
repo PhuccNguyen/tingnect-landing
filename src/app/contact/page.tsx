@@ -4,7 +4,8 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Contact TingNect - Connect with Web3 Innovation Leaders',
-  description: 'Get in touch with TingNect team for partnerships, development, investments, and community collaboration. Join the premier Web3 ecosystem in Vietnam.',
+  description:
+    'Get in touch with TingNect team for partnerships, development, investments, and community collaboration. Join the premier Web3 ecosystem in Vietnam.',
   keywords: [
     'TingNect contact',
     'Web3 partnership',
@@ -15,19 +16,21 @@ export const metadata: Metadata = {
     'decentralized applications',
     'startup collaboration',
     'blockchain consulting',
-    'Web3 ecosystem Vietnam'
-  ].join(', '),
+    'Web3 ecosystem Vietnam',
+  ],
   openGraph: {
     title: 'Contact TingNect - Connect with Web3 Innovation Leaders',
-    description: 'Get in touch with TingNect team for partnerships, development, investments, and community collaboration. Join the premier Web3 ecosystem in Vietnam.',
+    description:
+      'Get in touch with TingNect team for partnerships, development, investments, and community collaboration. Join the premier Web3 ecosystem in Vietnam.',
     url: 'https://tingnect.com/contact',
     siteName: 'TingNect',
     images: [
       {
-        url: '/Image/Logo/TingNect/TingNect-Logo.png',
+        url: '/Image/Logo/TingNect/TingNect-Logo-OG.jpg',
         width: 1200,
         height: 630,
         alt: 'TingNect Contact - Web3 Innovation Platform',
+        type: 'image/jpeg',
       },
     ],
     locale: 'en_US',
@@ -36,8 +39,9 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Contact TingNect - Connect with Web3 Innovation Leaders',
-    description: 'Get in touch with TingNect team for partnerships, development, investments, and community collaboration.',
-    images: ['/Image/Logo/TingNect/TingNect-Logo.png'],
+    description:
+      'Get in touch with TingNect team for partnerships, development, investments, and community collaboration.',
+    images: ['/Image/Logo/TingNect/TingNect-Logo-OG.jpg'],
     creator: '@tingnect',
     site: '@tingnect',
   },
@@ -58,57 +62,75 @@ export const metadata: Metadata = {
 };
 
 // JSON-LD structured data
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'ContactPage',
-  name: 'TingNect Contact',
-  description: 'Contact page for TingNect - Premier Web3 platform for developers, entrepreneurs, and innovators',
-  url: 'https://tingnect.com/contact',
-  mainEntity: {
-    '@type': 'Organization',
-    name: 'TingNect',
-    url: 'https://tingnect.com',
-    logo: 'https://tingnect.com//Image/Logo/TingNect/TingNect-Logo.png',
-    contactPoint: [
-      {
-        '@type': 'ContactPoint',
-        telephone: '+84',
-        contactType: 'customer service',
-        email: 'contact@tingnect.com',
-        availableLanguage: ['English', 'Vietnamese'],
-        hoursAvailable: {
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-          opens: '09:00',
-          closes: '18:00',
-          timeZone: 'Asia/Ho_Chi_Minh'
-        }
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'TingNect Contact',
+    description:
+      'Contact page for TingNect - Premier Web3 platform for developers, entrepreneurs, and innovators',
+    url: 'https://tingnect.com/contact',
+    mainEntity: {
+      '@type': 'Organization',
+      name: 'TingNect',
+      url: 'https://tingnect.com',
+      logo: 'https://tingnect.com/Image/Logo/TingNect/TingNect-Logo.png',
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          telephone: '+84',
+          contactType: 'customer service',
+          email: 'contact@tingnect.com',
+          availableLanguage: ['English', 'Vietnamese'],
+          hoursAvailable: {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: [
+              'Monday',
+              'Tuesday',
+              'Wednesday',
+              'Thursday',
+              'Friday',
+            ],
+            opens: '09:00',
+            closes: '18:00',
+            timeZone: 'Asia/Ho_Chi_Minh',
+          },
+        },
+        {
+          '@type': 'ContactPoint',
+          contactType: 'technical support',
+          email: 'support@tingnect.com',
+          availableLanguage: ['English', 'Vietnamese'],
+        },
+        {
+          '@type': 'ContactPoint',
+          contactType: 'business partnerships',
+          email: 'partnerships@tingnect.com',
+          availableLanguage: ['English', 'Vietnamese'],
+        },
+      ],
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Ho Chi Minh City',
+        addressCountry: 'VN',
       },
-      {
-        '@type': 'ContactPoint',
-        contactType: 'technical support',
-        email: 'support@tingnect.com',
-        availableLanguage: ['English', 'Vietnamese']
-      },
-      {
-        '@type': 'ContactPoint',
-        'contactType': 'business partnerships',
-        email: 'partnerships@tingnect.com',
-        availableLanguage: ['English', 'Vietnamese']
-      }
-    ],
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Ho Chi Minh City',
-      addressCountry: 'VN'
+      sameAs: [
+        'https://twitter.com/tingnect',
+        'https://t.me/tingnect_official',
+        'https://github.com/tingnect',
+      ],
     },
-    sameAs: [
-      'https://twitter.com/tingnect',
-      'https://t.me/tingnect_official',
-      'https://github.com/tingnect'
-    ]
-  }
-};
+  },
+  // BreadcrumbList
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://tingnect.com' },
+      { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://tingnect.com/contact' },
+    ],
+  },
+];
 
 export default function ContactPage() {
   return (
@@ -118,7 +140,7 @@ export default function ContactPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      
+
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
         <ContactHero />
         <section className="py-16">

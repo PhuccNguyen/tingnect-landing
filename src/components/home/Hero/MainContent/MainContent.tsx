@@ -294,90 +294,209 @@ export default function MainContent() {
   </div>
 
 
-                <div className={styles.featuredMeta}>
-                  <div className={styles.metaGrid}>
-                    <div className={styles.metaItem}>
-                      <Calendar size={16} />
-                      <span>Sep 27 – Dec 28, 2025</span>
-                    </div>
-                    <div className={styles.metaItem}>
-                      <Clock size={16} />
-                      <span>09:00 – 22:00 ICT</span>
-                    </div>
-                    <div className={styles.metaItem}>
-                      <MapPin size={16} />
-                      <span>Tien Son Palace, Da Nang</span>
-                    </div>
-                    <div className={styles.metaItem}>
-                      <Tag size={16} />
-                      <span>Beauty Contest</span>
-                    </div>
-                  </div>
-                </div>
+{/* Compact Meta Chips */}
+<div className={styles.featuredMeta}>
+  <div className={styles.metaChips}>
+    <motion.div 
+      className={styles.metaChip}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2 }}
+      whileHover={{ y: -1, scale: 1.02 }}
+    >
+      <MapPin size={14} />
+      <span>Da Nang • Tien Son Palace</span>
+    </motion.div>
+    
+    <div className={styles.chipSeparator}>•</div>
+    
+    <motion.div 
+      className={styles.metaChip}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.3 }}
+      whileHover={{ y: -1, scale: 1.02 }}
+    >
+      <Crown size={14} />
+      <span>Beauty Contest</span>
+    </motion.div>
+    
+    <div className={styles.chipSeparator}>•</div>
+    
+    <motion.div 
+      className={styles.metaChip}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.4 }}
+      whileHover={{ y: -1, scale: 1.02 }}
+    >
+      <Calendar size={14} />
+      <span>Sep 27 – Dec 28, 2025</span>
+    </motion.div>
+  </div>
+</div>
 
-                <div className={styles.featuredDescription}>
-                  <p>The first national-scale beauty contest exclusively for Vietnamese female students, honoring intellect and beauty. Experience the future of democratic voting through our revolutionary Web3 platform.</p>
-                </div>
+{/* Elegant Description */}
+<div className={styles.featuredDescription}>
+  <motion.div 
+    className={styles.descriptionContent}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.5 }}
+  >
+    <Sparkles size={16} className={styles.descriptionIcon} />
+    <p>Vietnam&apos;s first national beauty contest for students — where intellect meets elegance, powered by transparent Web3 voting.</p>
+  </motion.div>
+</div>
 
-                {/* Progress Bar */}
-                <div className={styles.progressSection}>
-                  <div className={styles.progressHeader}>
-                    <span>Voting Progress</span>
-                    <span className={styles.progressNumbers}>
-                      <Users size={14} />
-                      35,750 / 50,000
-                    </span>
-                  </div>
-                  <div className={styles.progressBar}>
-                    <motion.div 
-                      className={styles.progressFill}
-                      initial={{ width: 0 }}
-                      animate={{ width: "71.5%" }}
-                      transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
-                    >
-                      <motion.div
-                        className={styles.progressGlow}
-                        animate={{
-                          x: ["-100%", "200%"]
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "linear"
-                        }}
-                      />
-                    </motion.div>
-                  </div>
-                  <div className={styles.progressLabels}>
-                    <span>71.5% Complete</span>
-                    <span className={styles.remainingTime}>28 days left</span>
-                  </div>
-                </div>
+{/* Neon Rail Timeline */}
+<div className={styles.timelineSection}>
+  <motion.div 
+    className={styles.timelineHeader}
+    initial={{ opacity: 0, x: -20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ delay: 0.6 }}
+  >
+    <Award size={16} />
+    <span>Competition Timeline</span>
+    <div className={styles.timelineHeaderLine}></div>
+  </motion.div>
 
-                {/* CTA Buttons */}
-                <div className={styles.featuredCTAs}>
-                  <motion.button
-                    className={styles.primaryCTA}
-                    onClick={() => handleCTAClick('https://tingvote.com')}
-                    whileHover={{ scale: 1.02, y: -1 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Star size={16} />
-                    <span>Vote Now</span>
-                    <ExternalLink size={14} />
-                  </motion.button>
-                  <motion.button
-                    className={styles.secondaryCTA}
-                    onClick={() => handleCTAClick('https://tingvote.com/event-details')}
-                    whileHover={{ scale: 1.02, y: -1 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Trophy size={16} />
-                    <span>View Details</span>
-                  </motion.button>
-                </div>
+  <div className={styles.neonRail}>
+    <div className={styles.railLine}></div>
+    
+    <motion.div 
+      className={styles.railItem}
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: 0.7 }}
+    >
+      <div className={`${styles.railDot} ${styles.activeDot}`}>
+        <motion.div
+          className={styles.dotPulse}
+          animate={{ scale: [1, 1.4, 1], opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        />
+        <span>1</span>
+      </div>
+      <div className={styles.railContent}>
+        <div className={styles.railPhase}>Press Conference</div>
+        <div className={styles.railDate}>September 27, 2025</div>
+        <div className={styles.railTime}>16:00 - 21:00 ICT</div>
+      </div>
+    </motion.div>
+
+    <motion.div 
+      className={styles.railItem}
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: 0.8 }}
+    >
+      <div className={styles.railDot}>
+        <span>2</span>
+      </div>
+      <div className={styles.railContent}>
+        <div className={styles.railPhase}>Preliminary Round</div>
+        <div className={styles.railDate}>October 5 - November 25, 2025</div>
+        <div className={styles.railTime}>Selection & Screening</div>
+      </div>
+    </motion.div>
+
+    <motion.div 
+      className={styles.railItem}
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: 0.9 }}
+    >
+      <div className={styles.railDot}>
+        <span>3</span>
+      </div>
+      <div className={styles.railContent}>
+        <div className={styles.railPhase}>Semi-Final</div>
+        <div className={styles.railDate}>December 15, 2025</div>
+        <div className={styles.railTime}>Top Contestants Compete</div>
+      </div>
+    </motion.div>
+
+    <motion.div 
+      className={styles.railItem}
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: 1.0 }}
+    >
+      <div className={styles.railDot}>
+        <span>4</span>
+      </div>
+      <div className={styles.railContent}>
+        <div className={styles.railPhase}>Charity Night</div>
+        <div className={styles.railSubtitle}>&quot;Compassionate Students — Wings of Dreams&quot;</div> 
+        <div className={styles.railDate}>December 18, 2025</div>
+        <div className={styles.railTime}>Humanitarian Event</div>
+      </div>
+    </motion.div>
+
+    <motion.div 
+      className={styles.railItem}
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: 1.1 }}
+    >
+      <div className={`${styles.railDot} ${styles.finalDot}`}>
+        <Crown size={12} />
+      </div>
+      <div className={styles.railContent}>
+        <div className={`${styles.railPhase} ${styles.finalPhase}`}>Grand Final</div>
+        <div className={styles.railDate}>December 28, 2025</div>
+        <div className={styles.railTime}>Crown the Winner</div>
+      </div>
+    </motion.div>
+  </div>
+</div>
+
+{/* Premium CTA Buttons */}
+<div className={styles.featuredCTAs}>
+  <motion.button
+    className={styles.primaryCTA}
+    onClick={() => handleCTAClick('https://tingvote.com')}
+    whileHover={{ y: -2, scale: 1.02 }}
+    whileTap={{ scale: 0.98 }}
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ type: 'spring', stiffness: 400, delay: 1.2 }}   
+
+  >
+    <motion.div
+      animate={{ rotate: [0, 360] }}
+      transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+    >
+      <Star size={16} />
+    </motion.div>
+    <span>Vote Now</span>
+    <span className={styles.ctaHint}>(TingVote)</span>
+    <div className={styles.ctaShine}></div>
+  </motion.button>
+
+  <motion.button
+    className={styles.secondaryCTA}
+    onClick={() => handleCTAClick('https://hhsvhbvn.tingnect.com')}
+    whileHover={{ y: -2, scale: 1.02 }}
+    whileTap={{ scale: 0.98 }}
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ type: 'spring', stiffness: 400, delay: 1.3 }}   
+
+  >
+    <Trophy size={16} />
+    <span>Check-In</span>
+    <div className={styles.ctaShine}></div>
+  </motion.button>
+</div>
+
               </div>
-            </motion.div>
+
+              
+</motion.div>
+
 
             {/* Section Tabs */}
             <div className={styles.sectionTabs}>
@@ -497,25 +616,6 @@ export default function MainContent() {
                                   {event.description && (
                                     <div className={styles.eventDescription}>
                                       <p>{event.description}</p>
-                                    </div>
-                                  )}
-
-                                  {(event.capacity && event.registered !== undefined) && (
-                                    <div className={styles.progressSection}>
-                                      <div className={styles.progressHeader}>
-                                        <span>Progress</span>
-                                        <span>{event.registered.toLocaleString()}/{event.capacity.toLocaleString()}</span>
-                                      </div>
-                                      <div className={styles.progressBar}>
-                                        <motion.div 
-                                          className={styles.progressFill}
-                                          initial={{ width: 0 }}
-                                          animate={{ 
-                                            width: `${Math.min((event.registered / event.capacity) * 100, 100)}%` 
-                                          }}
-                                          transition={{ duration: 0.8, ease: "easeOut" }}
-                                        />
-                                      </div>
                                     </div>
                                   )}
 

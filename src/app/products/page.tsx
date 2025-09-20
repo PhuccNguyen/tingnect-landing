@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     'blockchain platform',
     'developer SDK',
     'Vietnam Web3',
-  ].join(', '),
+  ],
   alternates: { canonical: 'https://tingnect.com/products' },
   openGraph: {
     title: 'Products - TingNect',
@@ -26,10 +26,11 @@ export const metadata: Metadata = {
     siteName: 'TingNect',
     images: [
       {
-        url: 'https://tingnect.com/Image/Logo/TingNect/TingNect-Logo.png',
+        url: 'https://tingnect.com/Image/Logo/TingNect/TingNect-Logo-OG.jpg',
         width: 1200,
         height: 630,
         alt: 'TingNect Products',
+        type: 'image/jpeg',
       },
     ],
     type: 'website',
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     title: 'Products - TingNect',
     description:
       'Explore TingNect’s Web3 & AI product ecosystem: identity, chain, SDK, and tools for builders.',
-    images: ['https://tingnect.com/Image/Logo/TingNect/TingNect-Logo.png'],
+    images: ['https://tingnect.com/Image/Logo/TingNect/TingNect-Logo-OG.jpg'],
     site: '@tingnect',
     creator: '@tingnect',
   },
@@ -103,7 +104,7 @@ const productsForSchema = [
 ];
 
 export default function ProductsPage() {
-  // JSON-LD: CollectionPage + ItemList (+ Product nodes)
+  // JSON-LD: CollectionPage + ItemList (+ Product nodes with image)
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -129,6 +130,7 @@ export default function ProductsPage() {
           category: p.category,
           url: p.url,
           brand: { '@type': 'Brand', name: 'TingNect' },
+          image: 'https://tingnect.com/Image/Logo/TingNect/TingNect-Logo-OG.jpg',
           additionalProperty: [
             { '@type': 'PropertyValue', name: 'Release Stage', value: p.releaseStage },
           ],

@@ -54,7 +54,6 @@ export const eventsData: Record<string, EventData[]> = {
       ctas: [
         { label: "Vote Now", url: "https://tingvote.com/", type: "primary" },
         { label: "View Gallery", url: "https://tingvote.com/gallery", type: "secondary" },
-        { label: "Live Stream", url: "https://tingvote.com/live", type: "success" }
       ]
     },
     {

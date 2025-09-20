@@ -1,8 +1,7 @@
 // src/app/privacy/page.tsx
 import type { Metadata } from 'next';
-import PrivacyPolicyContent from './PrivacyPolicyContent'; // Import the Client Component
+import PrivacyPolicyContent from './PrivacyPolicyContent';
 
-// ===== SEO METADATA =====
 export const metadata: Metadata = {
   title: 'Privacy Policy - TingNect | Data Protection & Security',
   description:
@@ -15,7 +14,7 @@ export const metadata: Metadata = {
     'blockchain security',
     'user rights',
     'data security',
-  ].join(', '),
+  ],
   alternates: {
     canonical: 'https://tingnect.com/privacy',
   },
@@ -27,10 +26,11 @@ export const metadata: Metadata = {
     siteName: 'TingNect',
     images: [
       {
-        url: 'https://tingnect.com/Image/Logo/TingNect/TingNect-Logo.png',
+        url: 'https://tingnect.com/Image/Logo/TingNect/TingNect-Logo-OG.jpg',
         width: 1200,
         height: 630,
-        alt: 'TingNect - Privacy',
+        alt: 'TingNect - Privacy Policy',
+        type: 'image/jpeg',
       },
     ],
     type: 'website',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     title: 'Privacy Policy - TingNect | Data Protection & Security',
     description:
       'How TingNect protects your data and privacy across our Web3 platform.',
-    images: ['https://tingnect.com/Image/Logo/TingNect/TingNect-Logo.png'],
+    images: ['https://tingnect.com/Image/Logo/TingNect/TingNect-Logo-OG.jpg'],
     site: '@tingnect',
     creator: '@tingnect',
   },
@@ -58,6 +58,35 @@ export const metadata: Metadata = {
   },
 };
 
+// JSON-LD structured data
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Privacy Policy - TingNect',
+    url: 'https://tingnect.com/privacy',
+    description:
+      'TingNect Privacy Policy: How we protect user data, ensure transparency, and comply with GDPR standards.',
+    isPartOf: { '@type': 'WebSite', name: 'TingNect', url: 'https://tingnect.com' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://tingnect.com' },
+      { '@type': 'ListItem', position: 2, name: 'Privacy Policy', item: 'https://tingnect.com/privacy' },
+    ],
+  },
+];
+
 export default function PrivacyPolicyPage() {
-  return <PrivacyPolicyContent />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+      />
+      <PrivacyPolicyContent />
+    </>
+  );
 }

@@ -404,118 +404,242 @@
     min-height: 100px; /* Ensure enough height for image */
   }
 } 
+/* Compact Meta Chips */
 .featuredMeta {
-  margin-bottom: 1rem;
+  margin-bottom: 12px;
 }
 
-.metaGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.6rem;
+.metaChips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
 }
 
-.metaItem {
+.metaChip {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.85rem;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  font-size: 13px;
   font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  transition: all 0.18s ease;
+  backdrop-filter: blur(8px);
+  will-change: transform;
 }
 
-.metaItem svg {
-  color: #3b82f6;
+.metaChip:hover {
+  background: rgba(244, 114, 182, 0.08);
+  border-color: rgba(244, 114, 182, 0.2);
+  box-shadow: 0 2px 8px rgba(244, 114, 182, 0.15);
+}
+
+.metaChip svg {
+  color: #f472b6;
   flex-shrink: 0;
 }
 
+.chipSeparator {
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 600;
+  font-size: 12px;
+  margin: 0 2px;
+}
+
+/* Elegant Description */
 .featuredDescription {
-  margin-bottom: 1.2rem;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
-  border-left: 4px solid #3b82f6;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: linear-gradient(135deg,
+    rgba(139, 92, 246, 0.06) 0%,
+    rgba(59, 130, 246, 0.04) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.12);
+  border-radius: 12px;
+  position: relative;
 }
 
-.featuredDescription p {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  margin: 0;
+.featuredDescription::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #f472b6, #8b5cf6, #3b82f6);
+  border-radius: 1px;
 }
 
-/* Progress Section */
-.progressSection {
-  margin-bottom: 1.2rem;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
-}
-
-.progressHeader {
+.descriptionContent {
   display: flex;
-  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.descriptionIcon {
+  color: #8b5cf6;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.descriptionContent p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Neon Rail Timeline */
+.timelineSection {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  position: relative;
+}
+
+.timelineHeader {
+  display: flex;
   align-items: center;
-  margin-bottom: 0.8rem;
-  font-size: 0.85rem;
+  gap: 6px;
+  margin-bottom: 12px;
+  font-size: 14px;
   color: #f1f5f9;
   font-weight: 600;
 }
 
-.progressNumbers {
+.timelineHeader svg {
+  color: #fbbf24;
+}
+
+.timelineHeaderLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(244, 114, 182, 0.4) 30%,
+    rgba(139, 92, 246, 0.4) 70%,
+    transparent 100%);
+  margin-left: 8px;
+}
+
+.neonRail {
+  position: relative;
+}
+
+.railLine {
+  position: absolute;
+  left: 18px;
+  top: 20px;
+  bottom: 20px;
+  width: 2px;
+  background: linear-gradient(180deg,
+    #f472b6 0%,
+    #8b5cf6 50%,
+    #3b82f6 80%,
+    #fbbf24 100%);
+  border-radius: 1px;
+  opacity: 0.4;
+}
+
+.railItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px 0;
+  position: relative;
+  min-height: 44px;
+}
+
+.railDot {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
-  color: #60a5fa;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #f472b6, #8b5cf6);
+  border-radius: 50%;
+  color: white;
+  font-weight: 600;
+  font-size: 12px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(244, 114, 182, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+.activeDot {
+  background: linear-gradient(135deg, #f472b6, #ec4899);
+  box-shadow: 0 4px 12px rgba(244, 114, 182, 0.4);
+}
+
+.dotPulse {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f472b6, #ec4899);
+  z-index: -1;
+}
+
+.finalDot {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+}
+
+.railContent {
+  flex: 1;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.railPhase {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+
+.finalPhase {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
   font-weight: 700;
 }
 
-.progressBar {
-  position: relative;
-  width: 100%;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: 0.6rem;
+.railSubtitle {
+  font-size: 12px;
+  color: #a78bfa;
+  font-style: italic;
+  margin-bottom: 2px;
+  line-height: 1.2;
 }
 
-.progressFill {
-  position: relative;
-  height: 100%;
-  background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6);
-  border-radius: 4px;
-  box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
-  overflow: hidden;
+.railDate {
+  font-size: 13px;
+  color: #60a5fa;
+  font-weight: 500;
+  margin-bottom: 1px;
+  line-height: 1.2;
 }
 
-.progressGlow {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(255, 255, 255, 0.3) 50%, 
-    transparent 100%);
-  width: 100%;
+.railTime {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.2;
 }
 
-.progressLabels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.remainingTime {
-  color: #fbbf24;
-  font-weight: 600;
-}
-
-/* Featured CTAs */
+/* Premium CTA Buttons */
 .featuredCTAs {
   display: flex;
-  gap: 0.6rem;
+  gap: 8px;
 }
 
 .primaryCTA,
@@ -523,36 +647,243 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 6px;
   border: none;
-  border-radius: 1rem;
+  border-radius: 12px;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 14px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   flex: 1;
-  height: 48px;
+  height: 44px;
+  position: relative;
+  overflow: hidden;
+  will-change: transform;
 }
 
 .primaryCTA {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, #f472b6, #ec4899);
   color: white;
-  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
-}
-
-.primaryCTA:hover {
-  box-shadow: 0 6px 24px rgba(59, 130, 246, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 8px rgba(244, 114, 182, 0.3);
 }
 
 .secondaryCTA {
-  background: rgba(255, 255, 255, 0.06);
-  color: #f1f5f9;
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  color: white;
   border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+.primaryCTA:hover {
+  box-shadow: 0 4px 16px rgba(244, 114, 182, 0.4);
 }
 
 .secondaryCTA:hover {
-  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
 }
+
+.ctaHint {
+  font-size: 11px;
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+.ctaShine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%);
+  transition: left 0.5s ease;
+}
+
+.primaryCTA:hover .ctaShine,
+.secondaryCTA:hover .ctaShine {
+  left: 100%;
+}
+
+/* Tablet (≥640px) - Moderate expansion */
+@media (min-width: 640px) {
+  .featuredMeta {
+    margin-bottom: 16px;
+  }
+
+  .metaChips {
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .metaChip {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .chipSeparator {
+    margin: 0 4px;
+  }
+
+  .featuredDescription {
+    margin-bottom: 20px;
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .descriptionContent {
+    gap: 10px;
+  }
+
+  .descriptionContent p {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .timelineSection {
+    margin-bottom: 20px;
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .timelineHeader {
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+
+  .railItem {
+    padding: 10px 0;
+  }
+
+  .railDot {
+    width: 40px;
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .railPhase {
+    font-size: 16px;
+  }
+
+  .railDate {
+    font-size: 14px;
+  }
+
+  .railTime {
+    font-size: 13px;
+  }
+
+  .featuredCTAs {
+    gap: 12px;
+  }
+
+  .primaryCTA,
+  .secondaryCTA {
+    height: 48px;
+    font-size: 15px;
+    gap: 8px;
+  }
+}
+
+/* Desktop (≥1024px) - Full expansion */
+@media (min-width: 1024px) {
+  .featuredMeta {
+    margin-bottom: 20px;
+  }
+
+  .metaChip {
+    padding: 10px 16px;
+    font-size: 15px;
+  }
+
+  .featuredDescription {
+    margin-bottom: 24px;
+    padding: 20px;
+  }
+
+  .descriptionContent p {
+    font-size: 16px;
+  }
+
+  .timelineSection {
+    margin-bottom: 24px;
+    padding: 20px;
+  }
+
+  .timelineHeader {
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+  .railItem {
+    padding: 12px 0;
+  }
+
+  .railDot {
+    width: 44px;
+    height: 44px;
+    font-size: 14px;
+  }
+
+  .railPhase {
+    font-size: 17px;
+  }
+
+  .primaryCTA,
+  .secondaryCTA {
+    height: 52px;
+    font-size: 16px;
+  }
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .dotPulse,
+  .ctaShine,
+  .railDot svg {
+    animation: none !important;
+  }
+}
+
+/* Ultra-small screens (≤360px) */
+@media (max-width: 360px) {
+  .metaChips {
+    gap: 4px;
+  }
+
+  .metaChip {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  .chipSeparator {
+    font-size: 11px;
+  }
+
+  .railDot {
+    width: 32px;
+    height: 32px;
+    font-size: 11px;
+  }
+
+  .railPhase {
+    font-size: 14px;
+  }
+
+  .primaryCTA,
+  .secondaryCTA {
+    height: 40px;
+    font-size: 13px;
+    gap: 4px;
+  }
+
+  .ctaHint {
+    display: none;
+  }
+}
+
 
 /* Section Tabs */
 .sectionTabs {
@@ -1211,4 +1542,137 @@
 }
 
 
+/* Timeline Section Styles */
+.timelineSection {
+  margin-bottom: 1.2rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+}
+
+.timelineHeader {
+  font-size: 0.85rem;
+  color: #f1f5f9;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.timelineContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.timelineItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 0.6rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 0.6rem;
+  border-left: 3px solid #3b82f6;
+  transition: all 0.25s ease;
+}
+
+.timelineItem:hover {
+  background: rgba(59, 130, 246, 0.05);
+  border-left-color: #60a5fa;
+}
+
+.timelineDot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  border-radius: 50%;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.timelineContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.timelinePhase {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-bottom: 0.2rem;
+}
+
+.timelineDate {
+  font-size: 0.8rem;
+  color: #60a5fa;
+  font-weight: 500;
+  margin-bottom: 0.1rem;
+}
+
+.timelineTime {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.featuredTitle {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #f1f5f9;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+
+/* Mobile Responsive */
+@media (max-width: 639px) {
+  .timelineSection {
+    padding: 0.8rem;
+  }
+
+  .timelineItem {
+    padding: 0.5rem;
+    gap: 0.6rem;
+  }
+
+  .timelineDot {
+    width: 20px;
+    height: 20px;
+  }
+
+  .timelinePhase {
+    font-size: 0.8rem;
+  }
+
+  .timelineDate {
+    font-size: 0.75rem;
+  }
+
+  .timelineTime {
+    font-size: 0.7rem;
+  }
+
+  .featuredTitle {
+    font-size: 1.1rem;
+  }
+}
+
+/* Desktop Responsive */
+@media (min-width: 1024px) {
+  .timelineSection {
+    padding: 1.5rem;
+  }
+
+  .timelineItem {
+    padding: 0.8rem;
+  }
+
+  .featuredTitle {
+    font-size: 1.4rem;
+  }
+}
 

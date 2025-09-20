@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     'TingNect ID',
     'Vietnam Web3 Ecosystem',
     'Verified Web3 Profiles',
-  ].join(', '),
+  ],
   openGraph: {
     title: 'TingNect ID - Web3 Identity Explorer',
     description:
@@ -32,6 +32,7 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: 'TingNect ID - Web3 Identity Explorer',
+        type: 'image/jpeg',
       },
     ],
     locale: 'en_US',
@@ -63,33 +64,45 @@ export const metadata: Metadata = {
 };
 
 // JSON-LD structured data
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  name: 'TingNect ID - Web3 Identity Explorer',
-  description:
-    'TingNect ID is the Web3 Identity Explorer, enabling discovery of blockchain profiles, NFTs, wallets, and verified contributors in the TingNect ecosystem.',
-  url: 'https://tingnect.com/id',
-  mainEntity: {
-    '@type': 'SoftwareApplication',
-    name: 'TingNect ID',
-    applicationCategory: 'BlockchainApplication',
-    operatingSystem: 'Web',
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD',
-      description: 'Free access to explore and verify Web3 identities',
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'TingNect ID - Web3 Identity Explorer',
+    description:
+      'TingNect ID is the Web3 Identity Explorer, enabling discovery of blockchain profiles, NFTs, wallets, and verified contributors in the TingNect ecosystem.',
+    url: 'https://tingnect.com/id',
+    mainEntity: {
+      '@type': 'SoftwareApplication',
+      name: 'TingNect ID',
+      applicationCategory: 'BlockchainApplication',
+      operatingSystem: 'Web',
+      image: 'https://tingnect.com/Image/Logo/TingNect/TingNect-Logo.png',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+        description: 'Free access to explore and verify Web3 identities',
+      },
+      featureList: [
+        'On-chain identity verification',
+        'Wallet explorer',
+        'NFT & transaction history',
+        'Developer & founder profiles',
+        'Community-driven verification',
+      ],
     },
-    featureList: [
-      'On-chain identity verification',
-      'Wallet explorer',
-      'NFT & transaction history',
-      'Developer & founder profiles',
-      'Community-driven verification',
+  },
+  // Breadcrumb
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://tingnect.com' },
+      { '@type': 'ListItem', position: 2, name: 'TingNect ID', item: 'https://tingnect.com/id' },
     ],
   },
-};
+];
 
 export default function IDPage() {
   return (
