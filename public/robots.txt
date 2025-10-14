@@ -1,3 +1,33 @@
+# TingNect - Build for Billions - Robots.txt
 User-agent: *
 Allow: /
+
+# Allow important directories
+Allow: /Image/
+Allow: /Icon/
+Allow: /api/
+
+# Block unnecessary paths
+Disallow: /_next/
+Disallow: /api/auth/
+Disallow: /admin/
+Disallow: /private/
+
+# Special rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+# Sitemap location
 Sitemap: https://tingnect.com/sitemap.xml

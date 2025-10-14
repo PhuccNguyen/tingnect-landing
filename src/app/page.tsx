@@ -5,95 +5,149 @@ import { socialLinks, contactEmail, eventSiteUrl, eventRegistrationUrl } from '@
 export const metadata: Metadata = {
   metadataBase: new URL('https://tingnect.com'),
   title: {
-    default: 'TingNect - Official Web3 Community Platform | Build for Billions',
-    template: '%s | TingNect',
+    default: 'TingNect - Build for Billions',
+    template: '%s | TingNect - Build for Billions',
   },
-  description:
-    'Official TingNect platform - Premier Web3 community connecting founders, builders, and innovators. Join exclusive events, networking sessions, and shape the future of decentralized technology in Vietnam and globally.',
+  
+  description: 
+    'TingNect - The premier Web3 community platform in Vietnam. Connect with founders, builders & innovators. Join exclusive blockchain events, hackathons & networking sessions. Build for Billions.',
+  
   keywords: [
+    // Primary brand keywords
     'TingNect',
-    'Web3 Vietnam',
-    'Blockchain events Ho Chi Minh City',
-    'Web3 community platform',
+    'TingNect Build for Billions',
+    'TingNect Vietnam',
+    'TingNect Web3',
+    'TingNect platform',
+    'TingNect community',
+    
+    // Core mission
     'Build for Billions',
-    'Web3 founders Vietnam',
-    'Blockchain networking events',
-    'TingNect official website',
-    'Web3 ecosystem Vietnam',
-    'Decentralized technology events',
-    'Cryptocurrency meetup Vietnam',
-    'Blockchain developers community',
+    'Web3 Vietnam',
+    'Web3 community platform',
+    'Blockchain Vietnam',
+    'Vietnam Web3 ecosystem',
+    
+    // Community & Events
+    'Web3 events Vietnam',
+    'Blockchain events HCMC',
+    'Web3 builders Vietnam',
+    'Crypto community Vietnam',
+    'Web3 networking Vietnam',
+    'Blockchain meetup Vietnam',
+    
+    // Geographic & Market
+    'Vietnam blockchain community',
+    'Web3 ecosystem Asia',
+    'HCMC Web3',
+    'Southeast Asia Web3',
+    'Vietnam crypto',
+    
+    // Technology & Innovation
+    'Web3 adoption Vietnam',
+    'Blockchain innovation hub',
+    'Web3 development Vietnam',
+    'Decentralized applications Vietnam',
   ],
-  authors: [{ name: 'TingNect Team', url: 'https://tingnect.com' }],
+
+  authors: [
+    { 
+      name: 'TingNect Team', 
+      url: 'https://tingnect.com' 
+    }
+  ],
+  
   creator: 'TingNect',
   publisher: 'TingNect',
+  
   robots: {
     index: true,
     follow: true,
+    nocache: true,
     googleBot: {
       index: true,
       follow: true,
+      noimageindex: false,
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
   },
+
   icons: {
     icon: [
       { url: '/Image/Logo/TingNect/TingNectIcon.svg', type: 'image/svg+xml' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon-512x512.png', sizes: '512x512', type: 'image/png' },
     ],
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180' }
+    ],
     shortcut: '/favicon.ico',
   },
+
   openGraph: {
     type: 'website',
     locale: 'en_US',
     alternateLocale: 'vi_VN',
     url: 'https://tingnect.com',
-    siteName: 'TingNect',
-    title: 'TingNect - Official Web3 Community Platform | Build for Billions',
-    description:
-      'Join TingNect official platform - Premier Web3 community in Vietnam. Connect with founders, builders, and innovators shaping the decentralized future.',
+    siteName: 'TingNect - Build for Billions',
+    title: 'TingNect - Build for Billions',
+    description: 
+      'Join the premier Web3 community platform in Vietnam. Connect with innovators, attend exclusive events & shape the future of blockchain. Build for Billions with TingNect.',
     images: [
       {
         url: '/Image/Logo/TingNect/TingNect-Logo-OG.jpg',
         width: 1200,
         height: 630,
-        alt: 'TingNect - Web3 Community Platform',
+        alt: 'TingNect - Build for Billions',
         type: 'image/jpeg',
-      },
+        secureUrl: 'https://tingnect.com/Image/Logo/TingNect/TingNect-Logo-OG.jpg',
+      }
     ],
   },
+
   twitter: {
     card: 'summary_large_image',
     site: '@tingnect',
     creator: '@tingnect',
-    title: 'TingNect - Official Web3 Community Platform',
-    description:
-      'Premier Web3 community connecting founders and builders. Join exclusive events in Vietnam.',
-    images: ['/Image/Logo/TingNect/TingNect-Logo-OG.jpg'],
+    title: 'TingNect - Build for Billions',
+    description: 
+      'Leading Web3 community platform in Vietnam. Join us in building the future of blockchain technology. #BuildForBillions',
+    images: [{
+      url: '/Image/Logo/TingNect/TingNect-Logo-OG.jpg',
+      alt: 'TingNect - Build for Billions'
+    }],
   },
+
   verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code',
+    google: 'tingnect-build-for-billions-google-verification',
+    yandex: 'tingnect-yandex-verification',
+    other: {
+      'baidu-site-verification': 'tingnect-baidu-verification',
+      'norton-safeweb-site-verification': 'tingnect-norton-verification',
+      'msvalidate.01': 'tingnect-bing-verification'
+    }
   },
-  category: 'Technology',
-  classification: 'Business',
-  referrer: 'origin-when-cross-origin',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
+
   alternates: {
     canonical: 'https://tingnect.com',
     languages: {
       'en-US': 'https://tingnect.com',
       'vi-VN': 'https://tingnect.com/vi',
     },
+    types: {
+      'application/rss+xml': 'https://tingnect.com/feed.xml',
+    }
   },
+
+  other: {
+    'theme-color': '#ffffff',
+    'msapplication-TileColor': '#2b5797',
+    'msapplication-config': '/browserconfig.xml',
+  }
 };
 
 // =====================
@@ -104,17 +158,27 @@ const structuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': 'https://tingnect.com/#organization',
     name: 'TingNect',
+    slogan: 'Build for Billions',
     url: 'https://tingnect.com',
-    logo: 'https://tingnect.com/Image/Logo/TingNect/TingNect-Logo.png',
-    description:
-      'Official Web3 community platform connecting founders, builders, and innovators',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://tingnect.com/Image/Logo/TingNect/TingNect-Logo.png',
+      width: '512',
+      height: '512'
+    },
+    description: 'Leading Web3 community platform connecting innovators and builders across Vietnam',
     foundingDate: '2024',
+    founders: [{
+      '@type': 'Person',
+      name: 'TingNect Founder'
+    }],
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer service',
       email: contactEmail,
-      areaServed: 'VN',
+      areaServed: ['VN', 'APAC'],
       availableLanguage: ['English', 'Vietnamese'],
     },
     address: {
@@ -125,14 +189,47 @@ const structuredData = [
     sameAs: socialLinks.map((link) => link.url),
   },
 
+  // Website
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': 'https://tingnect.com/#website',
+    url: 'https://tingnect.com',
+    name: 'TingNect - Build for Billions',
+    description: 'Leading Web3 Community Platform in Vietnam',
+    publisher: {
+      '@id': 'https://tingnect.com/#organization'
+    },
+    inLanguage: 'en-US',
+  },
+
+  // WebPage
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': 'https://tingnect.com/#webpage',
+    url: 'https://tingnect.com',
+    name: 'TingNect - Build for Billions',
+    isPartOf: {
+      '@id': 'https://tingnect.com/#website'
+    },
+    about: {
+      '@id': 'https://tingnect.com/#organization'
+    },
+    description: 'Join the premier Web3 community platform in Vietnam. Connect with innovators, attend exclusive events & shape the future of blockchain.',
+    inLanguage: 'en-US',
+    potentialAction: [{
+      '@type': 'ReadAction',
+      target: ['https://tingnect.com']
+    }]
+  },
+
   // Event
   {
     '@context': 'https://schema.org',
     '@type': 'Event',
     name: 'TingNect Main Event 2025',
-    url: eventSiteUrl,
-    description:
-      'Premier Web3 ecosystem event bringing together visionary founders and builders',
+    description: 'Premier Web3 ecosystem event bringing together visionary founders and builders',
     startDate: '2025-08-16T14:00:00+07:00',
     endDate: '2025-08-16T17:00:00+07:00',
     eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode',
@@ -144,12 +241,12 @@ const structuredData = [
         '@type': 'PostalAddress',
         addressLocality: 'Ho Chi Minh City',
         addressCountry: 'Vietnam',
-      },
+      }
     },
     organizer: {
       '@type': 'Organization',
       name: 'TingNect',
-      url: 'https://tingnect.com',
+      url: 'https://tingnect.com'
     },
     offers: {
       '@type': 'Offer',
@@ -157,34 +254,13 @@ const structuredData = [
       price: '0',
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock',
+      validFrom: '2025-01-01T00:00:00+07:00'
     },
-  },
-
-  // Breadcrumb
-  {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: 'https://tingnect.com',
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Products',
-        item: 'https://tingnect.com/products',
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: 'Contact',
-        item: 'https://tingnect.com/contact',
-      },
-    ],
-  },
+    performer: {
+      '@type': 'Organization',
+      name: 'TingNect Team'
+    }
+  }
 ];
 
 export default function HomePage() {
