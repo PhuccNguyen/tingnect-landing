@@ -41,19 +41,20 @@ const ContactHero: React.FC = () => {
         >
           <div className={styles.logoWrapper}>
             <Image
-              src="/Image/Logo/TingNect/TingNecticon.svg"
-              alt="TingNect Logo"
+              src="/Image/Logo/TingnectNew/TingNect icon white.png"
+              alt="TingNect Web3 platform contact page logo - Get in touch with our team"
               width={80}
               height={80}
               className={styles.logo}
+              sizes="80px"
             />
             <div className={styles.logoGlow}></div>
           </div>
 
           <h1 className={styles.title}>
-            Connect with{' '}
+            Get in Touch with{' '}
             <span className={styles.titleGradient}>
-              TingNect
+              TingNect - Web3 Community Platform
             </span>
           </h1>
           <p className={styles.subtitle}>

@@ -326,7 +326,7 @@ export default function CombinedBackground() {
           }}
         >
           <Image
-            src="/Image/Logo/TingNect/TingNect icon.svg"
+            src="/Image/Logo/TingnectNew/TingNect icon white.png"
             alt="Tech Icon"
             width={24}
             height={24}
@@ -350,7 +350,7 @@ export default function CombinedBackground() {
           }}
         >
           <Image
-            src="/Image/Logo/TingNect/TingNect icon.svg"
+            src="/Image/Logo/TingnectNew/TingNect icon white.png"
             alt="AI Icon"
             width={22}
             height={22}
@@ -374,7 +374,7 @@ export default function CombinedBackground() {
           }}
         >
           <Image
-            src="/Image/Logo/TingNect/TingNect icon.svg"
+            src="/Image/Logo/TingnectNew/TingNect icon white.png"
             alt="Blockchain Icon"
             width={26}
             height={26}
@@ -398,7 +398,7 @@ export default function CombinedBackground() {
           }}
         >
           <Image
-            src="/Image/Logo/TingNect/TingNect icon.svg"
+            src="/Image/Logo/TingnectNew/TingNect icon white.png"
             alt="Web3 Icon"
             width={20}
             height={20}

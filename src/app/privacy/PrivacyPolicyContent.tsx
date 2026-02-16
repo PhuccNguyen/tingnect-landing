@@ -90,7 +90,7 @@ const PrivacyPolicyContent: React.FC = () => {
             <div className="flex justify-center mb-6 sm:mb-8">
               <div className="relative">
                 <Image
-                  src="/Image/Logo/TingNect/TingNecticon.svg"
+                  src="/Image/Logo/TingnectNew/TingNect icon white.png"
                   alt="TingNect Logo"
                   width={80}
                   height={80}

@@ -5,6 +5,11 @@ import DemoWallets from '@/components/id/DemoWallets/DemoWallets';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+    icons: {
+      icon: '/Image/Logo/TingnectNew/TingNect icon white.png',
+      shortcut: '/Image/Logo/TingnectNew/TingNect icon white.png',
+      apple: '/Image/Logo/TingnectNew/TingNect icon white.png',
+    },
   title: 'TingNect ID - Web3 Identity Explorer',
   description:
     'Discover and verify Web3 identities in the TingNect ecosystem. Explore blockchain profiles, NFTs, wallets, and connect with verified builders, founders, and investors.',

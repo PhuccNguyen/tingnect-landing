@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { contactFormSchema } from '@/lib/validations';
+import { checkRateLimit, getClientIP } from '@/lib/rate-limit';
 
 interface ContactFormData {
   fullName: string;
@@ -86,32 +88,37 @@ ${data.message}
 
 export async function POST(request: NextRequest) {
   try {
-    const data: ContactFormData = await request.json();
-
-    // Enhanced validation
-    if (!data.fullName || !data.email || !data.subject || !data.message) {
+    // Rate limiting
+    const clientIP = getClientIP(request.headers);
+    if (!checkRateLimit(clientIP, { windowMs: 15 * 60 * 1000, maxRequests: 5 })) {
       return NextResponse.json(
-        { success: false, error: 'Please fill in all required fields' },
+        { success: false, error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
+    }
+
+    const data = await request.json();
+
+    // Validate using Zod schema
+    const validation = contactFormSchema.safeParse(data);
+    
+    if (!validation.success) {
+      const error = validation.error.errors[0];
+      return NextResponse.json(
+        { success: false, error: `${error.path.join('.')}: ${error.message}` },
         { status: 400 }
       );
     }
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(data.email)) {
-      return NextResponse.json(
-        { success: false, error: 'Please enter a valid email address' },
-        { status: 400 }
-      );
-    }
+    const validatedData = validation.data;
 
     // Sanitize telegram handle
-    if (data.telegramHandle && !data.telegramHandle.startsWith('@')) {
-      data.telegramHandle = '@' + data.telegramHandle.replace(/^@+/, '');
+    if (validatedData.telegramHandle && !validatedData.telegramHandle.startsWith('@')) {
+      validatedData.telegramHandle = '@' + validatedData.telegramHandle.replace(/^@+/, '');
     }
 
     // Send to Telegram
-    await sendToTelegram(data);
+    await sendToTelegram(validatedData);
 
     return NextResponse.json({
       success: true,

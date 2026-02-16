@@ -316,8 +316,8 @@
 }
 
 .logoIcon {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3.3rem;
+  height: 3.3rem;
   filter: drop-shadow(0 10px 20px rgba(59, 130, 246, 0.5));
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   position: relative;
@@ -604,13 +604,13 @@
   }
   
   .logoWrapper {
-    width: 3rem;
-    height: 3rem;
+    width: 3.7rem;
+    height:3.7rem;
   }
 
   .logoIcon {
-    width: 2rem;
-    height: 2rem;
+    width:2.7rem;
+    height: 2.7rem;
   }
 
   .mouseGlow,

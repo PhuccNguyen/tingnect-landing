@@ -59,9 +59,6 @@ const RightVisual: React.FC = () => {
       animate="visible"
     >
     
-      {/* Background Glow */}
-      <div className={styles.backgroundGlow} />
-
       {/* 3D Globe - Center */}
     <motion.div className={styles.globe} variants={globeVariants}>
       <motion.div
@@ -112,7 +109,7 @@ const RightVisual: React.FC = () => {
         }}
       >
         <Image
-          src="/Image/Logo/TingNect/TingNect icon.svg"
+          src="/Image/Logo/TingnectNew/logo-tingnect-white.png"
           alt="Blockchain"
           width={24}
           height={24}
@@ -134,7 +131,7 @@ const RightVisual: React.FC = () => {
         }}
       >
         <Image
-          src="Image/Logo/TingNect/TingNect icon.svg"
+          src="/Image/Logo/TingnectNew/logo-tingnect-white.png"
           alt="AI"
           width={24}
           height={24}
@@ -156,11 +153,10 @@ const RightVisual: React.FC = () => {
         }}
       >
         <Image
-          src="/Image/Logo/TingNect/TingNect icon.svg"
+          src="/Image/Logo/TingnectNew/logo-tingnect-white.png"
           alt="Web3"
           width={24}
           height={24}
-          className={styles.elementIcon}
         />
       </motion.div>
 
@@ -179,14 +175,24 @@ const RightVisual: React.FC = () => {
         }}
       >
         <Image
-          src="Image/Logo/TingNect/TingNect icon.svg"
+          src="/Image/Logo/TingnectNew/logo-tingnect-white.png"
           alt="AI Tech"
           width={20}
           height={20  }
-          className={styles.elementIcon}
         />
       </motion.div>
-
+        <Image
+          src="/Image/Logo/TingnectNew/logo-tingnect-white.png"
+          alt="AI Tech"
+          width={20}
+          height={20  }
+        />
+                <Image
+          src="/Image/Logo/TingnectNew/logo-tingnect-white.png"
+          alt="AI Tech"
+          width={20}
+          height={20  }
+        />
       {/* Floating Particles */}
       {particles.map((particle) => (
         <motion.div

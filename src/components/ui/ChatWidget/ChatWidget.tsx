@@ -186,7 +186,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ assistantId }) => {
           >
             <div className={styles.buttonIcon}>
               <Image
-                src="/Image/Logo/TingNect/TingNecticon.svg"
+                src="/Image/Logo/TingnectNew/TingNect icon white.png"
                 alt="TingNect AI"
                 width={28}
                 height={28}
@@ -196,7 +196,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ assistantId }) => {
             <span className={styles.pingAnimation}></span>
 <div className={styles.notificationBadge}>
   <Image
-    src="/Image/Logo/TingNect/TingNect icon.png"
+    src="/Image/Logo/TingnectNew/TingNect icon white.png"
     alt="TingNect Logo"
     width={25} 
     height={25}
@@ -226,7 +226,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ assistantId }) => {
               <div className={styles.headerContent}>
                 <div className={styles.botAvatar}>
                   <Image
-                    src="/Image/Logo/TingNect/TingNecticon.svg"
+                    src="/Image/Logo/TingnectNew/TingNect icon white.png"
                     alt="TingNect AI"
                     width={24}
                     height={24}
@@ -273,7 +273,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ assistantId }) => {
                       <div className={styles.messageAvatar}>
                         {message.type === 'bot' ? (
                           <Image
-                            src="/Image/Logo/TingNect/TingNecticon.svg"
+                            src="/Image/Logo/TingnectNew/TingNect icon white.png"
                             alt="TingNect AI"
                             width={16}
                             height={16}
@@ -324,7 +324,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ assistantId }) => {
                     >
                       <div className={styles.messageAvatar}>
                         <Image
-                          src="/Image/Logo/TingNect/TingNecticon.svg"
+                          src="/Image/Logo/TingnectNew/TingNect icon white.png"
                           alt="TingNect AI"
                           width={16}
                           height={16}

@@ -36,7 +36,7 @@ export default function ProductsHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            Built for the <span className={styles.highlight}>Future</span>
+            Web3 & AI Products <span className={styles.highlight}>Built for the Future</span>
           </motion.h1>
 
           {/* Description */}

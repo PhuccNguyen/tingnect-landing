@@ -5,6 +5,11 @@ import TechStack from '@/components/products/TechStack/TechStack';
 
 // ===== SEO METADATA =====
 export const metadata: Metadata = {
+    icons: {
+      icon: '/Image/Logo/TingnectNew/TingNect icon white.png',
+      shortcut: '/Image/Logo/TingnectNew/TingNect icon white.png',
+      apple: '/Image/Logo/TingnectNew/TingNect icon white.png',
+    },
   title: 'Products - TingNect',
   description:
     'Discover cutting-edge Web3 and AI products by TingNect: decentralized identity, high-performance chain, developer SDKs, and more.',

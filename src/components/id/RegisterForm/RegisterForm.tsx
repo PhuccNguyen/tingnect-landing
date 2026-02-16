@@ -387,7 +387,7 @@ export default function RegisterForm(): React.ReactElement {
               transition={{ delay: 0.1, duration: 0.5 }}
             >
               <Image
-                src="/Image/Logo/TingNect/TingNect.svg"
+                src="/Image/Logo/TingnectNew/Logo TingNect new-01.svg"
                 alt="TingNect"
                 width={120}
                 height={40}

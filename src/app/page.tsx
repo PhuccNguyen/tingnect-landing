@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 
   icons: {
     icon: [
-      { url: '/Image/Logo/TingNect/TingNectIcon.svg', type: 'image/svg+xml' },
+      { url: '/Image/Logo/TingnectNew/TingNect icon white.png', type: 'image/png' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/favicon-192x192.png', sizes: '192x192', type: 'image/png' },
@@ -99,12 +99,12 @@ export const metadata: Metadata = {
       'Join the premier Web3 community platform in Vietnam. Connect with innovators, attend exclusive events & shape the future of blockchain. Build for Billions with TingNect.',
     images: [
       {
-        url: '/Image/Logo/TingNect/TingNect-Logo-OG.jpg',
-        width: 1200,
-        height: 630,
+        url: '/Image/Logo/TingnectNew/TingNect icon white.png',
+        width: 512,
+        height: 512,
         alt: 'TingNect - Build for Billions',
-        type: 'image/jpeg',
-        secureUrl: 'https://tingnect.com/Image/Logo/TingNect/TingNect-Logo-OG.jpg',
+        type: 'image/png',
+        secureUrl: 'https://tingnect.com/Image/Logo/TingnectNew/TingNect icon white.png',
       }
     ],
   },
@@ -117,7 +117,7 @@ export const metadata: Metadata = {
     description: 
       'Leading Web3 community platform in Vietnam. Join us in building the future of blockchain technology. #BuildForBillions',
     images: [{
-      url: '/Image/Logo/TingNect/TingNect-Logo-OG.jpg',
+      url: '/Image/Logo/TingnectNew/TingNect icon white.png',
       alt: 'TingNect - Build for Billions'
     }],
   },

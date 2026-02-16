@@ -24,9 +24,12 @@ const quickLinks = [
   { name: 'Products', href: '/products' },
   { name: 'ID Platform', href: '/id' },
   { name: 'Events', href: 'https://event.tingnect.com', external: true },
+  { name: 'Blog', href: '/blog' },
+  { name: 'FAQ', href: '/faq' },
 ];
 
 const resources = [
+  { name: 'Blog', href: '/blog' },
   { name: 'Documentation', href: 'https://docs.tingnect.com', external: true },
   { name: 'GitHub', href: 'https://github.com/TingNect', external: true },
   { name: 'Community', href: 'https://t.me/TingNectGroup', external: true },
@@ -76,8 +79,8 @@ export default function Footer() {
               <Link href="/" className={styles.brandLink}>
                 <div className={styles.logoWrapper}>
                   <Image
-                    src="/Image/Logo/TingNect/TingNect icon.svg"
-                    alt="TingNect"
+                    src="/Image/Logo/TingnectNew/TingNect icon white.png"
+                    alt="TingNect - Build for Billions Web3 community platform - Homepage link"
                     width={40}
                     height={40}
                     className={styles.logo}
@@ -293,10 +296,10 @@ export default function Footer() {
             >
               <span className={styles.poweredBy}>Powered by</span>
               <Image
-                src="/Image/Logo/TingFoundation/TingFoundation-white.svg"
-                alt="Ting Foundation"
-                width={100}
-                height={24}
+                src="/Image/Logo/Trustlabs/trustlabs-logos.png"
+                alt="TrustLabs"
+                width={80}
+                height={30}
                 className={styles.partnerLogo}
               />
             </motion.div>

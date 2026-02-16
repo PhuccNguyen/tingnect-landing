@@ -16,6 +16,8 @@ const navigation = [
   { name: 'Event', href: 'https://event.tingnect.com', external: true },
   { name: 'ID', href: '/id' },
   { name: 'Products', href: '/products' },
+  { name: 'Blog', href: '/blog' },
+  { name: 'FAQ', href: '/faq' },
 ];
 
 export default function Header() {
@@ -318,11 +320,12 @@ export default function Header() {
               }}
               transition={{ duration: 4, repeat: Infinity }}
             >
+              
               <Image
-                src="/Image/Logo/TingNect/TingNect icon.svg"
+                src="/Image/Logo/TingnectNew/TingNect icon white.png"
                 alt="TingNect"
-                width={40}
-                height={40}
+                width={160}
+                height={160}
                 className={styles.logoIcon}
                 priority
               />
@@ -346,49 +349,18 @@ export default function Header() {
             </motion.div>
 
 
-            <motion.div
-              className={styles.logoWrapperr}
-            >
+            {/* <motion.div className={styles.logoWrapperr}>
               <Image
-              src="/Image/Logo/TingNect/TING_Nect_01.svg"
-              alt="TingNect Logo Mobile"
-               width={120}
-               height={32}
+                src="/Image/Logo/TingnectNew/Logo TingNect  white png.png"
+                alt="TingNect"
+                width={120}
+                height={32}
                 className={styles.logoMobile}
                 priority
               />
-            </motion.div>
+            </motion.div> */}
 
 
-            <div className={styles.logoTextContainer}>
-              <motion.span
-                className={styles.logoText}
-                animate={{
-                  backgroundPosition: isScrolled ? "300% 0%" : "0% 0%",
-                }}
-                transition={{ duration: 4, ease: "easeInOut", repeat: Infinity }}
-              >
-                TingNect
-              </motion.span>
-
-
-
-
-              <div className={styles.badgeContainer}>
-                <motion.div
-                  className={styles.buildBadge}
-                  animate={{
-                    scale: [1, 1.08, 1],
-                    opacity: [0.85, 1, 0.85],
-                  }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                >
-                  <Sparkles size={10} />
-                  Build for Billions
-                </motion.div>
-              </div>
-            </div>
           </Link>
         </motion.div>
 

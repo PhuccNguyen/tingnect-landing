@@ -30,6 +30,10 @@ export interface EventData {
   category?: string;
   price?: string;
   tags?: string[];
+
+  // Hình ảnh và logo
+  sponsorLogo?: string;
+  image?: string;
 }
 
 export const eventsData: Record<string, EventData[]> = {
@@ -43,7 +47,7 @@ export const eventsData: Record<string, EventData[]> = {
       venue: "Tien Son Palace - Da Nang Convention & Exhibition Center",
       type: "Beauty Contest",
       category: "Entertainment",
-      status: "current",
+      status: "past",
       featured: true,
       organizer: "Ting Foundation",
       price: "Free Voting",
@@ -51,6 +55,8 @@ export const eventsData: Record<string, EventData[]> = {
       capacity: 50000,
       registered: 35750,
       tags: ["Beauty", "Student", "Vietnam", "Contest", "Web3", "Democracy"],
+      sponsorLogo: "/Image/Other/Logo_tpa.svg",
+      image: "/Image/Event/miss-blockchain-banner.jpg",
       ctas: [
         { label: "Vote Now", url: "https://tingvote.com/", type: "primary" },
         { label: "View Gallery", url: "https://tingvote.com/gallery", type: "secondary" },
@@ -65,7 +71,7 @@ export const eventsData: Record<string, EventData[]> = {
       venue: "TingVote Web Platform",
       type: "Platform Demo",
       category: "Technology",
-      status: "current",
+      status: "past",
       featured: false,
       organizer: "TingNect Team",
       price: "Free Access",
@@ -102,6 +108,8 @@ export const eventsData: Record<string, EventData[]> = {
       capacity: 200,
       registered: 200,
       tags: ["Launch", "Official", "Platform", "HCMC", "Web3"],
+      sponsorLogo: "/Image/Other/Logo_tpa.svg",
+      image: "/Image/Event/tingnect-launch-banner.jpg",
       ctas: [
         { label: "View Recap", url: "https://tingvote.com/launch-recap", type: "secondary" },
         { label: "Watch Highlights", url: "https://tingvote.com/highlights", type: "secondary" }
