@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import {
   Calendar,
   Clock,
@@ -82,7 +83,7 @@ export default function EventsList({
                       </div>
                       {event.image && (
                         <div className={styles.metaRow}>
-                          <img src={event.image} alt={event.title + ' banner'} className={styles.eventThumbImg} />
+                          <Image src={event.image} alt={event.title + ' banner'} className={styles.eventThumbImg} width={400} height={200} />
                         </div>
                       )}
                     </div>
@@ -122,7 +123,7 @@ export default function EventsList({
                           )}
                           {event.sponsorLogo && (
                             <div className={styles.detailItem}>
-                              <img src={event.sponsorLogo} alt={event.title + ' sponsor logo'} className={styles.sponsorLogoSmall} />
+                              <Image src={event.sponsorLogo} alt={event.title + ' sponsor logo'} className={styles.sponsorLogoSmall} width={100} height={40} />
                             </div>
                           )}
                         </div>
