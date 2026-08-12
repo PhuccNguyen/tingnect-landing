@@ -3,8 +3,18 @@
 import { motion } from 'framer-motion';
 import styles from './MainContent.module.css';
 
+interface EventItem {
+  id: string;
+  title: string;
+  date: string;
+  location: string;
+  description: string;
+  image?: string;
+  status: 'current' | 'upcoming' | 'past';
+}
+
 interface EventTabsSectionProps {
-  eventsData: Record<string, any[]>;
+  eventsData: Record<string, EventItem[]>;
   activeSection: string;
   onSectionChange: (section: string) => void;
 }
@@ -18,28 +28,63 @@ export default function EventTabsSection({
   activeSection,
   onSectionChange,
 }: EventTabsSectionProps) {
+  const sections = Object.keys(eventsData);
+
   return (
-    <div className={styles.sectionTabs}>
-      {Object.keys(eventsData).map((section) => {
-        const count = eventsData[section].length;
-        return (
+    <div className={styles.eventTabsSection}>
+      {/* Tab Navigation */}
+      <div className={styles.tabsContainer}>
+        {sections.map((section) => (
           <motion.button
             key={section}
-            className={`${styles.sectionTab} ${
-              activeSection === section ? styles.activeTab : ''
+            className={`${styles.tabButton} ${
+              activeSection === section ? styles.active : ''
             }`}
             onClick={() => onSectionChange(section)}
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
-            disabled={count === 0}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <span className={styles.tabLabel}>
-              {section.charAt(0).toUpperCase() + section.slice(1)}
+            {section.charAt(0).toUpperCase() + section.slice(1)} Events
+            <span className={styles.eventCount}>
+              ({eventsData[section]?.length || 0})
             </span>
-            <span className={styles.tabCount}>{count}</span>
           </motion.button>
-        );
-      })}
+        ))}
+      </div>
+
+      {/* Events Grid */}
+      <motion.div
+        className={styles.eventsGrid}
+        key={activeSection}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        {eventsData[activeSection]?.map((event) => (
+          <motion.div
+            key={event.id}
+            className={styles.eventCard}
+            whileHover={{ y: -5 }}
+            transition={{ duration: 0.2 }}
+          >
+            {event.image && (
+              <div className={styles.eventImage}>
+                <img src={event.image} alt={event.title} />
+              </div>
+            )}
+            <div className={styles.eventContent}>
+              <h3 className={styles.eventTitle}>{event.title}</h3>
+              <p className={styles.eventDate}>{event.date}</p>
+              <p className={styles.eventLocation}>{event.location}</p>
+              <p className={styles.eventDescription}>{event.description}</p>
+            </div>
+          </motion.div>
+        )) || (
+          <div className={styles.noEvents}>
+            <p>No {activeSection} events available.</p>
+          </div>
+        )}
+      </motion.div>
     </div>
   );
 }
