@@ -1,0 +1,70 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # Cho phép trigger thủ công từ GitHub UI
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true # Hủy deploy cũ nếu có push mới
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    timeout-minutes: 15
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          clean: false # Giữ node_modules cache
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 🔧 Install dependencies
+        run: npm ci --prefer-offline
+
+      - name: 🏗️ Build
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: 🚀 Restart PM2
+        run: |
+          # Kiểm tra PM2 process đã tồn tại chưa
+          if pm2 describe yaaclub-web > /dev/null 2>&1; then
+            echo "Reloading existing PM2 process..."
+            pm2 reload ecosystem.config.cjs --env production
+          else
+            echo "Starting new PM2 process..."
+            pm2 start ecosystem.config.cjs --env production
+            pm2 save
+          fi
+
+      - name: ✅ Health check
+        run: |
+          echo "Waiting for server to start..."
+          sleep 5
+          for i in 1 2 3; do
+            if curl -sf http://localhost:3000 > /dev/null; then
+              echo "✅ Site is up and running!"
+              exit 0
+            fi
+            echo "Attempt $i failed, retrying in 3s..."
+            sleep 3
+          done
+          echo "❌ Health check failed after 3 attempts"
+          exit 1
+
+      - name: 📊 Deploy info
+        if: always()
+        run: |
+          echo "📅 Deployed at: $(date '+%Y-%m-%d %H:%M:%S %Z')"
+          echo "📝 Commit: ${{ github.sha }}"
+          echo "👤 By: ${{ github.actor }}"
+          pm2 status
