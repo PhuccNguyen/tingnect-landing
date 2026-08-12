@@ -3,11 +3,11 @@ name: Deploy to VPS
 on:
   push:
     branches: [main]
-  workflow_dispatch: # Cho phép trigger thủ công từ GitHub UI
+  workflow_dispatch:
 
 concurrency:
   group: deploy-production
-  cancel-in-progress: true # Hủy deploy cũ nếu có push mới
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -17,54 +17,39 @@ jobs:
     steps:
       - name: 📥 Checkout code
         uses: actions/checkout@v4
-        with:
-          clean: false # Giữ node_modules cache
 
-      - name: 📦 Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: 🔧 Install dependencies
-        run: npm ci --prefer-offline
-
-      - name: 🏗️ Build
-        run: npm run build
-        env:
-          NODE_ENV: production
-
-      - name: 🚀 Restart PM2
+      - name: 🐳 Build Docker image
         run: |
-          # Kiểm tra PM2 process đã tồn tại chưa
-          if pm2 describe yaaclub-web > /dev/null 2>&1; then
-            echo "Reloading existing PM2 process..."
-            pm2 reload ecosystem.config.cjs --env production
-          else
-            echo "Starting new PM2 process..."
-            pm2 start ecosystem.config.cjs --env production
-            pm2 save
-          fi
+          docker compose -f docker/docker-compose.yml build --no-cache
+
+      - name: 🚀 Deploy container
+        run: |
+          docker compose -f docker/docker-compose.yml up -d
+
+      - name: 🧹 Cleanup old images
+        run: |
+          docker image prune -f
 
       - name: ✅ Health check
         run: |
-          echo "Waiting for server to start..."
-          sleep 5
-          for i in 1 2 3; do
-            if curl -sf http://localhost:3000 > /dev/null; then
-              echo "✅ Site is up and running!"
+          echo "Waiting for container to start..."
+          sleep 10
+          for i in 1 2 3 4 5; do
+            if curl -sf http://localhost:3100 > /dev/null; then
+              echo "✅ YaaClub is live on port 3100!"
               exit 0
             fi
-            echo "Attempt $i failed, retrying in 3s..."
-            sleep 3
+            echo "Attempt $i/5 - retrying in 5s..."
+            sleep 5
           done
-          echo "❌ Health check failed after 3 attempts"
+          echo "❌ Health check failed"
+          docker compose -f docker/docker-compose.yml logs --tail=50
           exit 1
 
       - name: 📊 Deploy info
         if: always()
         run: |
-          echo "📅 Deployed at: $(date '+%Y-%m-%d %H:%M:%S %Z')"
+          echo "📅 $(date '+%Y-%m-%d %H:%M:%S %Z')"
           echo "📝 Commit: ${{ github.sha }}"
           echo "👤 By: ${{ github.actor }}"
-          pm2 status
+          docker ps --filter "name=yaaclub-landing" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
