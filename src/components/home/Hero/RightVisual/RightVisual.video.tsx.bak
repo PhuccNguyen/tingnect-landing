@@ -1,0 +1,62 @@
+// BAN GOC TRUOC KHI THAY BANG Globe3D - giu de rollback.
+// Doi ten thanh RightVisual.tsx la quay lai video denok.mp4.
+// src/components/home/Hero/RightVisual/RightVisual.tsx
+'use client';
+
+import { motion } from 'framer-motion';
+
+export default function RightVisual() {
+  return (
+    <div
+      style={{
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 10,
+        mixBlendMode: 'screen',
+      }}
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2, ease: 'easeOut' }}
+        style={{
+          position: 'absolute',
+          right: '10%',
+          top: '5%',
+          transform: 'translateY(-50%)',
+          width: 'min(70vw, 900px)',
+          aspectRatio: '1/1',
+          pointerEvents: 'none',
+          borderRadius: '50%',
+          overflow: 'hidden',
+          boxShadow: '0 0 80px rgba(147, 197, 253, 0.4)',
+          maxWidth: '750px',
+          maxHeight: '750px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <video
+          src="/videos/denok.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            transform: 'scale(1.02)',
+            filter: 'contrast(120%) brightness(1.1)',
+            display: 'block',
+          }}
+        />
+      </motion.div>
+    </div>
+  );
+}

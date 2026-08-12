@@ -1,0 +1,142 @@
+/* src/components/home/FloatingDownloadCTA/FloatingDownloadCTA.module.css */
+
+.floatingCTA {
+  position: fixed;
+  z-index: 50;
+  bottom: 24px;
+  right: 24px;
+  left: auto;
+  
+  /* =========================================================
+     APPLE GLASSMORPHISM & VERCEL DARK THEME
+     ========================================================= */
+  background: rgba(20, 20, 20, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px; /* Bo góc sâu hơn chuẩn iOS */
+  padding: 12px 48px 12px 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  overflow: hidden; /* Giữ lại hiệu ứng glow bên trong */
+  
+  /* Box-shadow phức hợp: Bóng đổ ngoài + Viền sáng 3D bên trong */
+  box-shadow: 
+    0 24px 40px -10px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease;
+}
+
+.floatingCTA:hover {
+  background: rgba(30, 30, 30, 0.85);
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Ánh sáng hắt nhẹ từ góc trái (Deep Tech UI) */
+.glowEffect {
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.imageWrapper {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  
+  /* Mô phỏng khối App Icon của Apple: Nền trắng nhám, viền 3D */
+  background: linear-gradient(135deg, #ffffff 0%, #e5e5e5 100%);
+  border-radius: 12px; /* Chuẩn Squircle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.2), 
+    inset 0 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+.appIcon {
+  object-fit: contain;
+  /* Nếu logo bị nhỏ, bác có thể thêm: transform: scale(1.1); */
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 1;
+}
+
+.title {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+}
+
+.subtitle {
+  color: #9ca3af;
+  font-size: 13px;
+  margin: 0;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  
+  /* Thiết kế nút tắt tinh tế hơn */
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* ==============================================
+   MOBILE RESPONSIVE
+   ============================================== */
+@media (max-width: 768px) {
+  .floatingCTA {
+    right: 16px;
+    bottom: 16px;
+    width: calc(100vw - 32px);
+    max-width: 400px;
+    padding: 10px 42px 10px 10px;
+    border-radius: 20px;
+  }
+  
+  .imageWrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+}

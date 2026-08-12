@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Send, Bot, User, Minimize2, HelpCircle, Sparkles } from 'lucide-react';
+import { X, Send, User, Minimize2, HelpCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './ChatWidget.module.css';
 import Image from 'next/image';
@@ -74,7 +74,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ assistantId }) => {
           }),
         });
         setIsConnected(response.ok);
-      } catch (error) {
+      } catch {
         setIsConnected(false);
       }
     };
@@ -141,7 +141,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ assistantId }) => {
       } else {
         throw new Error(data.error || 'API Error');
       }
-    } catch (error) {
+    } catch {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: 'bot',

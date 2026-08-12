@@ -1,3 +1,4 @@
+// This file has been removed as it is no longer in use.
 'use client';
 
 import { motion } from 'framer-motion';
@@ -24,11 +25,12 @@ interface FeaturedEventCardProps {
  * Chứa banner, metadata chips, timeline, CTA buttons
  */
 export default function FeaturedEventCard({ event, onCTAClick }: FeaturedEventCardProps) {
-  // Badge động theo status
-  const statusBadge = {
-    current: { label: 'Current', className: styles.currentBadge },
+  // Badge động theo status.
+  // Key phải khớp đúng EventData['status'] = 'upcoming' | 'current' | 'past'.
+  const statusBadge: { label: string; className: string } = {
     upcoming: { label: 'Upcoming', className: styles.upcomingBadge },
-    past: { label: 'Past', className: styles.pastBadge },
+    current: { label: 'Ongoing', className: styles.currentBadge },
+    past: { label: 'Completed', className: styles.pastBadge },
   }[event.status] || { label: event.status, className: styles.currentBadge };
 
   return (

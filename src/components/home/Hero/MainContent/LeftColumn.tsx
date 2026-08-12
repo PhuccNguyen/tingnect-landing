@@ -1,117 +1,58 @@
+// src/components/home/Hero/MainContent/LeftColumn.tsx
 'use client';
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { easeOut } from 'framer-motion';
 import styles from './MainContent.module.css';
-import CTAButtons from '../CTAButtons/CTAButtons';
+import CTAButtonsBlock from '../CTAButtons/CTAButtonsBlock';
+import TrustedNetwork from '../TrustedNetwork/TrustedNetwork';
 
 interface LeftColumnProps {
   displayText: string;
   cursor: boolean;
 }
 
-/**
- * Component Left Column - TingNect Brand (cố định, không thay đổi)
- * Chứa: Logo, Slogan, Typing text, CTA buttons
- */
 export default function LeftColumn({ displayText, cursor }: LeftColumnProps) {
   const logoVariants = {
     hidden: { opacity: 0, scale: 0.95 },
     visible: {
       opacity: 1,
       scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: easeOut,
-      },
+      transition: { duration: 0.7, ease: easeOut },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, y: 18 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.4,
-        ease: easeOut,
-      },
+      transition: { duration: 0.55, ease: easeOut },
     },
   };
 
   return (
     <motion.div className={styles.leftColumn} variants={itemVariants}>
-      {/* Logo Section - TingNect brand (cố định) */}
-      <motion.div className={styles.logoSection} variants={logoVariants}>
-        <motion.div
-          className={styles.logoContainer}
-          whileHover={{
-            scale: 1.02,
-            y: -3,
-          }}
-          transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-        >
-          <div className={styles.logoBg}>
-            <Image
-              src="/Image/Logo/TingnectNew/logo-tingnect-white.png"
-              alt="TingNect - Build for Billions Web3 community platform logo"
-              width={280}
-              height={92}
-              className={styles.logoImage}
-              sizes="(max-width: 768px) 100%, (max-width: 1200px) 80%, 280px"
-              priority
-            />
-            <motion.div
-              className={styles.officialBadge}
-              animate={{
-                scale: [1, 1.08, 1],
-                boxShadow: [
-                  '0 0 15px rgba(59, 130, 246, 0.4)',
-                  '0 0 30px rgba(139, 92, 246, 0.6)',
-                  '0 0 15px rgba(59, 130, 246, 0.4)',
-                ],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            >
-              <span>Official</span>
-            </motion.div>
-          </div>
+      {/* Top group: Logo + Heading + Subtitle + CTA Block */}
+      <div className={styles.topGroup}>
+
+
+{/* MAIN SLOGAN */}
+        <motion.div className={styles.sloganSection} variants={itemVariants}>
+          <h1 className={styles.slogan}>
+            <span>YOUR TRUSTED</span>
+            <span>LIFESTYLE</span>
+            <span>SOCIAL CLUB</span>
+          </h1>
         </motion.div>
-      </motion.div>
 
-      {/* Slogan - Build for Billions (cố định) */}
-      <motion.div className={styles.sloganSection} variants={itemVariants}>
-        <motion.h1
-          className={styles.slogan}
-          animate={{
-            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-          }}
-          transition={{
-            duration: 12,
-            ease: 'linear',
-            repeat: Infinity,
-          }}
-        >
-          Build for Billions
-        </motion.h1>
-        <motion.div
-          className={styles.sloganUnderline}
-          initial={{ width: 0 }}
-          animate={{ width: '70%' }}
-          transition={{ duration: 1.2, delay: 0.4 }}
-        />
-      </motion.div>
+        {/* Subtitle — text-xl với mt rộng để không bị "lost" */}
+        <motion.div className={styles.subtitleSection} variants={itemVariants}>
 
-      {/* Typing Text (động, thay đổi) */}
-      <motion.div className={styles.typingSection} variants={itemVariants}>
-        <div className={styles.typingContainer}>
-          <span className={styles.typingContent}>
-            {displayText}
+          {/* Typing line nhỏ hơn */}
+          <p className={styles.typingLine}>
+            <span>{displayText}</span>
             {cursor && (
               <motion.span
                 className={styles.cursor}
@@ -121,13 +62,21 @@ export default function LeftColumn({ displayText, cursor }: LeftColumnProps) {
                 |
               </motion.span>
             )}
-          </span>
-        </div>
-      </motion.div>
+          </p>
+        </motion.div>
 
-      {/* CTA Buttons (cố định) */}
-      <motion.div variants={itemVariants}>
-        <CTAButtons />
+        {/* CTA + QR Block — width đồng nhất */}
+        <motion.div variants={itemVariants}>
+          <CTAButtonsBlock />
+        </motion.div>
+      </div>
+
+      {/* Trusted Network — đẩy xuống đáy bằng mt-auto */}
+      <motion.div
+        className={styles.trustedNetworkWrap}
+        variants={itemVariants}
+      >
+        <TrustedNetwork />
       </motion.div>
     </motion.div>
   );

@@ -69,3 +69,6 @@ docker/data
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# Thu muc build kiem tra cua `npm run build:verify` (xem scripts/build-verify.mjs)
+/.next-verify
