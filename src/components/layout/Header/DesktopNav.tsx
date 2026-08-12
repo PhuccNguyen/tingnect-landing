@@ -94,9 +94,9 @@ export default function DesktopNav({ navigation, pathname }: DesktopNavProps) {
                       className={styles.activeGlow}
                       animate={{
                         boxShadow: [
-                          "0 0 25px rgba(59, 130, 246, 0.6)",
+                          "0 0 25px rgba(210, 255, 0, 0.6)",
                           "0 0 35px rgba(139, 92, 246, 0.5)",
-                          "0 0 25px rgba(59, 130, 246, 0.6)"
+                          "0 0 25px rgba(210, 255, 0, 0.6)"
                         ],
                         scale: [1, 1.2, 1],
                       }}

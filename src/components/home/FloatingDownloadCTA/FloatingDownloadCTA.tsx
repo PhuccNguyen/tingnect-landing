@@ -3,9 +3,10 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Smartphone } from 'lucide-react';
+import { X } from 'lucide-react';
+import Logo from '@/components/layout/Logo/Logo';
+import { SOCIAL_LINKS } from '@/lib/constants';
 import styles from './FloatingDownloadCTA.module.css';
-import Image from 'next/image';
 
 
 export default function FloatingDownloadCTA() {
@@ -45,15 +46,9 @@ export default function FloatingDownloadCTA() {
   };
 
   const handleClick = () => {
-    const ua = navigator.userAgent;
-    if (/iPhone|iPad|iPod/i.test(ua)) {
-      window.open('https://apps.apple.com/app/tingnect', '_blank');
-    } else if (/Android/i.test(ua)) {
-      window.open('https://play.google.com/store/apps/details?id=com.tingnect', '_blank');
-    } else {
-      const el = document.getElementById('download');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }
+    // App chua len App Store / Google Play. Link toi store se ra trang loi,
+    // nen truoc mat dua nguoi dung sang X de theo doi ngay ra mat.
+    window.open(SOCIAL_LINKS.twitter, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -71,18 +66,12 @@ export default function FloatingDownloadCTA() {
           <div className={styles.glowEffect} />
 
           <div className={styles.imageWrapper}>
-            <Image 
-              src="/Image/Logo/TingnectNew/TingNect icon black.png" 
-              alt="TingNect App Icon"
-              width={26}
-              height={26}
-              className={styles.appIcon}
-            />
+            <Logo variant="standard" orientation="icon" height={22} className={styles.appIcon} />
           </div>
-          
+
           <div className={styles.content}>
-            <p className={styles.title}>Get TingNect App</p>
-            <p className={styles.subtitle}>Build for Billions & Earn</p>
+            <p className={styles.title}>Yaa Club is coming</p>
+            <p className={styles.subtitle}>Follow us on X for launch</p>
           </div>
           
           <button className={styles.closeBtn} onClick={handleDismiss} aria-label="Close">

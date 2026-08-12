@@ -2,9 +2,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { Sparkles, ArrowRight, Download } from 'lucide-react';
+import Logo from '@/components/layout/Logo/Logo';
 import styles from './CTAButtonsBlock.module.css';
+
+// Mau QR lay tu brand token thay vi hex cung trong component
+const QR_DARK = 'var(--yaa-black)';
+const QR_LIGHT = 'var(--yaa-cream)';
 
 export default function CTAButtonsBlock() {
   return (
@@ -31,8 +35,7 @@ export default function CTAButtonsBlock() {
           whileTap={{ scale: 0.98 }}
           transition={{ type: 'spring', stiffness: 400, damping: 25 }}
         >
-          <Sparkles size={16} className={styles.buttonIconSparkle} />
-          <span>Explore Features</span>
+          <span>Explore Clubs</span>
           <ArrowRight size={15} className={styles.buttonArrow} />
         </motion.a>
       </div>
@@ -57,21 +60,21 @@ export default function CTAButtonsBlock() {
                       y={row * 8 + 2}
                       width={7}
                       height={7}
-                      fill="#0A2642"
+                      fill={QR_DARK}
                     />
                   ) : null;
                 })
               )}
               {/* Corner markers */}
-              <rect x="2" y="2" width="22" height="22" fill="#0A2642" />
-              <rect x="6" y="6" width="14" height="14" fill="#fff" />
-              <rect x="9" y="9" width="8" height="8" fill="#0A2642" />
-              <rect x="76" y="2" width="22" height="22" fill="#0A2642" />
-              <rect x="80" y="6" width="14" height="14" fill="#fff" />
-              <rect x="83" y="9" width="8" height="8" fill="#0A2642" />
-              <rect x="2" y="76" width="22" height="22" fill="#0A2642" />
-              <rect x="6" y="80" width="14" height="14" fill="#fff" />
-              <rect x="9" y="83" width="8" height="8" fill="#0A2642" />
+              <rect x="2" y="2" width="22" height="22" fill={QR_DARK} />
+              <rect x="6" y="6" width="14" height="14" fill={QR_LIGHT} />
+              <rect x="9" y="9" width="8" height="8" fill={QR_DARK} />
+              <rect x="76" y="2" width="22" height="22" fill={QR_DARK} />
+              <rect x="80" y="6" width="14" height="14" fill={QR_LIGHT} />
+              <rect x="83" y="9" width="8" height="8" fill={QR_DARK} />
+              <rect x="2" y="76" width="22" height="22" fill={QR_DARK} />
+              <rect x="6" y="80" width="14" height="14" fill={QR_LIGHT} />
+              <rect x="9" y="83" width="8" height="8" fill={QR_DARK} />
             </svg>
           </div>
         </div>
@@ -84,13 +87,7 @@ export default function CTAButtonsBlock() {
         </div>
 
         <div className={styles.qrRight}>
-          <Image
-            src="/Image/Logo/TingnectNew/TingNect icon white.png"
-            alt="Tingnect"
-            width={36}
-            height={36}
-            className={styles.qrAppIcon}
-          />
+          <Logo variant="inverted" orientation="icon" height={30} className={styles.qrAppIcon} />
         </div>
       </motion.div>
     </div>

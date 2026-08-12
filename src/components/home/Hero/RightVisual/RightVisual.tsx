@@ -2,6 +2,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import styles from './RightVisual.module.css';
 
@@ -12,7 +13,14 @@ const Globe3D = dynamic(() => import('./Globe3D'), {
   loading: () => <div className={styles.skeleton} />,
 });
 
-export default function RightVisual() {
+/*
+ * memo() BAT BUOC o day.
+ * MainContent chay hieu ung go chu bang setTimeout 50-100ms, moi lan set
+ * state la re-render ca cay con — bao gom luon <Canvas> cua R3F. React phai
+ * doi chieu lai toan bo scene 3D 10-20 lan moi giay du khong co gi thay doi.
+ * RightVisual khong nhan prop nao nen memo chan dut duoc chuoi do.
+ */
+function RightVisual() {
   return (
     <div className={styles.rightVisual}>
       {/*
@@ -34,3 +42,5 @@ export default function RightVisual() {
     </div>
   );
 }
+
+export default memo(RightVisual);

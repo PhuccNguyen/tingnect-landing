@@ -9,9 +9,9 @@ import LeftColumn from './LeftColumn';
 import RightVisual from '../RightVisual/RightVisual';
 
 const typingTexts = [
-  'Connect. Build. Scale.',
-  'Private chat. Real clubs. Real meets.',
-  'One app for your complete lifestyle.',
+  'Play. Connect. Grow.',
+  'Discover clubs. Join communities.',
+  'Book activities. Host events.',
 ];
 
 export default function MainContent() {

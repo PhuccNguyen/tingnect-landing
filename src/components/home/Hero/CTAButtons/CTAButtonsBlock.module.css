@@ -34,7 +34,7 @@
 
 .buttonPrimary {
   background: #fff;
-  color: #0A2642;
+  color: #0a0a0a;
   border: none;
   box-shadow: 0 4px 16px rgba(255, 255, 255, 0.18);
 }
@@ -42,14 +42,14 @@
 .buttonPrimary:hover {
   background: #f0f9ff;
   box-shadow: 0 8px 24px rgba(255, 255, 255, 0.3),
-    0 0 0 1px rgba(147, 197, 253, 0.4);
+    0 0 0 1px rgba(210, 255, 0, 0.4);
 }
 
 .buttonSecondary {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--on-surface-fill);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: #fff;
+  border: 1px solid var(--on-surface-border);
+  color: var(--on-surface);
 }
 
 .buttonSecondary:hover {
@@ -59,7 +59,7 @@
 }
 
 .buttonIcon {
-  color: #0A2642;
+  color: #0a0a0a;
 }
 
 .buttonIconSparkle {
@@ -106,7 +106,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(10, 38, 66, 0.06);
+  border: 1px solid rgba(10, 10, 10, 0.06);
 }
 
 .qrSvg {
@@ -128,7 +128,7 @@
 .qrTitle {
   font-size: 14px;
   font-weight: 700;
-  color: #0A2642;
+  color: #0a0a0a;
   letter-spacing: -0.01em;
 }
 
@@ -142,12 +142,12 @@
   flex-shrink: 0;
   width: 44px;
   height: 44px;
-  background: linear-gradient(135deg, #164D82, #0A2642);
+  background: linear-gradient(135deg, #164D82, #0a0a0a);
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 10px rgba(10, 38, 66, 0.3);
+  box-shadow: 0 4px 10px rgba(10, 10, 10, 0.3);
 }
 
 .qrAppIcon {

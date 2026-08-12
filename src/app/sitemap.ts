@@ -1,39 +1,16 @@
 import { MetadataRoute } from 'next';
+import { SITE_CONFIG } from '@/lib/constants';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://tingnect.com';
-  const now = new Date();
-
+  // Chi khai bao route CO THAT. Sitemap cu liet ke /products, /contact, /id,
+  // /privacy — nhung trang do da bi xoa khoi du an, khai bao tiep se sinh
+  // hang loat 404 trong Search Console.
   return [
     {
-      url: `${baseUrl}/`,
-      lastModified: now,
-      changeFrequency: 'daily',
+      url: `${SITE_CONFIG.website}/`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
       priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/products`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/id`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/privacy`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.3,
     },
   ];
 }

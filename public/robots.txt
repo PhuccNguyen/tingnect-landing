@@ -1,33 +1,15 @@
-# TingNect - Build for Billions - Robots.txt
+# Yaa Club - Wellbeing that works
 User-agent: *
 Allow: /
 
-# Allow important directories
-Allow: /Image/
-Allow: /Icon/
-Allow: /api/
-
-# Block unnecessary paths
 Disallow: /_next/
-Disallow: /api/auth/
-Disallow: /admin/
-Disallow: /private/
+Disallow: /api/
 
-# Special rules for major search engines
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 1
-
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-# Block bad bots
+# Block SEO crawler bots
 User-agent: SemrushBot
 Disallow: /
 
 User-agent: AhrefsBot
 Disallow: /
 
-# Sitemap location
-Sitemap: https://tingnect.com/sitemap.xml
+Sitemap: https://yaaclub.com/sitemap.xml

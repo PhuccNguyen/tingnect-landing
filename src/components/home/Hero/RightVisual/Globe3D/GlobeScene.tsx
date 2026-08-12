@@ -17,7 +17,8 @@ export default function GlobeScene({ isMobile }: { isMobile: boolean }) {
   return (
     <group rotation={[0, 0, tilt]}>
       <EarthLayer segments={segments} />
-      <CloudLayer segments={segments} />
+      {/* May khong co displacement nen khong can luoi day — chia 4 cho nhe */}
+      <CloudLayer segments={segments / 4} />
       {ATMOSPHERE.enabled && <AtmosphereLayer />}
     </group>
   );

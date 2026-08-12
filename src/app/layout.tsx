@@ -1,30 +1,68 @@
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Archivo } from "next/font/google";
 import { Metadata } from 'next';
 import "./globals.css";
 import Header from "@/components/layout/Header/Header";
 import Footer from "@/components/layout/Footer/Footer";
 import ChatWidget from "@/components/ui/ChatWidget/ChatWidget";
-import FloatingDownloadCTA from "@/components/home/FloatingDownloadCTA/FloatingDownloadCTA"; // IMPORT TẠI ĐÂY
+import FloatingDownloadCTA from "@/components/home/FloatingDownloadCTA/FloatingDownloadCTA";
 import Script from "next/script";
+import { SITE_CONFIG, SOCIAL_LINKS } from "@/lib/constants";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk", display: "swap" });
+
+/*
+ * Display face = Archivo, nap kem truc bien thien `wdth` (62-125).
+ * Nho co truc do moi ep hep chu bang font-stretch duoc — day la thu hep
+ * THAT SU trong thiet ke chu. Cach thay the la transform: scaleX() thi chi
+ * la keo meo anh: net doc bi mong di trong khi net ngang giu nguyen.
+ * Inter Tight (dung truoc day) khong co truc wdth nen khong lam duoc.
+ */
+const archivo = Archivo({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+  axes: ["wdth"],
+});
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://tingnect.com'),
-  title: 'TingNect - Build for Billions',
-  description: 'Premier Web3 community platform for builders and innovators',
+  metadataBase: new URL(SITE_CONFIG.website),
+  title: `${SITE_CONFIG.name} | ${SITE_CONFIG.slogan}`,
+  description: `${SITE_CONFIG.description} ${SITE_CONFIG.tagline}.`,
+  keywords: [
+    'Yaa Club',
+    'sports community',
+    'sports booking',
+    'pickleball',
+    'wellbeing',
+    'run club',
+    'yoga',
+    'padel',
+    'events',
+  ],
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://tingnect.com',
-    siteName: 'TingNect',
+    url: SITE_CONFIG.website,
+    siteName: SITE_CONFIG.name,
+    title: `${SITE_CONFIG.name} | ${SITE_CONFIG.slogan}`,
+    description: SITE_CONFIG.description,
+    images: [{ url: '/brand/logo/icon-512.png', width: 506, height: 512, alt: `${SITE_CONFIG.name} logo` }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@YaaClubApp',
+    title: `${SITE_CONFIG.name} | ${SITE_CONFIG.slogan}`,
+    description: SITE_CONFIG.description,
+  },
+  icons: {
+    icon: '/brand/logo/icon-512.png',
+    apple: '/brand/logo/icon-512.png',
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${archivo.variable}`} suppressHydrationWarning>
       <body className="font-inter antialiased" suppressHydrationWarning>
         {/* GA4 */}
         <Script
@@ -40,60 +78,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `}
         </Script>
 
-        {/* JSON-LD Organization */}
+        {/*
+          JSON-LD Organization.
+          Da BO schema LocalBusiness cu: no khai bao dia chi "Ho Chi Minh City"
+          va so dien thoai "+84" — deu la du lieu bia. Structured data sai se
+          bi Google phat. Chi khai bao lai khi co dia chi doanh nghiep that.
+        */}
         <Script id="org-jsonld" type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            name: "TingNect",
-            url: "https://tingnect.com",
-            logo: "https://tingnect.com/Image/Logo/TingnectNew/logo-tingnect-white.png",
+            name: SITE_CONFIG.name,
+            url: SITE_CONFIG.website,
+            logo: `${SITE_CONFIG.website}/brand/logo/icon-512.png`,
+            description: SITE_CONFIG.description,
             sameAs: [
-              "https://twitter.com/tingnect",
-              "https://linkedin.com/company/tingnect",
-              "https://github.com/tingnect",
+              SOCIAL_LINKS.twitter,
+              SOCIAL_LINKS.facebook,
+              SOCIAL_LINKS.youtube,
             ],
-            contactPoint: {
-              "@type": "ContactPoint",
-              contactType: "customer service",
-              email: "contact@tingnect.com",
-              areaServed: "VN",
-              availableLanguage: ["English", "Vietnamese"],
-            },
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Ho Chi Minh City",
-              addressCountry: "VN",
-            },
-          })}
-        </Script>
-
-        {/* LocalBusiness Schema for Local SEO */}
-        <Script id="local-business-schema" type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "TingNect",
-            "image": "https://tingnect.com/Image/Logo/TingnectNew/TingNect icon white.png",
-            "description": "Premier Web3 community platform connecting innovators, builders, and investors in Vietnam. Build for Billions.",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Ho Chi Minh City",
-              "addressCountry": "VN"
-            },
-            "telephone": "+84",
-            "email": "contact@tingnect.com",
-            "url": "https://tingnect.com",
-            "sameAs": [
-              "https://twitter.com/tingnect",
-              "https://linkedin.com/company/tingnect",
-              "https://github.com/tingnect"
-            ],
-            "priceRange": "Free",
-            "areaServed": {
-              "@type": "Country",
-              "name": "VN"
-            }
           })}
         </Script>
 

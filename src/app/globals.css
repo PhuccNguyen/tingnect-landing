@@ -1,16 +1,135 @@
+/* ==========================================================================
+   YAA CLUB — BRAND SYSTEM
+   Quy tac: hex CHI ton tai o file nay. Component dung var(), khong hardcode.
+   ========================================================================== */
 
-/* Đổi màu nền về #0a2540 cho đồng bộ hero */
 :root {
-  --background: 10 37 64; /* #0a2540 */
-  --foreground: 248 250 252; /* slate-50 */
-  --primary: 59 130 246; /* blue-500 */
-  --secondary: 100 116 139; /* slate-500 */
-  --accent: 139 92 246; /* violet-500 */
-  --destructive: 239 68 68; /* red-500 */
-  --border: 51 65 85; /* slate-700 */
-  --input: 30 41 59; /* slate-800 */
-  --ring: 59 130 246; /* blue-500 */
+  /* --- Primary --- */
+  --yaa-cream: #faffa2;   /* Kem vang chanh */
+  --yaa-black: #0a0a0a;   /* Den gan tuyet doi */
+
+  /* --- Secondary --- */
+  --yaa-lime: #d2ff00;    /* Xanh la neon — accent chinh, CTA */
+  --yaa-red: #ff5722;     /* Do cam — category tag */
+  --yaa-purple: #635bce;  /* Tim — accent phu */
+
+  /* --- Neutral --- */
+  --yaa-off: #f6f5ee;     /* Off-white am */
+  --yaa-sand: #e7e1d3;    /* Cat */
+  --yaa-white: #ffffff;
+
+  /* --- Blue: mau chu dao cua Hero, lay tu anh nen goc --- */
+  --yaa-blue-900: #0a2540; /* Nen sau nhat */
+  --yaa-blue-600: #1668a8;
+  --yaa-blue-400: #2f9fd6;
+  --yaa-blue-200: #11bbef; /* Diem sang giua nen */
+
+  /* --- Ink (den theo do trong suot) --- */
+  --yaa-ink-60: rgba(10, 10, 10, 0.6);  /* Text phu */
+  --yaa-ink-15: rgba(10, 10, 10, 0.15); /* Border nhe */
+  --yaa-ink-08: rgba(10, 10, 10, 0.08); /* Shadow */
+
+  /* --- Cream theo do trong suot (dung tren nen den) --- */
+  --yaa-cream-70: rgba(250, 255, 162, 0.7);
+  --yaa-cream-45: rgba(250, 255, 162, 0.45);
+  --yaa-cream-15: rgba(250, 255, 162, 0.15);
+  --yaa-cream-08: rgba(250, 255, 162, 0.08);
+
+  --accent: var(--yaa-lime);
   --radius: 0.5rem;
+
+  /* ==================================================================
+     THANG CHU — mot bo duy nhat, moi noi tham chieu vao day.
+     Truoc do moi component tu viet clamp() rieng nen kich thuoc lech nhau.
+
+     Display dung ti le 1.25 (major third) va deu la clamp(min, vw, max)
+     de co gian muot tu mobile len 4K ma khong can breakpoint.
+     ================================================================== */
+  /* Chu condensed hep ngang ~20% nen de co lon hon ma van vua cot */
+  /* 5.6vw: da do thuc te, dong dai nhat "MORE THAN A GAME," o wdth 78 chiem
+     ~767px trong cot trai 808px — con vien ~5%. Tang qua muc nay se tran cot
+     vi .slogan dat white-space: nowrap. */
+  --fs-display: clamp(2.6rem, 5.6vw, 6.75rem); /* H1 hero */
+  /* Truc wdth cua Archivo: 100 = binh thuong, 62 = hep nhat.
+     78 cho dang cao va thon ma van doc thoai mai.
+     Don vi la SO TRAN (khong co %) vi dung trong font-variation-settings. */
+  --fw-display: 78;
+  --fs-h2: clamp(1.75rem, 3vw, 2.75rem);
+  --fs-lead: clamp(1.05rem, 1.35vw, 1.25rem);  /* sub-copy duoi H1 */
+  --fs-body: clamp(0.95rem, 1.05vw, 1.0625rem);
+  --fs-sm: 0.875rem;
+  --fs-eyebrow: 0.75rem;                        /* nhan UPPERCASE */
+
+  --lh-display: 0.86;   /* headline bam sat, nhieu dong doc thanh mot khoi */
+  --lh-body: 1.55;
+  --ls-display: -0.035em;
+  --ls-eyebrow: 0.18em;
+
+  /* ==================================================================
+     THANG KHOANG CACH — buoc 4px, dung chung cho moi gap/padding trong Hero.
+     ================================================================== */
+  --sp-1: 0.25rem;   /*  4px */
+  --sp-2: 0.5rem;    /*  8px */
+  --sp-3: 0.75rem;   /* 12px */
+  --sp-4: 1rem;      /* 16px */
+  --sp-5: 1.5rem;    /* 24px */
+  --sp-6: 2rem;      /* 32px */
+  --sp-7: 3rem;      /* 48px */
+
+  /* ==================================================================
+     THEME TOKENS
+     Doi tone toan bo Hero bang cach dat thuoc tinh `data-hero` tren <html>.
+     Component KHONG duoc dung mau brand truc tiep cho chu/nen — phai qua
+     6 bien duoi day, nho vay lat sang/toi khong phai sua tung file.
+     ================================================================== */
+
+  /* ==================================================================
+     MAC DINH: PHOTO — nen anh xanh goc (/Image/BG/bg-desktop.jpg)
+
+     He mau chinh la TRANG / DEN / XANH. Trai Dat giu mau that (xanh lam +
+     xanh la) nen nen xanh la lua chon hoa mau duy nhat khong phai bop meo
+     texture. Da thu 2 huong grade texture cho hop nen kem va deu that bai:
+       - xoay hue -32 do  -> dat lien xanh la bi keo sang hong ca hoi
+       - giam bao hoa 55% -> diu hon nhung Trai Dat mat suc song
+     KEM chi con dong vai tro ACCENT NHO: chip, dau nhan, chi tiet vien.
+     ================================================================== */
+  --surface: var(--yaa-blue-900);
+  --surface-lift: var(--yaa-blue-900);
+  --on-surface: var(--yaa-white);
+  --on-surface-muted: rgba(255, 255, 255, 0.72);
+  --on-surface-fill: rgba(255, 255, 255, 0.1);
+  --on-surface-border: rgba(255, 255, 255, 0.22);
+  --hero-glow: transparent;
+  --hero-ray: transparent;
+  --accent-soft: var(--yaa-cream);  /* accent nho: chip, dau nhan */
+}
+
+/* --- CREAM: nen kem sang, dung brand site v1. Trai Dat mau that hoi choi
+       voi nen nay — xem ghi chu o khoi mac dinh. --- */
+:root[data-hero='cream'] {
+  --surface: var(--yaa-cream);
+  --surface-lift: var(--yaa-cream);
+  --on-surface: var(--yaa-black);
+  --on-surface-muted: var(--yaa-ink-60);
+  --on-surface-fill: var(--yaa-ink-08);
+  --on-surface-border: var(--yaa-ink-15);
+  --hero-glow: rgba(10, 10, 10, 0.05);
+  --hero-ray: var(--yaa-ink-08);
+  --accent-soft: var(--yaa-lime);
+}
+
+/* --- INK: nen den, Trai Dat nhu nhin tu vu tru. Tuong phan do sang cao
+       nhat (5.67) nhung lech voi brand. --- */
+:root[data-hero='ink'] {
+  --surface: #0a0a0a;
+  --surface-lift: #16180e;
+  --accent-soft: var(--yaa-lime);
+  --on-surface: var(--yaa-cream);
+  --on-surface-muted: var(--yaa-cream-70);
+  --on-surface-fill: var(--yaa-cream-08);
+  --on-surface-border: var(--yaa-cream-15);
+  --hero-glow: rgba(210, 255, 0, 0.1);
+  --hero-ray: var(--yaa-cream-08);
 }
 
 * {
@@ -30,8 +149,8 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground));
-  background: rgb(var(--background));
+  color: var(--on-surface);
+  background: var(--surface);
   font-feature-settings: 'rlig' 1, 'calt' 1;
 }
 
@@ -42,20 +161,20 @@ a {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgb(15 23 42);
+  background: var(--yaa-black);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(51 65 85);
-  border-radius: 3px;
+  background: var(--yaa-cream-45);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(71 85 105);
+  background: var(--yaa-lime);
 }
 
 /* Font Classes */
@@ -81,13 +200,13 @@ a {
 
 /* Selection */
 ::selection {
-  background: rgb(59 130 246 / 0.3);
-  color: rgb(248 250 252);
+  background: var(--yaa-lime);
+  color: var(--yaa-black);
 }
 
 /* Focus Visible */
 .focus-visible {
-  outline: 2px solid rgb(59 130 246);
+  outline: 2px solid var(--yaa-lime);
   outline-offset: 2px;
 }
 
@@ -100,24 +219,6 @@ a {
 /* Header spacing for fixed positioning */
 /* Đã loại bỏ padding-top body để tránh dư khoảng trống ở top */
 
-/* Enhanced scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgb(15 23 42);
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgb(59 130 246), rgb(139 92 246));
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, rgb(96 165 250), rgb(168 85 247));
-}
-
 /* Smooth performance */
 * {
   -webkit-font-smoothing: antialiased;
@@ -127,9 +228,9 @@ a {
 /* Focus states for accessibility */
 button:focus-visible,
 a:focus-visible {
-  outline: 2px solid rgb(59 130 246);
+  outline: 2px solid var(--yaa-lime);
   outline-offset: 2px;
-  border-radius: 0.5rem;
+  border-radius: var(--radius);
 }
 
 /* Reduce motion for users who prefer it */

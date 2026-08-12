@@ -30,7 +30,11 @@ export default function EarthLayer({ segments }: { segments: number }) {
         // dat (trang) -> nham, bien (den) -> nhan, bat sang mat troi.
         roughnessMap={landMask}
         roughness={MATERIAL.roughnessBase}
-        // Lop 3 - height map, noi khoi nui va bang
+        // Lop 3 - height map, dung theo HAI cach bo tro nhau:
+        //   displacementMap = day vertex ra ngoai -> nui THAT, silhouette go ghe
+        //   bumpMap         = chi tiet anh sang nho hon buoc luoi displacement
+        displacementMap={elevation}
+        displacementScale={MATERIAL.displacementScale}
         bumpMap={elevation}
         bumpScale={MATERIAL.bumpScale}
         metalness={MATERIAL.metalness}

@@ -2,45 +2,40 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
-import { 
-  Github, 
-  Twitter, 
-  Send, 
-  Youtube, 
-  Facebook,
-  BookOpen,
-  Mail,
-  MapPin,
-  Phone,
-  ArrowUp,
-  ExternalLink
-} from 'lucide-react';
+import { Mail, ArrowUp, ExternalLink, Send } from 'lucide-react';
+// Icon social lay tu react-icons: lucide da deprecate Twitter/Facebook,
+// va fa6 co san glyph X (Twitter) dung chuan thuong hieu moi.
+import { FaXTwitter, FaFacebook, FaYoutube, FaInstagram } from 'react-icons/fa6';
 import { socialLinks } from '@/data/social-links';
+import { SITE_CONFIG } from '@/lib/constants';
+import Logo from '../Logo/Logo';
 import styles from './Footer.module.css';
 
-const quickLinks = [
+// Yaa Club dang pre-launch: cac muc chua co trang that deu tro ve '#' thay vi
+// link toi route khong ton tai (/products, /blog, /faq... da bi xoa khoi du an).
+interface FooterLink {
+  name: string;
+  href: string;
+  external?: boolean;
+}
+
+const quickLinks: FooterLink[] = [
   { name: 'Home', href: '/' },
-  { name: 'Products', href: '/products' },
-  { name: 'ID Platform', href: '/id' },
-  { name: 'Events', href: 'https://event.tingnect.com', external: true },
-  { name: 'Blog', href: '/blog' },
-  { name: 'FAQ', href: '/faq' },
+  { name: 'Communities', href: '#' },
+  { name: 'Events', href: '#' },
+  { name: 'Bookings', href: '#' },
 ];
 
-const resources = [
-  { name: 'Blog', href: '/blog' },
-  { name: 'Documentation', href: 'https://docs.tingnect.com', external: true },
-  { name: 'GitHub', href: 'https://github.com/TingNect', external: true },
-  { name: 'Community', href: 'https://t.me/TingNectGroup', external: true },
-  { name: 'Support', href: 'mailto:contact@tingnect.com', external: true },
+const resources: FooterLink[] = [
+  { name: 'List a Venue', href: '#' },
+  { name: 'Host an Event', href: '#' },
+  { name: 'Manage Events', href: '#' },
+  { name: 'Support', href: `mailto:${SITE_CONFIG.email}`, external: true },
 ];
 
-const legal = [
-  { name: 'Privacy Policy', href: '/privacy' },
-  { name: 'Terms of Service', href: '/terms' },
-  { name: 'Cookie Policy', href: '/cookies' },
-  { name: 'Disclaimer', href: '/disclaimer' },
+const legal: FooterLink[] = [
+  { name: 'Privacy Policy', href: '#' },
+  { name: 'Terms of Service', href: '#' },
 ];
 
 export default function Footer() {
@@ -50,14 +45,10 @@ export default function Footer() {
 
   const getSocialIcon = (name: string) => {
     switch (name.toLowerCase()) {
-      case 'github': return Github;
-      case 'twitter/x': return Twitter;
-      case 'telegram channel':
-      case 'telegram group': return Send;
-      case 'youtube': return Youtube;
-      case 'facebook page':
-      case 'facebook group': return Facebook;
-      case 'documentation': return BookOpen;
+      case 'x (twitter)': return FaXTwitter;
+      case 'facebook': return FaFacebook;
+      case 'youtube': return FaYoutube;
+      case 'instagram': return FaInstagram;
       default: return ExternalLink;
     }
   };
@@ -76,20 +67,10 @@ export default function Footer() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <Link href="/" className={styles.brandLink}>
-                <div className={styles.logoWrapper}>
-                  <Image
-                    src="/Image/Logo/TingnectNew/TingNect icon white.png"
-                    alt="TingNect - Build for Billions Web3 community platform - Homepage link"
-                    width={40}
-                    height={40}
-                    className={styles.logo}
-                  />
-                  <div className={styles.logoGlow} />
-                </div>
-                <span className={styles.brandName}>TingNect</span>
+              <Link href="/" className={styles.brandLink} aria-label="Yaa Club — trang chủ">
+                <Logo variant="inverted" orientation="horizontal" height={34} />
               </Link>
-              <p className={styles.tagline}>Build for Billions</p>
+              <p className={styles.tagline}>{SITE_CONFIG.slogan}</p>
             </motion.div>
 
             <motion.p 
@@ -99,8 +80,8 @@ export default function Footer() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              Premier platform uniting developers, entrepreneurs, investors, and tech enthusiasts 
-              in shaping a sustainable Web3 ecosystem for billions of users worldwide.
+              Discover clubs, join communities, book sports activities and organize events,
+              all in one place. Pickleball, yoga, run club, football, padel and more.
             </motion.p>
 
             {/* Contact Info */}
@@ -113,12 +94,10 @@ export default function Footer() {
             >
               <div className={styles.contactItem}>
                 <Mail size={16} />
-                <a href="mailto:contact@tingnect.com">contact@tingnect.com</a>
+                <a href={`mailto:${SITE_CONFIG.email}`}>{SITE_CONFIG.email}</a>
               </div>
-              <div className={styles.contactItem}>
-                <MapPin size={16} />
-                <span>Ho Chi Minh City, Vietnam</span>
-              </div>
+              {/* Da bo dong dia chi "Ho Chi Minh City, Vietnam": khong co
+                  nguon nao xac nhan dia chi doanh nghiep cua Yaa Club. */}
             </motion.div>
           </div>
 
@@ -284,25 +263,8 @@ export default function Footer() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              © {new Date().getFullYear()} TingNect. All rights reserved.
+              © {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.
             </motion.p>
-            
-            <motion.div 
-              className={styles.partnerLogos}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <span className={styles.poweredBy}>Powered by</span>
-              <Image
-                src="/Image/Logo/Trustlabs/trustlabs-logos.png"
-                alt="TrustLabs"
-                width={80}
-                height={30}
-                className={styles.partnerLogo}
-              />
-            </motion.div>
           </div>
         </div>
       </div>

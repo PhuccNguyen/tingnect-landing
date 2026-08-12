@@ -26,8 +26,16 @@ const OUT = 'public/textures/globe';
 //   bien 0.75 -> khong con dom nang, chi con sac thai rat nhe so voi dat
 //   dat  1.00 -> nham hoan toan
 // Muon lay lai anh nang lap lanh tren bien thi ha 191 xuong (vd 64 = 0.25).
+// Ban MUTED cua texture mau: giam bao hoa xuong 55% + sang len 10%.
+// KHONG xoay hue — thu nghiem xoay -32 do cho thay no keo dat lien xanh la
+// sang hong-ca hoi. Giam bao hoa lam diu do choi cua xanh lam ma khong
+// pha tuong quan mau giua dai duong / dat lien / bang.
 const JOBS = [
   { src: '1.png', out: 'earth-surface.webp', w: 2048, h: 1024, q: 82, gray: false },
+  {
+    src: '1.png', out: 'earth-surface-warm.webp', w: 2048, h: 1024, q: 82, gray: false,
+    modulate: { saturation: 0.55, brightness: 1.1 },
+  },
   { src: '2.png', out: 'earth-landmask.webp', w: 1024, h: 512, q: 80, gray: true, linear: [0.25, 191] },
   { src: '3.png', out: 'earth-elevation.webp', w: 2048, h: 1024, q: 82, gray: true },
   { src: '4.png', out: 'earth-clouds.webp', w: 1024, h: 512, q: 82, gray: true },
@@ -47,6 +55,7 @@ for (const job of JOBS) {
   });
   if (job.gray) pipeline = pipeline.grayscale();
   if (job.linear) pipeline = pipeline.linear(job.linear[0], job.linear[1]);
+  if (job.modulate) pipeline = pipeline.modulate(job.modulate);
 
   await pipeline.webp({ quality: job.q, effort: 6 }).toFile(`${OUT}/${job.out}`);
 

@@ -20,6 +20,24 @@
   text-decoration: none;
 }
 
+/*
+ * Nền sáng cho logo bản ĐEN.
+ * Header nằm trên nền xanh đậm nên logo đen cần một mặt phẳng sáng mới đọc
+ * được. Bo tròn hết cỡ để khớp ngôn ngữ pill của nav.
+ */
+.logoPlate {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 18px;
+  background: var(--yaa-white);
+  border-radius: 999px;
+  transition: transform 0.2s ease;
+}
+
+.logoGroup:hover .logoPlate {
+  transform: scale(1.03);
+}
+
 .logoCircle {
   width: 46px;
   height: 46px;
@@ -76,11 +94,11 @@
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.1); /* Kính mờ trong suốt */
+  background: var(--on-surface-fill); /* Kính mờ, tự lật theo theme */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 99px;
-  color: #ffffff;
+  color: var(--on-surface);
   font-weight: 700;
   font-size: 15px;
   text-decoration: none;
@@ -88,7 +106,7 @@
 }
 
 .navItem:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--on-surface-border);
 }
 
 .navItemLocked {
@@ -98,21 +116,22 @@
 
 /* Nút đang Active (Màu trắng chữ đen) */
 .navItemActive {
-  background: #ffffff;
-  color: #000000;
+  background: var(--on-surface);
+  color: var(--surface);
   padding: 6px 16px 6px 6px; /* Căn chỉnh để nhét vừa hình tròn đen */
   transition: transform 0.2s ease;
 }
 
 .navItemActive:hover {
-  background: #ffffff;
+  background: var(--on-surface);
   transform: scale(1.05);
 }
 
 .activeIconCircle {
   width: 28px;
   height: 28px;
-  background-color: #1A1A1A;
+  /* Nằm trong pill active (nền = --on-surface) nên phải lấy màu nền chính */
+  background-color: var(--surface);
   border-radius: 50%;
   display: flex;
   align-items: center;
