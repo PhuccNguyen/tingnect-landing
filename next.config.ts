@@ -3,6 +3,12 @@ const nextConfig = {
   // giữ để build chạy độc lập (Docker/PM2, etc.)
   output: 'standalone',
 
+  // `next dev` và `next build` mặc định GHI ĐÈ cùng thư mục .next.
+  // Chạy build trong lúc dev server đang chạy sẽ xoá mất chunk mà dev
+  // đang tham chiếu -> "Cannot find module './985.js'" và toàn bộ route 500.
+  // Biến này cho phép build ra thư mục riêng: dùng `npm run build:verify`.
+  distDir: process.env.NEXT_DIST_DIR || '.next',
+
   images: {
     // vẫn giữ các domain cũ để không ảnh hưởng phần đang chạy
     domains: ['localhost', 'tingnect.com', 'event.tingnect.com'],

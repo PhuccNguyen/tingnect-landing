@@ -1,6 +1,7 @@
 
+/* Đổi màu nền về #0a2540 cho đồng bộ hero */
 :root {
-  --background: 15 23 42; /* slate-900 */
+  --background: 10 37 64; /* #0a2540 */
   --foreground: 248 250 252; /* slate-50 */
   --primary: 59 130 246; /* blue-500 */
   --secondary: 100 116 139; /* slate-500 */
@@ -97,21 +98,7 @@ a {
   }
 }
 /* Header spacing for fixed positioning */
-body {
-  padding-top: 5rem;
-}
-
-@media (max-width: 768px) {
-  body {
-    padding-top: 4.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  body {
-    padding-top: 4rem;
-  }
-}
+/* Đã loại bỏ padding-top body để tránh dư khoảng trống ở top */
 
 /* Enhanced scrollbar */
 ::-webkit-scrollbar {

@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header/Header";
 import Footer from "@/components/layout/Footer/Footer";
 import ChatWidget from "@/components/ui/ChatWidget/ChatWidget";
+import FloatingDownloadCTA from "@/components/home/FloatingDownloadCTA/FloatingDownloadCTA"; // IMPORT TẠI ĐÂY
 import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -100,6 +101,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="min-h-screen">{children}</main>
         <Footer />
         <ChatWidget assistantId={process.env.NEXT_PUBLIC_OPENAI_ASSISTANT_ID} />
+        <FloatingDownloadCTA />
       </body>
     </html>
   );

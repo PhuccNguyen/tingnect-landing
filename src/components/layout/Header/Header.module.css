@@ -1,625 +1,161 @@
-/* Base Styles với tối ưu hóa mobile */
+/* Tổng thể Header */
 .header {
-  position: fixed;
-  top: 0.5rem;
-  left: 0.5rem;
-  right: 0.5rem;
-  z-index: 1000;
-  height: 5.5rem;
-  border-radius: 2rem;
-  overflow: hidden;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-  transform-origin: center top;
-  will-change: transform, opacity;
-}
-
-.header.hidden {
-  transform: translateY(-120%);
-  opacity: 0;
-}
-
-.header.scrolled {
-  height: 4.5rem;  
-  top: 0.25rem;
-  backdrop-filter: blur(40px) saturate(1.4);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Multi-layer Background System */
-.headerBackgroundLayers {
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  overflow: hidden;
-}
-
-.headerBackground {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, 
-    rgba(6, 11, 25, 0.88) 0%, 
-    rgba(15, 23, 42, 0.82) 30%, 
-    rgba(30, 41, 59, 0.78) 70%, 
-    rgba(15, 23, 42, 0.88) 100%);
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.meshGradient {
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.12) 0%, transparent 60%),
-    radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.10) 0%, transparent 60%),
-    radial-gradient(circle at 50% 90%, rgba(16, 185, 129, 0.08) 0%, transparent 60%);
-  animation: meshFlow 12s ease-in-out infinite alternate;
-}
-
-.neuralPattern {
-  position: absolute;
-  inset: 0;
-  background-image: 
-    linear-gradient(35deg, transparent 47%, rgba(59, 130, 246, 0.03) 48%, rgba(59, 130, 246, 0.03) 52%, transparent 53%),
-    linear-gradient(145deg, transparent 47%, rgba(139, 92, 246, 0.025) 48%, rgba(139, 92, 246, 0.025) 52%, transparent 53%);
-  background-size: 80px 80px, 120px 120px;
-  animation: neuralPulse 15s linear infinite;
-}
-
-.headerBlur {
-  position: absolute;
-  inset: 0;
-  backdrop-filter: blur(0px) saturate(1.1);
-  transition: backdrop-filter 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.premiumBorder {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.18) 0%,
-    rgba(59, 130, 246, 0.25) 25%,
-    rgba(139, 92, 246, 0.20) 50%,
-    rgba(16, 185, 129, 0.15) 75%,
-    rgba(255, 255, 255, 0.08) 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: subtract;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: subtract;
-  animation: borderGlow 8s ease-in-out infinite;
-}
-
-.ambientLight {
-  position: absolute;
-  inset: -20px;
-  background: radial-gradient(ellipse at center, 
-    rgba(59, 130, 246, 0.1) 0%, 
-    rgba(139, 92, 246, 0.08) 40%,
-    transparent 70%);
-  filter: blur(30px);
-  opacity: 0.3;
-}
-
-.mouseGlow {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0;
-  border-radius: inherit;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-/* Advanced Status Bar */
-.statusBar {
-  position: absolute;
-  top: 0.75rem;
-  right: 1rem;
-  z-index: 15;
-}
-
-.statusIndicators {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 2rem;
-  padding: 0.5rem 1rem;
-  transition: all 0.4s ease;
-}
-
-.networkIndicator {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.signalBars {
-  display: flex;
-  align-items: end;
-  gap: 1px;
-  height: 10px;
-}
-
-.signalBar {
-  width: 2px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 1px;
-  transition: all 0.3s ease;
-}
-
-.signalBar:nth-child(1) { height: 3px; }
-.signalBar:nth-child(2) { height: 5px; }
-.signalBar:nth-child(3) { height: 7px; }
-.signalBar:nth-child(4) { height: 10px; }
-
-.signalBar.active {
-  background: linear-gradient(to top, #10b981, #06b6d4);
-}
-
-.timeDisplay {
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.75rem;
-  font-weight: 600;
-  font-family: 'SF Mono', 'Cascadia Code', monospace;
-  letter-spacing: 0.5px;
-}
-
-.batteryIndicator {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.batteryContainer {
-  width: 20px;
-  height: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 2px;
-  position: relative;
-  background: rgba(0, 0, 0, 0.2);
-}
-
-.batteryContainer::after {
-  content: '';
-  position: absolute;
-  right: -3px;
-  top: 3px;
-  width: 2px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 0 1px 1px 0;
-}
-
-.batteryLevel {
-  height: 100%;
-  background: linear-gradient(90deg, #10b981, #06b6d4);
-  border-radius: 1px;
-  transition: all 0.5s ease;
-}
-
-.batteryText {
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.6);
-  font-weight: 500;
-}
-
-/* Enhanced Particle System */
-.particleSystem {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  border-radius: inherit;
-}
-
-.particle {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  filter: blur(0.5px);
-}
-
-.particle1 {
-  width: 3px;
-  height: 3px;
-  background: linear-gradient(45deg, #60a5fa, #a78bfa);
-  box-shadow: 0 0 15px rgba(96, 165, 250, 0.9);
-}
-
-.particle2 {
-  width: 2px;
-  height: 2px;
-  background: linear-gradient(45deg, #8b5cf6, #06b6d4);
-  box-shadow: 0 0 12px rgba(139, 92, 246, 0.8);
-}
-
-.particle3 {
-  width: 4px;
-  height: 4px;
-  background: linear-gradient(45deg, #10b981, #3b82f6);
-  box-shadow: 0 0 18px rgba(16, 185, 129, 0.7);
-}
-
-.container {
-  position: relative;
-  z-index: 10;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 100%;
+  padding: 20px 32px;
+  box-sizing: border-box;
 }
 
-/* Enhanced Logo Styles */
-.logo {
+/* ================== PHẦN LOGO BÊN TRÁI ================== */
+.logoGroup {
   display: flex;
   align-items: center;
-  z-index: 20;
-}
-
-.logoLink {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  gap: 12px;
   text-decoration: none;
-  color: white;
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.logoWrapper {
-  position: relative;
-  width: 4rem;
-  height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 1.5rem;
-  background: 
-    linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.12)),
-    linear-gradient(45deg, rgba(16, 185, 129, 0.08), rgba(59, 130, 246, 0.08));
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(25px);
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  overflow: hidden;
-}
-
-.logoWrapper::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #10b981, #06b6d4, #3b82f6);
-  border-radius: inherit;
-  opacity: 0;
-  animation: logoRotate 6s linear infinite;
-  transition: opacity 0.4s ease;
-}
-
-.logoWrapper:hover::before {
-  opacity: 0.6;
-}
-
-.logoWrapper::after {
-  content: '';
-  position: absolute;
-  inset: 1px;
-  background: inherit;
-  border-radius: inherit;
-  z-index: 1;
-}
-
-.logoIcon {
-  width: 3.3rem;
-  height: 3.3rem;
-  filter: drop-shadow(0 10px 20px rgba(59, 130, 246, 0.5));
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  position: relative;
-  z-index: 2;
-}
-
-.pulseRing {
-  position: absolute;
-  inset: -8px;
-  border: 2px solid rgba(59, 130, 246, 0.3);
+.logoCircle {
+  width: 46px;
+  height: 46px;
+  background-color: #1A1A1A;
   border-radius: 50%;
-  pointer-events: none;
-}
-
-.logoGlow,
-.logoGlowSecondary {
-  position: absolute;
-  inset: -6px;
-  border-radius: inherit;
-  opacity: 0;
-  filter: blur(15px);
-  transition: all 0.5s ease;
-  z-index: 0;
-}
-
-.logoGlow {
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
-  animation: logoRotate 8s linear infinite;
-}
-
-.logoGlowSecondary {
-  background: linear-gradient(-45deg, #10b981, #06b6d4, #10b981);
-  animation: logoRotate 10s linear infinite reverse;
-  filter: blur(25px);
-}
-
-.holographicEffect {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(45deg, 
-    transparent 25%, 
-    rgba(255, 255, 255, 0.15) 50%, 
-    transparent 75%);
-  opacity: 0;
-  transform: translateX(-100%);
-  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.logoWrapper:hover .logoGlow,
-.logoWrapper:hover .logoGlowSecondary {
-  opacity: 0.8;
-}
-
-.logoWrapper:hover .holographicEffect {
-  opacity: 1;
-  transform: translateX(100%);
-}
-
-.logoTextContainer {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.logoText {
-  font-size: 1.875rem;
-  font-weight: 900;
-  font-family: var(--font-space-grotesk), system-ui, sans-serif;
-  background: linear-gradient(45deg, 
-    #ffffff 0%, 
-    #60a5fa 20%, 
-    #a78bfa 40%, 
-    #10b981 60%, 
-    #06b6d4 80%,
-    #ffffff 100%);
-  background-size: 500% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1;
-  transition: all 0.5s ease;
-  letter-spacing: -0.03em;
-}
-
-.badgeContainer {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.375rem;
-}
-
-.buildBadge {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem;
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
-  color: white;
-  font-size: 0.625rem;
-  font-weight: 800;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  box-shadow: 
-    0 4px 15px rgba(59, 130, 246, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-/* Enhanced Mobile Menu Button */
-.mobileMenuButton {
-  position: relative;
-  display: none;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 1.5rem;
-  padding: 1.125rem;
-  color: white;
-  cursor: pointer;
-  backdrop-filter: blur(25px);
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  z-index: 200;
-}
-
-.mobileMenuButton:hover {
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 12px 35px rgba(59, 130, 246, 0.25);
+.logoGroup:hover .logoCircle {
   transform: scale(1.05);
 }
 
-.menuIconContainer {
+.textGroup {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 3px;
+
+}
+
+.byText {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0px;
+  margin-top: 2px;
+}
+
+.brandText {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.slashIcon {
+  color: white;
+}
+
+/* ================== PHẦN MENU DESKTOP ================== */
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1); /* Kính mờ trong suốt */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 99px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.navItem:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.navItemLocked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Nút đang Active (Màu trắng chữ đen) */
+.navItemActive {
+  background: #ffffff;
+  color: #000000;
+  padding: 6px 16px 6px 6px; /* Căn chỉnh để nhét vừa hình tròn đen */
+  transition: transform 0.2s ease;
+}
+
+.navItemActive:hover {
+  background: #ffffff;
+  transform: scale(1.05);
+}
+
+.activeIconCircle {
+  width: 28px;
+  height: 28px;
+  background-color: #1A1A1A;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  position: relative;
-  z-index: 2;
 }
 
-.menuButtonGlow {
-  position: absolute;
-  inset: -3px;
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
-  border-radius: inherit;
-  opacity: 0;
-  filter: blur(12px);
-  animation: logoRotate 6s linear infinite;
-  transition: opacity 0.4s ease;
+/* ================== NÚT MOBILE HAMBURGER ================== */
+.mobileBtn {
+  display: none; /* Mặc định ẩn trên Desktop */
+  width: 48px;
+  height: 48px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.1s ease;
 }
 
-.mobileMenuButton:hover .menuButtonGlow {
-  opacity: 0.6;
+.mobileBtn:active {
+  transform: scale(0.95);
 }
 
-/* Enhanced Animations */
-@keyframes meshFlow {
-  0%, 100% { 
-    transform: translate(0, 0) scale(1) rotate(0deg); 
-    opacity: 0.8;
-  }
-  33% { 
-    transform: translate(15px, -15px) scale(1.1) rotate(2deg); 
-    opacity: 1;
-  }
-  66% { 
-    transform: translate(-10px, 8px) scale(0.9) rotate(-1deg); 
-    opacity: 0.9;
-  }
+.hamburgerLine {
+  width: 18px;
+  height: 2px;
+  background-color: #1A1A1A;
+  border-radius: 2px;
 }
 
-@keyframes neuralPulse {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(80px, 80px) rotate(1deg); }
-}
-
-@keyframes logoRotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes borderGlow {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 1; }
-}
-
-/* Thêm style cho logo mobile */
-.logoMobile {
-  display: none; /* Ẩn mặc định ở desktop */
-  width: auto;
-  height: 3.25rem; /* Điều chỉnh chiều cao phù hợp với header mobile */
-  filter: drop-shadow(0 2px 8px rgba(59, 130, 246, 0.3));
-  transition: all 0.3s ease;
-  margin-left: -0.5rem;
-}
-
-.logoMobile:hover {
-  filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.5));
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
+/* ================== RESPONSIVE MOBILE ================== */
+@media (max-width: 1024px) {
   .header {
-    height: 4.5rem;
-    top: 0.25rem;
-    left: 0.25rem;
-    right: 0.25rem;
-    border-radius: 1.75rem;
+    padding: 16px 20px;
   }
-  
-  .header.scrolled {
-    height: 4rem;
-    border-radius: 1.5rem;
+  .desktopNav {
+    display: none; /* Ẩn menu ngang trên điện thoại */
   }
-  
-  .container {
-    padding: 0 1.25rem;
-  }
-  
-  .statusBar {
-    display: none;
-  }
-  
-  .mobileMenuButton {
-    display: block;
-  }
-  
-  .logoText {
-    font-size: 1.5rem;
-  }
-
-  .logoMobile {
-    display: none;
-  }
-  
-  .logoWrapper {
-    width: 3.5rem;
-    height: 3.5rem;
-  }
-  
-  .logoIcon {
-    width: 2.25rem;
-    height: 2.25rem;
-  }
-
-  .particleSystem {
-    opacity: 0.7;
-  }
-
-  .buildBadge {
-    font-size: 0.5rem;
-    padding: 0.2rem 0.6rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .header {
-    top: 0.125rem;
-    left: 0.125rem;
-    right: 0.125rem;
-    height: 4rem;
-    border-radius: 1.5rem;
-  }
-
-  .header.scrolled {
-    height: 3.5rem;
-    border-radius: 1.25rem;
-  }
-
-  .container {
-    padding: 0 1rem;
-  }
-
-  .logoTextContainer {
-    display: none;
-  }
-
-    .logoMobile {
-    display: block;
-  }
-  
-  .logoWrapper {
-    width: 3.7rem;
-    height:3.7rem;
-  }
-
-  .logoIcon {
-    width:2.7rem;
-    height: 2.7rem;
-  }
-
-  .mouseGlow,
-  .neuralPattern,
-  .particleSystem {
-    display: none;
-  }
-
-  .buildBadge {
-    display: none;
+  .mobileBtn {
+    display: flex; /* Hiện nút tròn trên điện thoại */
   }
 }
