@@ -1,31 +1,57 @@
 export const SITE_CONFIG = {
-  name: "TingNect",
-  slogan: "Build for Billions",
-  host: "Ting Foundation",
-  website: "https://tingnect.com",
-  lumaUrl: "https://lu.ma/tingnect",
-  email: "contact@tingnect.com",
-  phone: "+84 123 456 789",
+  name: "Yaa Club",
+  slogan: "Wellbeing that works",
+  tagline: "More than a game, it's a community",
+  description:
+    "Discover clubs, join communities, book sports activities and organize events. Play. Connect. Grow.",
+  /** Domain chinh thuc, da dang ky. */
+  website: process.env.NEXT_PUBLIC_SITE_URL || "https://yaaclub.com",
+  /** ⚠️ TAM DAT — chua co hom thu that. Sua khi co dia chi chinh thuc. */
+  email: "hello@yaaclub.com",
 };
 
 export const SOCIAL_LINKS = {
-  telegram: "https://t.me/tingnect",
-  telegramGroup: "https://t.me/TingNectGroup",
-  twitter: "https://x.com/TingNect",
-  facebook: "https://www.facebook.com/TingNect",
-  facebookGroup: "https://www.facebook.com/groups/tingnect",
-  tiktok: "https://www.tiktok.com/@tingnect",
-  youtube: "https://www.youtube.com/@TingNect",
-  github: "https://github.com/TingNect",
-  docs: "https://docs.tingnect.com",
-  coinmarketcap: "https://coinmarketcap.com/community/profile/TingNect",
+  twitter: "https://x.com/YaaClubApp",
+  facebook: "https://www.facebook.com/YaaClub",
+  youtube: "https://www.youtube.com/@YaaClubApp",
+  /** Chua co tai khoan that — tro ve trang coming-soon */
+  instagram: "/coming-soon?page=Instagram",
 };
 
-export const EVENT_INFO = {
-  date: "2025-08-15",
-  time: "09:00 AM",
-  location: "Ho Chi Minh City, Vietnam",
-  expectedAttendees: 1500,
-  speakers: 25,
-  workshops: 8,
-};
+/** Cac mon the thao Yaa Club dang phuc vu */
+export const SPORTS = [
+  "Pickleball",
+  "Yoga",
+  "Run Club",
+  "Football",
+  "Padel",
+] as const;
+
+/** 3 nhom nguoi dung cua nen tang */
+export const ROLES = [
+  {
+    name: "Users",
+    description:
+      "Kham pha, tham gia va dat cho cac hoat dong the thao ban yeu thich.",
+  },
+  {
+    name: "Club Owners",
+    description: "Phat trien cong dong va quan ly club mot cach de dang.",
+  },
+  {
+    name: "Venues / Organizers",
+    description: "Dang san, to chuc su kien, tiep can nhieu nguoi choi hon.",
+  },
+] as const;
+
+/**
+ * So lieu minh hoa cho StatsBar. Day la DEMO DATA, khong phai metrics that —
+ * phai ghi ro tren UI de khong gay hieu nham.
+ */
+export const DEMO_STATS = [
+  { value: 2500, suffix: "+", label: "Active Clubs" },
+  { value: 12000, suffix: "+", label: "Bookings / Month" },
+  { value: 250, suffix: "K+", label: "Community Members" },
+  { value: 1000, suffix: "+", label: "Events Hosted" },
+  { value: 20, suffix: "+", label: "Cities" },
+] as const;
