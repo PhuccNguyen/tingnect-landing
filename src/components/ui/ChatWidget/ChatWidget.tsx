@@ -25,7 +25,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ assistantId }) => {
     {
       id: '1',
       type: 'bot',
-      content: 'Hello! I\'m TingNect AI Assistant. I can help you learn about our Web3 ecosystem, community, and opportunities. How can I assist you today?',
+      content: 'Hello! I\'m Yaa Club Assistant. I can help you learn about our Web3 ecosystem, community, and opportunities. How can I assist you today?',
       timestamp: new Date()
     }
   ]);
@@ -38,9 +38,9 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ assistantId }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const suggestedQuestions = [
-    "What is TingNect Build for Billions?",
-    "How can I join the TingNect community?",
-    "What Web3 products are you building?",
+    "What is Yaa Club?",
+    "How do I join a club?",
+    "What sports can I book?",
     "How to become a verified builder?",
     "Partnership opportunities?",
     "Developer resources and documentation"
@@ -145,7 +145,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ assistantId }) => {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: 'bot',
-        content: 'Sorry, I\'m experiencing technical difficulties. Please try again later or contact us directly at contact@tingnect.com.',
+        content: 'Sorry, I\'m experiencing technical difficulties. Please try again later or contact us directly at hello@yaaclub.com.',
         timestamp: new Date()
       };
       setMessages(prev => [...prev, errorMessage]);
@@ -186,8 +186,8 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ assistantId }) => {
           >
             <div className={styles.buttonIcon}>
               <Image
-                src="/Image/Logo/TingnectNew/TingNect icon white.png"
-                alt="TingNect AI"
+                src="/brand/logo/icon-cream.webp"
+                alt="Yaa Club"
                 width={28}
                 height={28}
                 className={styles.logoIcon}
@@ -196,8 +196,8 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ assistantId }) => {
             <span className={styles.pingAnimation}></span>
 <div className={styles.notificationBadge}>
   <Image
-    src="/Image/Logo/TingnectNew/TingNect icon white.png"
-    alt="TingNect Logo"
+    src="/brand/logo/icon-cream.webp"
+    alt="Yaa Club"
     width={25} 
     height={25}
   />
@@ -226,14 +226,14 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ assistantId }) => {
               <div className={styles.headerContent}>
                 <div className={styles.botAvatar}>
                   <Image
-                    src="/Image/Logo/TingnectNew/TingNect icon white.png"
-                    alt="TingNect AI"
+                    src="/brand/logo/icon-cream.webp"
+                    alt="Yaa Club"
                     width={24}
                     height={24}
                   />
                 </div>
                 <div className={styles.headerInfo}>
-                  <h3 className={styles.headerTitle}>TingNect AI Assistant</h3>
+                  <h3 className={styles.headerTitle}>Yaa Club Assistant</h3>
                   <span className={styles.status}>
                     <span className={`${styles.onlineIndicator} ${!isConnected ? styles.offline : ''}`}></span>
                     {isConnected ? 'Online' : 'Offline'}
@@ -273,8 +273,8 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ assistantId }) => {
                       <div className={styles.messageAvatar}>
                         {message.type === 'bot' ? (
                           <Image
-                            src="/Image/Logo/TingnectNew/TingNect icon white.png"
-                            alt="TingNect AI"
+                            src="/brand/logo/icon-cream.webp"
+                            alt="Yaa Club"
                             width={16}
                             height={16}
                           />
@@ -324,8 +324,8 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ assistantId }) => {
                     >
                       <div className={styles.messageAvatar}>
                         <Image
-                          src="/Image/Logo/TingnectNew/TingNect icon white.png"
-                          alt="TingNect AI"
+                          src="/brand/logo/icon-cream.webp"
+                          alt="Yaa Club"
                           width={16}
                           height={16}
                         />
@@ -351,7 +351,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ assistantId }) => {
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyPress={handleKeyPress}
-                    placeholder="Ask me anything about TingNect..."
+                    placeholder="Ask me anything about Yaa Club..."
                     className={styles.messageInput}
                     disabled={isLoading || !isConnected}
                   />
