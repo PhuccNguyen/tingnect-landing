@@ -51,7 +51,7 @@ export default function Background() {
   // Initialize particles
   const initializeStardust = useCallback((width: number, height: number) => {
     stardust.current = [];
-    const colors = ['#3b82f6', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b'];
+    const colors = ['#d2ff00', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b'];
 
     for (let i = 0; i < 150; i++) {
       stardust.current.push({
@@ -182,7 +182,7 @@ export default function Background() {
             const opacity = (1 - distance / 150) * 0.3;
             ctx.save();
             ctx.globalAlpha = opacity;
-            ctx.strokeStyle = '#3b82f6';
+            ctx.strokeStyle = '#d2ff00';
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(node.x, node.y);

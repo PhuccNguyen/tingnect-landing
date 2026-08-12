@@ -2,23 +2,17 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import {
-  FaXTwitter,
-  FaTelegram,
-  FaDiscord,
-  FaYoutube,
-  FaInstagram,
-  FaTiktok,
-} from 'react-icons/fa6';
+import { FaXTwitter, FaFacebook, FaYoutube, FaInstagram } from 'react-icons/fa6';
+import { SOCIAL_LINKS } from '@/lib/constants';
 import styles from './TrustedNetwork.module.css';
 
+// Chi 4 kenh Yaa Club that su co. Cac kenh cu (Telegram, Discord, TikTok)
+// da bo vi khong ton tai — icon tro toi tai khoan khong co la link chet.
 const socialPlatforms = [
-  { name: 'X (Twitter)', icon: FaXTwitter, url: 'https://x.com/tingnect' },
-  { name: 'Telegram', icon: FaTelegram, url: 'https://t.me/tingnect' },
-  { name: 'Discord', icon: FaDiscord, url: 'https://discord.gg/tingnect' },
-  { name: 'YouTube', icon: FaYoutube, url: 'https://youtube.com/@tingnect' },
-  { name: 'Instagram', icon: FaInstagram, url: 'https://instagram.com/tingnect' },
-  { name: 'TikTok', icon: FaTiktok, url: 'https://tiktok.com/@tingnect' },
+  { name: 'X (Twitter)', icon: FaXTwitter, url: SOCIAL_LINKS.twitter, external: true },
+  { name: 'Facebook', icon: FaFacebook, url: SOCIAL_LINKS.facebook, external: true },
+  { name: 'YouTube', icon: FaYoutube, url: SOCIAL_LINKS.youtube, external: true },
+  { name: 'Instagram', icon: FaInstagram, url: SOCIAL_LINKS.instagram, external: false },
 ];
 
 export default function TrustedNetwork() {
@@ -30,9 +24,9 @@ export default function TrustedNetwork() {
       transition={{ duration: 0.6, delay: 1 }}
     >
       <div className={styles.labelWrap}>
-        <span className={styles.labelMain}>TRUSTED NETWORK</span>
+        <span className={styles.labelMain}>JOIN THE CLUB</span>
         <span className={styles.labelDivider}>-</span>
-        <span className={styles.labelSub}>Join our community</span>
+        <span className={styles.labelSub}>Follow us for launch updates</span>
       </div>
 
       <div className={styles.socialIcons}>
@@ -42,8 +36,9 @@ export default function TrustedNetwork() {
             <motion.a
               key={platform.name}
               href={platform.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...(platform.external
+                ? { target: '_blank', rel: 'noopener noreferrer' }
+                : {})}
               aria-label={platform.name}
               className={styles.socialLink}
               initial={{ opacity: 0, scale: 0.8 }}
@@ -57,9 +52,11 @@ export default function TrustedNetwork() {
           );
         })}
 
- <span className={styles.memberCount}>
+        {/* Da bo con so "1M+ members": Yaa Club dang pre-launch, chua co
+            nguoi dung nao — de nguyen la tuyen bo sai su that. */}
+        <span className={styles.memberCount}>
           <span className={styles.memberDot} />
-          1M+ members
+          Launching soon
         </span>
       </div>
     </motion.div>

@@ -32,7 +32,14 @@ export default function CloudLayer({ segments }: { segments: number }) {
         opacity={MATERIAL.cloudOpacity}
         // Bat buoc: khong tat se duc lo vao Trai Dat phia duoi
         depthWrite={false}
-        blending={THREE.AdditiveBlending}
+        /*
+         * NormalBlending, KHONG dung AdditiveBlending.
+         * Additive la phep CONG anh sang: tren nen toi thi may sang bat len,
+         * nhung tren nen kem (#e9f08c — kenh R,G da gan bao hoa) thi cong
+         * them khong lam sang duoc nua -> may bien mat o ria qua cau.
+         * Normal ve may nhu lop phu duc, doc duoc tren moi mau nen.
+         */
+        blending={THREE.NormalBlending}
         // DoubleSide + additive se ve may ban cau sau xuyen qua Trai Dat
         side={THREE.FrontSide}
       />

@@ -1,30 +1,54 @@
 /* src/components/home/Hero/CombinedBackground/CombinedBackground.module.css */
 
+/*
+ * MAC DINH — anh nen xanh goc.
+ * Trai Dat giu mau that (xanh lam + xanh la) nen nen xanh la lua chon hoa
+ * mau duy nhat khong phai bop meo texture.
+ *
+ * Neo goc TRAI-TREN: khi man hinh hep lai chi cat phan ben phai, giu nguyen
+ * chum tia sang ben trai.
+ */
 .combinedBackground {
   position: absolute;
   inset: 0;
   z-index: -10;
   overflow: hidden;
-  
-  /* 1. MẶC ĐỊNH CHO DESKTOP (Màn hình PC/Tablet ngang) */
+
+  background-color: var(--surface);
   background-image: url('/Image/BG/bg-desktop.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  
-  /* QUAN TRỌNG: Neo cố định điểm bắt đầu ở Góc Trái - Cạnh Trên. 
-     Khi màn hình hẹp lại, nó CHỈ cắt phần hình bên phải, giữ nguyên tia sáng bên trái. */
-  background-position: left top; 
+  background-position: left top;
 }
 
 @media (max-width: 768px) {
   .combinedBackground {
-    /* Đổi sang bức ảnh tia sáng chiếu từ giữa */
+    /* Neo GIUA-TREN: anh got deu 2 ben, truc tia sang luon o giua */
     background-image: url('/Image/BG/bg-mobile.jpg');
-    
-    /* QUAN TRỌNG: Neo ở Giữa - Cạnh Trên. 
-       Khi màn hình hẹp lại, ảnh sẽ bị gọt đều từ 2 bên trái/phải, giữ trục tia sáng luôn ở giữa. */
-    background-position: center top; 
+    background-position: center top;
   }
+}
+
+/*
+ * Theme 'cream' / 'ink': bo anh, dung gradient CSS thuan.
+ * Cac bien --hero-ray / --hero-glow / --surface-lift o theme mac dinh deu
+ * la transparent hoac bang --surface nen khong can tat rieng.
+ */
+:global(:root[data-hero='cream']) .combinedBackground,
+:global(:root[data-hero='ink']) .combinedBackground {
+  background-image:
+    /* Tia sang cheo toa ra tu goc trai-tren */
+    conic-gradient(
+      from 202deg at 6% -8%,
+      transparent 0deg, var(--hero-ray) 5deg, transparent 11deg,
+      transparent 18deg, var(--hero-ray) 24deg, transparent 31deg,
+      transparent 39deg, var(--hero-ray) 45deg, transparent 53deg,
+      transparent 360deg
+    ),
+    /* Quang sang diu phia sau qua dia cau */
+    radial-gradient(ellipse 52% 58% at 76% 46%, var(--hero-glow) 0%, transparent 62%),
+    /* Sang dan o giua, tram dan ra ria — cau truc radial cua OneFootball */
+    radial-gradient(ellipse 90% 85% at 50% 42%, var(--surface-lift) 0%, var(--surface) 78%);
 }
 
 .ambientLight {
@@ -33,11 +57,9 @@
   left: 0;
   right: 0;
   height: 40vh;
-  background: linear-gradient(
-    to top,
-    rgba(6, 24, 44, 0.9) 0%, /* Màu xanh navy siêu đậm hòa vào nền */
-    transparent 100%
-  );
+  /* Hoà xuống mép dưới hero — dùng chính màu nền nên tự đúng ở mọi theme */
+  background: linear-gradient(to top, var(--surface) 0%, transparent 100%);
+  opacity: 0.9;
   pointer-events: none;
   z-index: 3;
 }

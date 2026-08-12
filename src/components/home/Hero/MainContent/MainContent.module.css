@@ -1,4 +1,9 @@
-/* src/components/home/Hero/MainContent/MainContent.module.css */
+/* src/components/home/Hero/MainContent/MainContent.module.css
+ *
+ * Kich thuoc chu va khoang cach deu tham chieu thang chuan trong globals.css
+ * (--fs-*, --sp-*). Khong viet clamp() rieng o day nua — truoc do moi
+ * component tu dat mot cong thuc khac nhau nen ti le lech nhau.
+ */
 
 .mainContent {
   width: 100%;
@@ -10,9 +15,9 @@
 
 .layout {
   display: grid;
-  /* Đổi dòng này */
-grid-template-columns: 55% 45%;  gap: 48px;
-gap: 48px;
+  /* 54/46: cot trai vua du cho dong "MORE THAN A GAME," o co chu lon nhat */
+  grid-template-columns: 54% 46%;
+  gap: var(--sp-7);
   align-items: stretch;
   flex: 1;
   min-height: 0;
@@ -24,8 +29,7 @@ gap: 48px;
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-block: var(--sp-2);
 }
 
 .rightWrapper {
@@ -38,116 +42,103 @@ gap: 48px;
   width: 100%;
 }
 
-/* ====== LEFT COLUMN ====== */
+/* ====== COT TRAI ====== */
 
 .leftColumn {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-max-width: none; /* QUAN TRỌNG: Mở khóa giới hạn chiều rộng cũ (640px) */
 }
 
-/* Group on top — logo + heading + subtitle + CTA */
+/* Nhom tren: headline + sub-copy + CTA */
 .topGroup {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: var(--sp-5);
 }
 
-/* Trusted Network sát đáy */
+/* Day social row xuong sat day cot */
 .trustedNetworkWrap {
   margin-top: auto;
-  padding-top: 24px;
+  padding-top: var(--sp-5);
 }
 
-/* Logo Section — TO HƠN, không còn badge */
-.logoSection {
-  display: flex;
-  align-items: center;
-}
+/* ====== HEADLINE ====== */
 
-.logoContainer {
-  position: relative;
-  display: inline-block;
-}
-
-.logoImage {
-  height: auto;
-  max-height: 100px;
-  width: auto;
-  max-width: 100%;
-  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.4));
-}
-
-/* Slogan — match logo width visually */
-/* Slogan — match logo width visually */
 .sloganSection {
   position: relative;
   width: 100%;
   display: flex;
-  justify-content: flex-start; /* Ép nguyên khối chữ sát về bên trái */
+  justify-content: flex-start;
 }
 
 .slogan {
-  /* 1. HẠ MỨC MIN XUỐNG 2rem (Để chữ được phép thu nhỏ thoải mái khi màn hình hẹp) */
-  /* Vẫn giữ max 6.4rem cho màn hình siêu to */
-  font-size: clamp(2rem, 5.5vw, 6.4rem);
-  
+  font-size: var(--fs-display);
   font-weight: 900;
-  line-height: 0.88;
-  letter-spacing: -0.04em;
+  /*
+   * Ep hep truc wdth cua Archivo -> chu cao va thon.
+   * Dung font-variation-settings chu KHONG dung font-stretch: da do thuc te,
+   * Chrome bo qua font-stretch tren font nay (be rong y het nhau o 100% va
+   * 78%), trong khi font-variation-settings cho ket qua dung (1143 -> 920px).
+   */
+  font-variation-settings: 'wdth' var(--fw-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
   text-transform: uppercase;
-  color: #fff;
-  margin: 0 0 16px 0;
-  font-family: 'Archivo Black', 'Inter', system-ui, sans-serif;
+  color: var(--on-surface);
+  margin: 0;
+  /* Display face: Archivo bien thien, nap qua next/font o layout.tsx */
+  font-family: var(--font-display), 'Inter', system-ui, sans-serif;
   text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  
+
   text-align: left;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  
-  /* 2. LỆNH THÉP: Cấm tuyệt đối việc bẻ từ rớt dòng */
-  white-space: nowrap; 
+
+  /* Cam be tu rot dong — bo cuc 3 dong la co y */
+  white-space: nowrap;
 }
 
-/* Đảm bảo vẫn là 3 dòng cứng */
 .slogan span {
   display: block;
 }
-/* Subtitle - text-xl với margin top thoáng */
+
+/* ====== SUB-COPY ====== */
+
 .subtitleSection {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 8px;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
 }
 
 .subtitle {
   margin: 0;
-  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  font-size: var(--fs-lead);
   font-weight: 500;
-  line-height: 1.5;
-  color: rgba(219, 234, 254, 0.95);
+  line-height: var(--lh-body);
+  color: var(--on-surface);
   letter-spacing: -0.005em;
 }
 
 .subtitleStatic {
-  color: #fff;
+  color: var(--on-surface);
 }
 
 .typingLine {
   margin: 0;
-  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
-  color: rgba(191, 219, 254, 0.8);
+  font-size: var(--fs-body);
+  color: var(--on-surface-muted);
   font-weight: 400;
-  line-height: 1.5;
-  min-height: 24px;
+  line-height: var(--lh-body);
+  /* Chan chieu cao de dong chu go khong lam nhay layout */
+  min-height: 1.6em;
 }
 
 .cursor {
-  color: #93c5fd;
+  color: var(--accent-soft);
   font-weight: 300;
   margin-left: 2px;
 }
@@ -155,10 +146,7 @@ max-width: none; /* QUAN TRỌNG: Mở khóa giới hạn chiều rộng cũ (64
 /* ============ TABLET ============ */
 @media (max-width: 1024px) {
   .layout {
-    gap: 32px;
-  }
-  .logoImage {
-    max-height: 80px;
+    gap: var(--sp-6);
   }
 }
 
@@ -172,7 +160,7 @@ max-width: none; /* QUAN TRỌNG: Mở khóa giới hạn chiều rộng cũ (64
 
   .leftWrapper {
     order: 1;
-    padding: 16px 0 8px;
+    padding: var(--sp-4) 0 var(--sp-2);
     height: auto;
   }
 
@@ -191,87 +179,27 @@ max-width: none; /* QUAN TRỌNG: Mở khóa giới hạn chiều rộng cũ (64
 
   .topGroup {
     align-items: center;
-    gap: 16px;
+    gap: var(--sp-4);
   }
 
   .trustedNetworkWrap {
-    margin-top: 20px;
+    margin-top: var(--sp-5);
     padding-top: 0;
     width: 100%;
     display: flex;
     justify-content: center;
   }
 
-  .logoImage {
-    max-height: 64px;
-  }
-
-  /* CHÈN THÊM ĐOẠN NÀY: Ép nguyên section chữ ra giữa */
   .sloganSection {
     justify-content: center;
     width: 100%;
   }
 
   .slogan {
-    font-size: clamp(2.2rem, 9vw, 2.8rem);
-    line-height: 1.05;
-    
-    /* CHÈN THÊM 2 DÒNG NÀY: Ghi đè lệnh ép trái của Desktop */
-    align-items: center; /* Đưa các thẻ span vào giữa */
-    text-align: center;  /* Căn giữa text bên trong */
-  }
-
-  .subtitle {
-    font-size: 1.05rem;
-  }
-
-  .subtitleSection {
+    /* Mobile can rong hon 5.2vw de chu khong be xiu tren man hep */
+    font-size: clamp(1.9rem, 8.4vw, 2.9rem);
+    line-height: 0.98;
     align-items: center;
+    text-align: center;
   }
-}
-
-/* ============ BADGE STYLES ============ */
-
-.currentBadge {
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: white;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-}
-
-.upcomingBadge {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
-  color: white;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-}
-
-.pastBadge {
-  background: linear-gradient(135deg, #6b7280, #4b5563);
-  color: white;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-}
-
-.cancelledBadge {
-  background: linear-gradient(135deg, #ef4444, #dc2626);
-  color: white;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
 }

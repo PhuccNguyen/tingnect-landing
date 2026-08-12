@@ -5,6 +5,7 @@
 
 /** Duong dan texture da toi uu - sinh boi scripts/optimize-globe-textures.mjs */
 export const TEXTURES = {
+  /** Mau goc, khong giam bao hoa. */
   surface: '/textures/globe/earth-surface.webp',
   landMask: '/textures/globe/earth-landmask.webp',
   elevation: '/textures/globe/earth-elevation.webp',
@@ -13,13 +14,24 @@ export const TEXTURES = {
 
 export const GEOMETRY = {
   earthRadius: 1.0,
-  /** Cach Trai Dat 4.5% -> parallax ro. Duoi 1.01 se bi z-fighting. */
+  /**
+   * 1.075 — may bay LO LUNG cach be mat, tao chieu sau 3D khi xoay.
+   * PHAI lon hon (earthRadius + displacementScale = 1.05), neu khong dinh nui
+   * se dam xuyen qua lop may.
+   * Vanh "diem" truoc day khong phai do ban kinh ma do AdditiveBlending —
+   * da sua o CloudLayer nen gio nang len thoai mai.
+   */
   cloudRadius: 1.045,
   /* 1.09: sat be mat de quang sang doc thanh khi quyen. De xa hon (~1.14)
      se ho ra mot vanh toi giua ria Trai Dat va quang sang -> nhin nhu qua
      cau thuy tinh chu khong phai khi quyen. */
-  atmoRadius: 1.09,
-  segments: { desktop: 96, mobile: 48 },
+  atmoRadius: 1.12,
+  /**
+   * Displacement can luoi DAY moi hien duoc nui: moi dinh nui la mot vertex.
+   * 96 segment (~4.6k quad) qua tho, dinh nui bi bo tron mat. 256 = 32k quad
+   * = 65k tam giac, van rat nhe voi GPU.
+   */
+  segments: { desktop: 256, mobile: 128 },
 } as const;
 
 /**
@@ -52,8 +64,19 @@ export const MOTION = {
 } as const;
 
 export const MATERIAL = {
-  /** >0.06 la lo gia o ria qua cau */
-  bumpScale: 0.035,
+  /**
+   * DISPLACEMENT — day vertex ra ngoai theo do cao, tao nui THAT.
+   * Khac han bumpMap: bump chi danh lua anh sang, silhouette van tron tuyet
+   * doi. Displacement lam bien dang hinh hoc nen khi xoay, nui hien ro go
+   * ghe o duong ria.
+   *
+   * 0.035 = 3.5% ban kinh. Nghe qua thi cuong dieu (Everest that chi bang
+   * 0.14% ban kinh Trai Dat, o ti le that se hoan toan vo hinh), nhung day
+   * la qua dia cau phong cach hoa nen phai phong dai moi thay.
+   */
+  displacementScale: 0.035,
+  /** Bump giu lai de tao chi tiet anh sang nho hon buoc luoi displacement */
+  bumpScale: 0.025,
   /** Nhan voi roughnessMap (2.png): trang=dat=nham, den=bien=it nham hon */
   roughnessBase: 1.0,
   /**
@@ -63,10 +86,15 @@ export const MATERIAL = {
    * chi con khuech tan thuan - van giu ranh gioi ngay/dem, khong con loa.
    */
   metalness: 0,
-  cloudOpacity: 0.85,
-  cloudTint: '#e8f2ff',
-  /** May trong 4.png kha xin -> nhan sang len */
-  cloudBoost: 1.35,
+  cloudOpacity: 0.72,
+  cloudTint: '#ffffff',
+  /**
+   * 1.0 = khong nhan sang.
+   * He so >1 chi co y nghia voi AdditiveBlending (nen toi). Da chuyen
+   * CloudLayer sang NormalBlending de may hien duoc tren MOI mau nen,
+   * luc do nhan sang qua 1.0 se lam may bi chay trang.
+   */
+  cloudBoost: 1.0,
 } as const;
 
 export const ATMOSPHERE = {
@@ -85,12 +113,12 @@ export const ATMOSPHERE = {
  * Camera phai du xa de lop NGOAI CUNG dang bat khong bi xen:
  *   asin(banKinhNgoaiCung / z) < fov / 2
  *
- * Khi tat ATMOSPHERE, lop ngoai cung la may (1.045):
- *   asin(1.045 / 3.0) = 20.4 < 21  -> qua cau chiem ~97% khung, gan sat mep.
+ * Khi tat ATMOSPHERE, lop ngoai cung la may (1.075):
+ *   asin(1.075 / 3.15) = 19.9 < 21  -> vua khit, con vien ~5%.
  * Neu bat lai ATMOSPHERE (1.09) thi PHAI keo z len >= 3.25, khong thi
  * vanh sang bi cat cut.
  */
 export const CAMERA = {
-  position: [0, 0, 3.0] as [number, number, number],
+  position: [0, 0, 3.05] as [number, number, number],
   fov: 42,
 } as const;

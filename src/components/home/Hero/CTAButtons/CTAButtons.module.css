@@ -32,7 +32,7 @@
 .downloadButton:hover {
   background: #f0f9ff;
   box-shadow: 0 8px 24px rgba(255, 255, 255, 0.3),
-    0 0 0 1px rgba(147, 197, 253, 0.4);
+    0 0 0 1px rgba(210, 255, 0, 0.4);
 }
 
 .downloadIcon {

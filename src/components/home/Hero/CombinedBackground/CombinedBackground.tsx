@@ -48,7 +48,7 @@ export default function CombinedBackground() {
   }, []);
 
   useEffect(() => {
-    const colors = ['#ffffff', '#93c5fd', '#bfdbfe', '#60a5fa', '#dbeafe'];
+    const colors = ['#ffffff', '#93c5fd', '#bfdbfe', '#d2ff00', '#dbeafe'];
     const particleCount = isLowPerformance ? 12 : 22;
 
     const newParticles = Array.from({ length: particleCount }, (_, i) => ({
@@ -134,7 +134,7 @@ export default function CombinedBackground() {
     if (!ctx) return;
 
     const { width, height } = canvas;
-    ctx.fillStyle = 'rgba(10, 38, 66, 0.08)';
+    ctx.fillStyle = 'rgba(10, 10, 10, 0.08)';
     ctx.fillRect(0, 0, width, height);
     updateStardust(ctx, width, height);
 

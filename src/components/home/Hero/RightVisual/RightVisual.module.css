@@ -68,8 +68,8 @@
   border-radius: 50%;
   background: radial-gradient(
     circle at 38% 32%,
-    rgba(147, 197, 253, 0.16),
-    rgba(10, 38, 66, 0.5) 70%
+    rgba(210, 255, 0, 0.16),
+    rgba(10, 10, 10, 0.5) 70%
   );
   animation: globePulse 2.2s ease-in-out infinite;
 }

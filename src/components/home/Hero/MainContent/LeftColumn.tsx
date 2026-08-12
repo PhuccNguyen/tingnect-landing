@@ -40,10 +40,11 @@ export default function LeftColumn({ displayText, cursor }: LeftColumnProps) {
 
 {/* MAIN SLOGAN */}
         <motion.div className={styles.sloganSection} variants={itemVariants}>
+          {/* 3 dòng cứng, giống bố cục site v1 */}
           <h1 className={styles.slogan}>
-            <span>YOUR TRUSTED</span>
-            <span>LIFESTYLE</span>
-            <span>SOCIAL CLUB</span>
+            <span>MORE THAN A GAME,</span>
+            <span>IT&apos;S A</span>
+            <span>COMMUNITY</span>
           </h1>
         </motion.div>
 
