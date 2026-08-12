@@ -11,7 +11,7 @@ const nextConfig = {
 
   images: {
     // vẫn giữ các domain cũ để không ảnh hưởng phần đang chạy
-    domains: ['localhost', 'tingnect.com', 'event.tingnect.com'],
+    domains: ['localhost', 'yaaclub.com'],
 
     // thêm các nguồn ảnh mới
     remotePatterns: [

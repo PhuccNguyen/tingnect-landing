@@ -1,16 +1,16 @@
 {
-  "name": "tingnect-website",
+  "name": "yaaclub-landing",
   "version": "1.0.0",
   "private": true,
-  "description": "TingNect - Build for Billions | Official Website",
+  "description": "Yaa Club — Wellbeing that works | Official Landing Page",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "build:verify": "node scripts/build-verify.mjs",
     "start": "next start",
     "lint": "next lint",
-    "docker:build": "docker build -t tingnect-website .",
-    "docker:run": "docker run -p 3000:3000 tingnect-website"
+    "docker:build": "docker build -t yaaclub-landing .",
+    "docker:run": "docker run -p 3000:3000 yaaclub-landing"
   },
   "dependencies": {
     "@lottiefiles/react-lottie-player": "^3.6.0",
