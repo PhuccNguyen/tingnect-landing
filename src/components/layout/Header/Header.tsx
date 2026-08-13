@@ -24,19 +24,15 @@ export default function Header() {
   return (
     <header className={styles.header}>
       
-      {/* 1. TRÁI: LOGO AREA — lockup ngang đã gồm cả icon + wordmark,
-          không cần vòng tròn icon riêng như bố cục "BY <brand>" cũ */}
+      {/* 1. TRÁI: LOGO AREA */}
       <Link href="/" className={styles.logoGroup} aria-label="Yaa Club — trang chủ">
-        {/*
-          Logo bản ĐEN (standard), to hơn.
-          Nền hero là xanh đậm nên logo đen đặt thẳng lên sẽ không đọc được —
-          vì vậy bọc trong một nền sáng bo tròn, cùng ngôn ngữ với pill
-          "Discover" đang active. Nếu đổi header sang nền sáng thì bỏ
-          class .logoPlate đi là logo nằm trực tiếp trên nền.
-        */}
-        <span className={styles.logoPlate}>
-          <Logo variant="standard" orientation="horizontal" height={48} priority />
-        </span>
+        <div className={styles.logoCircle}>
+          <Logo variant="inverted" orientation="icon" height={24} priority />
+        </div>
+        <div className={styles.textGroup}>
+          <span className={styles.byText}>BY</span>
+          <span className={styles.brandText}>YAACLUB</span>
+        </div>
       </Link>
 
       {/* 2. PHẢI: DESKTOP NAV */}
