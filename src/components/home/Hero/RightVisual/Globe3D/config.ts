@@ -15,21 +15,19 @@ export const TEXTURES = {
 export const GEOMETRY = {
   earthRadius: 1.0,
   /**
-   * 1.075 — may bay LO LUNG cach be mat, tao chieu sau 3D khi xoay.
-   * PHAI lon hon (earthRadius + displacementScale = 1.05), neu khong dinh nui
-   * se dam xuyen qua lop may.
-   * Vanh "diem" truoc day khong phai do ban kinh ma do AdditiveBlending —
-   * da sua o CloudLayer nen gio nang len thoai mai.
+   * 1.015 — may OM SAT be mat, chi la mot mang mong phu len, giong anh mau
+   * goble-3d.png (may o do chi la vai vet trang tren dai duong).
+   *
+   * RANG BUOC: phai LON HON (earthRadius + displacementScale = 1.010),
+   * neu khong dinh nui se dam xuyen qua lop may. Hien ho 0.5%.
    */
-  cloudRadius: 1.045,
-  /* 1.09: sat be mat de quang sang doc thanh khi quyen. De xa hon (~1.14)
-     se ho ra mot vanh toi giua ria Trai Dat va quang sang -> nhin nhu qua
-     cau thuy tinh chu khong phai khi quyen. */
-  atmoRadius: 1.12,
+  cloudRadius: 1.015,
+  /* Chi co tac dung khi ATMOSPHERE.enabled = true (dang tat). */
+  atmoRadius: 1.08,
   /**
-   * Displacement can luoi DAY moi hien duoc nui: moi dinh nui la mot vertex.
-   * 96 segment (~4.6k quad) qua tho, dinh nui bi bo tron mat. 256 = 32k quad
-   * = 65k tam giac, van rat nhe voi GPU.
+   * Luoi day chu yeu phuc vu displacement. Voi displacementScale nho nhu
+   * hien tai (0.01) thi 128 cung du, nhung giu 256 de con nang bien do len
+   * bat cu luc nao ma khong bi bo tron dinh nui.
    */
   segments: { desktop: 256, mobile: 128 },
 } as const;
@@ -70,11 +68,14 @@ export const MATERIAL = {
    * doi. Displacement lam bien dang hinh hoc nen khi xoay, nui hien ro go
    * ghe o duong ria.
    *
-   * 0.035 = 3.5% ban kinh. Nghe qua thi cuong dieu (Everest that chi bang
-   * 0.14% ban kinh Trai Dat, o ti le that se hoan toan vo hinh), nhung day
-   * la qua dia cau phong cach hoa nen phai phong dai moi thay.
+   * 0.01 = 1% ban kinh — chi con GOI Y dia hinh, be mat gan nhu min hoan
+   * toan de khop anh mau goble-3d.png (anh do khong co go ghe nao).
+   *
+   * LUU Y: day la danh doi. Truoc do de 0.035 de "khi xoay hien ro nui cao
+   * hon dat bang" theo yeu cau. Muon lay lai hieu ung nui thi nang len 0.035
+   * VA nang cloudRadius len >= 1.045 cho khoi dam xuyen may.
    */
-  displacementScale: 0.035,
+  displacementScale: 0.01,
   /** Bump giu lai de tao chi tiet anh sang nho hon buoc luoi displacement */
   bumpScale: 0.025,
   /** Nhan voi roughnessMap (2.png): trang=dat=nham, den=bien=it nham hon */
@@ -86,7 +87,7 @@ export const MATERIAL = {
    * chi con khuech tan thuan - van giu ranh gioi ngay/dem, khong con loa.
    */
   metalness: 0,
-  cloudOpacity: 0.72,
+  cloudOpacity: 0.35,
   cloudTint: '#ffffff',
   /**
    * 1.0 = khong nhan sang.
@@ -113,12 +114,12 @@ export const ATMOSPHERE = {
  * Camera phai du xa de lop NGOAI CUNG dang bat khong bi xen:
  *   asin(banKinhNgoaiCung / z) < fov / 2
  *
- * Khi tat ATMOSPHERE, lop ngoai cung la may (1.075):
- *   asin(1.075 / 3.15) = 19.9 < 21  -> vua khit, con vien ~5%.
- * Neu bat lai ATMOSPHERE (1.09) thi PHAI keo z len >= 3.25, khong thi
+ * Khi tat ATMOSPHERE, lop ngoai cung la may (1.015):
+ *   asin(1.015 / 2.98) = 19.9 < 21  -> qua cau chiem 95% khung, con vien 5%.
+ * Neu bat lai ATMOSPHERE (1.08) thi PHAI keo z len >= 3.15, khong thi
  * vanh sang bi cat cut.
  */
 export const CAMERA = {
-  position: [0, 0, 3.05] as [number, number, number],
+  position: [0, 0, 2.98] as [number, number, number],
   fov: 42,
 } as const;
