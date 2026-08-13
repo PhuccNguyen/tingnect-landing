@@ -27,7 +27,7 @@ export default function Header() {
       {/* 1. TRÁI: LOGO AREA */}
       <Link href="/" className={styles.logoGroup} aria-label="Yaa Club — trang chủ">
         <div className={styles.logoCircle}>
-          <Logo variant="inverted" orientation="icon" height={24} priority />
+          <Logo variant="inverted" orientation="icon" height={34} priority />
         </div>
         <div className={styles.textGroup}>
           <span className={styles.byText}>BY</span>
